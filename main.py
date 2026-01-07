@@ -20,15 +20,21 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(text_surface, (x, y))
 
 def title_screen():
+    imp = pygame.image.load("./assets/backgrounds/title.jpg").convert()
+    imp = pygame.transform.scale(imp, (1280, 720)) 
     def onbtnc():
-        print("hi")
         game_screen()  # Proceed to the game screen after button click
 
     running = True
     # Set font for the button to 40pt
-    button = Button(screen, (screen.get_width() / 2) - 100, (screen.get_height() / 2) - 50, 
-                    200, 100, False, text="Click Me", 
-                    onClick=onbtnc, font=cfont.get(40))
+    play_btn = Button(screen, (screen.get_width() / 2) - 100, (screen.get_height() / 2) - 50, 
+                    200, 100, False, text="Play", 
+                    onClick=onbtnc, font=cfont.get(40),radius=20)
+    settings_btn = Button(screen, (screen.get_width() / 2) - 100, (screen.get_height() / 2) + 70, 
+                    200, 100, False, text="Settings", 
+                    onClick=onbtnc, font=cfont.get(40),radius=20)
+    exit_btn = Button(screen, (screen.get_width() / 2) - 100, (screen.get_height() / 2) + 190, 
+                    200, 100, False, text="Exit", onClick=exit, font=cfont.get(40),radius=20)
 
     title_text = "Platformer"
     title_width, title_height = cfont.get(60).size(title_text)
@@ -37,18 +43,21 @@ def title_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                exit()
 
         pygame.display.set_caption("Platformer: Title Screen")
         
         # Fill screen
-        screen.fill("black")
+        screen.blit(imp, (0, 0))
         # Draw the title
         draw_text("Platformer", cfont.get(60), "white", screen, 
                    (screen.get_width() / 2) - (title_width / 2), 
                    (screen.get_height() / 2) - 200)
 
         # Draw the button
-        button.draw()
+        play_btn.draw()
+        settings_btn.draw()
+        exit_btn.draw()
         pygame_widgets.update(pygame.event.get())
         
         pygame.display.update()
