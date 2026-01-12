@@ -46,7 +46,7 @@ class Spieler:
         this.is_on_ground = False
         player_rect = this.get_rect()
         feet_rect = player_rect.copy()
-        feet_rect.y += 1  # expand downward so touching surfaces still collide
+        feet_rect.y += 1
         
         for platform in platforms:
             rect_to_check = feet_rect if this.velocity_y >= 0 else player_rect
@@ -55,19 +55,16 @@ class Spieler:
                 prev_bottom = this.prev_y + this.radius
                 current_bottom = this.player_pos.y + this.radius
                 
-                # Landing on top of platform (falling down onto it)
                 if this.velocity_y >= 0 and prev_bottom <= platform.rect.top + 5:
                     this.player_pos.y = platform.rect.top - this.radius
                     this.velocity_y = 0
                     this.is_on_ground = True
                     break
-                # Already standing on platform (within tolerance)
                 elif this.velocity_y >= 0 and abs(current_bottom - platform.rect.top) < 3:
                     this.player_pos.y = platform.rect.top - this.radius
                     this.velocity_y = 0
                     this.is_on_ground = True
                     break
-                # Hitting head on bottom of platform
                 elif this.velocity_y < 0 and prev_bottom > platform.rect.top:
                     this.player_pos.y = platform.rect.bottom + this.radius
                     this.velocity_y = 0

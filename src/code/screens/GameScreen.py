@@ -50,7 +50,17 @@ class GameScreen(Screen):
             platform.draw(this.screen)
 
         # Draw player
-        pygame.draw.circle(this.screen, "red", this.player_pos, this.player.radius)
+        scale_factor = 0.2# Scale factor for the sprite and bounding box
+        sprite_width = int(182 * scale_factor)
+        sprite_height = int(243 * scale_factor)
+        this.draw_sprite("Sprite_laufen-0001.png", 
+                 this.player.player_pos.x - sprite_width / 2, 
+                 this.player.player_pos.y - sprite_height / 2, 
+                 sprite_width, sprite_height)
+        pygame.draw.rect(this.screen, "black", 
+                 pygame.Rect(this.player.player_pos.x - sprite_width / 2, 
+                         this.player.player_pos.y - sprite_height / 2, 
+                         sprite_width, sprite_height), 2)  # Draw scaled bounding box for debugging
 
         # Handle input
         keys = pygame.key.get_pressed()

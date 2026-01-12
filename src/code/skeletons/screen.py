@@ -25,6 +25,12 @@ class Screen:
     def draw_text(this, text:int, font:pygame.font.Font, r:int,g:int,b:int, x:float, y:float):
         text_surface = font.render(text, True, (r,g,b))
         this.screen.blit(text_surface, (x, y))
+    
+    def draw_sprite(this, name:str, x:float, y:float, scale_width:int=None, scale_height:int=None):
+        image = pygame.image.load(path+"../resources/assets/sprites/"+name).convert_alpha()
+        if scale_width is not None and scale_height is not None:
+            image = pygame.transform.scale(image, (scale_width, scale_height))
+        this.screen.blit(image, (x, y))
 
     def run():
         pass
