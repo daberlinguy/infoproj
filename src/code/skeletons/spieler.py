@@ -48,17 +48,13 @@ class Spieler:
         
         for platform in platforms:
             if player_rect.colliderect(platform.rect):
-                # Get previous bottom position
                 prev_bottom = this.prev_y + this.radius
                 
-                # Check if player is falling onto platform from above
                 if this.velocity_y > 0 and prev_bottom <= platform.rect.top + 5:
-                    # Landing on platform from above
                     this.player_pos.y = platform.rect.top - this.radius
                     this.velocity_y = 0
                     this.is_on_ground = True
                     break
                 elif this.velocity_y < 0 and prev_bottom > platform.rect.top:
-                    # Jumping into platform from below - stop upward movement
                     this.player_pos.y = platform.rect.bottom + this.radius
                     this.velocity_y = 0
