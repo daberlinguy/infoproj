@@ -4,22 +4,48 @@ import sys
 path=sys.argv[0].replace("main.py","")
 
 class Spieler:
-    def __init__(self, player_pos):
-        player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+    def __init__(this, player_pos, dt, radius=40):
+        this.player_pos = player_pos
+        this.dt = dt
+        this.radius = radius
+        this.velocity_y = 0
+        this.gravity = 980
+        this.jump_strength = -500
+        this.is_on_ground = False
         
-        
-    def move_left(player_pos,dt):
-        if  keys[pygame.K_a]:
-            player_pos.x -= 300 * dt
+    def move_left(this):
+        this.player_pos.x -= 300 * this.dt
+
+    def move_right(this):
+        this.player_pos.x += 300 * this.dt
+
+    def jump(this):
+        if this.is_on_ground:
+            this.velocity_y = this.jump_strength
+            this.is_on_ground = False
     
-    def move_right(player_pos,dt):
-        if keys[pygame.K_d]:
-            player_pos.x -= 300 * dt
+    def on_ground(this):
+        return this.is_on_ground
 
-    def move_fwd(player_pos,dt):
-        if keys[pygame.K_w]:
-            player_pos.y += 300 * dt
 
-    def move_bck(player_pos,dt):
-        if keys[pygame.K_s]:
-            player_pos.y -= 300 * dt
+    def apply_gravity(this, dt):
+        if not this.is_on_ground:
+            this.velocity_y += this.gravity * dt
+        this.player_pos.y += this.velocity_y * dt
+
+    def get_rect(this):
+        return pygame.Rect(this.player_pos.x - this.radius, 
+                          this.player_pos.y - this.radius, 
+                          this.radius * 2, this.radius * 2)
+
+    def check_platform_collision(this, platforms):
+        this.is_on_ground = False
+        player_rect = this.get_rect()
+        
+        for platform in platforms:
+            if player_rect.colliderect(platform.rect):
+                if this.velocity_y > 0:  # Falling down
+                    player_rect.bottom = platform.rect.top
+                    this.player_pos.y = player_rect.centery
+                    this.velocity_y = 0
+                    this.is_on_ground = True
