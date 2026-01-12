@@ -12,6 +12,7 @@ class Spieler:
         this.gravity = 980
         this.jump_strength = -500
         this.is_on_ground = False
+        this.prev_y = player_pos.y  # Track previous Y position
         
     def move_left(this):
         this.player_pos.x -= 300 * this.dt
@@ -29,9 +30,12 @@ class Spieler:
 
 
     def apply_gravity(this, dt):
+        this.prev_y = this.player_pos.y  # Store position before applying gravity
         if not this.is_on_ground:
             this.velocity_y += this.gravity * dt
-        this.player_pos.y += this.velocity_y * dt
+            this.player_pos.y += this.velocity_y * dt
+        else:
+            this.velocity_y = 0
 
     def get_rect(this):
         return pygame.Rect(this.player_pos.x - this.radius, 
@@ -44,8 +48,17 @@ class Spieler:
         
         for platform in platforms:
             if player_rect.colliderect(platform.rect):
-                if this.velocity_y > 0:  # Falling down
-                    player_rect.bottom = platform.rect.top
-                    this.player_pos.y = player_rect.centery
+                # Get previous bottom position
+                prev_bottom = this.prev_y + this.radius
+                
+                # Check if player is falling onto platform from above
+                if this.velocity_y > 0 and prev_bottom <= platform.rect.top + 5:
+                    # Landing on platform from above
+                    this.player_pos.y = platform.rect.top - this.radius
                     this.velocity_y = 0
                     this.is_on_ground = True
+                    break
+                elif this.velocity_y < 0 and prev_bottom > platform.rect.top:
+                    # Jumping into platform from below - stop upward movement
+                    this.player_pos.y = platform.rect.bottom + this.radius
+                    this.velocity_y = 0

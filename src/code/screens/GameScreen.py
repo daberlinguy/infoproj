@@ -31,6 +31,7 @@ class GameScreen(Screen):
     def run(this):
         pygame.display.set_caption(f"X: {int(this.player_pos.x)} Y: {int(this.player_pos.y)} On Ground: {this.player.is_on_ground}")
 
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 this.running = False
@@ -41,6 +42,8 @@ class GameScreen(Screen):
                     this.player.jump()
 
         this.screen.fill("purple")
+        this.draw_text(f"FPS: {int(this.clock.get_fps())}", getFont(30), 255, 255, 255, 10, 10)
+
 
         # Draw platforms
         for platform in this.platforms:
@@ -63,12 +66,12 @@ class GameScreen(Screen):
         # Update player dt
         this.player.dt = this.dt
         
-        # Apply physics
+        # Apply physics - apply gravity first, then check collisions to resolve
         this.player.apply_gravity(this.dt)
         this.player.check_platform_collision(this.platforms)
 
         # Flip() the display to put your work on screen
         pygame.display.flip()
 
-        # Limits FPS to 60
-        this.dt = this.clock.tick(60) / 1000
+        # Limits FPS to 60 and cap dt to prevent large jumps
+        this.dt = min(this.clock.tick(60) / 1000, 0.05)  # Cap at 50ms (20 FPS minimum)
