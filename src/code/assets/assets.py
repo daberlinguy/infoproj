@@ -18,3 +18,16 @@ def getFont(size: int) -> pygame.font.Font:
         raise RuntimeError("Out of Range below 0")
     else:
         return cfont[size]
+
+def getMinecraftTexture(location_x: int, location_y: int, width: int, height: int, top_left: tuple = (0, 0)) -> pygame.Surface:
+    texture_path = path+'../resources/assets/sprites/texture_atlas.png'
+    minecraft_texture = pygame.image.load(texture_path).convert_alpha()
+    texture_surface = pygame.Surface((width, height), pygame.SRCALPHA)
+    texture_surface.blit(minecraft_texture, top_left, pygame.Rect(location_x, location_y, width, height))
+    return texture_surface
+
+class Texture:
+    GRASS = getMinecraftTexture(352, 576, 16, 16)
+    ICE = getMinecraftTexture(112, 576, 16, 16)
+    STONE = getMinecraftTexture(640, 640, 16, 16)
+    GOLD_BLOCK = getMinecraftTexture(288, 576, 16, 16)
