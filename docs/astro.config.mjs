@@ -10,7 +10,7 @@ export default defineConfig({
       title: 'Parkour Game Docs',
       description: 'Documentation for the Parkour Game platformer',
       social: {
-        github: 'https://github.com/your-username/parkour-game',
+        github: 'https://github.com/daberlinguy/infoproj',
       },
       sidebar: [
         {
