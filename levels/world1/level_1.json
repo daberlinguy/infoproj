@@ -1,0 +1,159 @@
+{
+  "name": "Untitled Level",
+  "world": "world1",
+  "spawn_point": [
+    1,
+    14
+  ],
+  "background_color": [
+    128,
+    0,
+    128
+  ],
+  "grid_size": 32,
+  "platforms": [
+    {
+      "grid_x1": 1,
+      "grid_y1": 14,
+      "grid_x2": 1,
+      "grid_y2": 14,
+      "type": "spawn",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GOLD_BLOCK"
+    },
+    {
+      "grid_x1": 2,
+      "grid_y1": 14,
+      "grid_x2": 11,
+      "grid_y2": 14,
+      "type": "normal",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GRASS"
+    },
+    {
+      "grid_x1": 6,
+      "grid_y1": 13,
+      "grid_x2": 11,
+      "grid_y2": 13,
+      "type": "normal",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GRASS"
+    },
+    {
+      "grid_x1": 8,
+      "grid_y1": 12,
+      "grid_x2": 11,
+      "grid_y2": 12,
+      "type": "normal",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GRASS"
+    },
+    {
+      "grid_x1": 9,
+      "grid_y1": 11,
+      "grid_x2": 11,
+      "grid_y2": 11,
+      "type": "normal",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GRASS"
+    },
+    {
+      "grid_x1": 10,
+      "grid_y1": 10,
+      "grid_x2": 11,
+      "grid_y2": 10,
+      "type": "normal",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GRASS"
+    },
+    {
+      "grid_x1": 1,
+      "grid_y1": 15,
+      "grid_x2": 11,
+      "grid_y2": 15,
+      "type": "normal",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "STONE"
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 12,
+      "grid_x2": 18,
+      "grid_y2": 12,
+      "type": "slippery",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "ICE"
+    },
+    {
+      "grid_x1": 22,
+      "grid_y1": 13,
+      "grid_x2": 26,
+      "grid_y2": 13,
+      "type": "slippery",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "ICE"
+    },
+    {
+      "grid_x1": 29,
+      "grid_y1": 12,
+      "grid_x2": 31,
+      "grid_y2": 12,
+      "type": "slippery",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "ICE"
+    },
+    {
+      "grid_x1": 34,
+      "grid_y1": 12,
+      "grid_x2": 34,
+      "grid_y2": 12,
+      "type": "checkpoint",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GOLD_BLOCK"
+    }
+  ]
+}

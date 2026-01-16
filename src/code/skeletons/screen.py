@@ -1,7 +1,11 @@
 import pygame
 import sys
+from pathlib import Path
 
-path=sys.argv[0].replace("main.py","")
+# Calculate path relative to this file's location
+current_file = Path(__file__).resolve()
+code_dir = current_file.parent.parent  # Go up to 'code' directory
+resources_dir = code_dir.parent / 'resources'
 
 class Screen:
     def __init__(self, screen:pygame.Surface, caption:str):
@@ -18,7 +22,7 @@ class Screen:
         self.screen.fill(r,g,b)
 
     def set_backgroundImage(self, name:str,scale_width:int=1280,scale_height:int=720):
-        imp = pygame.image.load(path+"../resources/assets/backgrounds/"+name).convert()
+        imp = pygame.image.load(str(resources_dir / "assets" / "backgrounds" / name)).convert()
         imp = pygame.transform.scale(imp, (scale_width, scale_height))
         self.screen.blit(imp, (0,0))
 
@@ -27,7 +31,7 @@ class Screen:
         self.screen.blit(text_surface, (x, y))
     
     def draw_sprite(self, name:str, x:float, y:float, scale_width:int=None, scale_height:int=None):
-        image = pygame.image.load(path+"../resources/assets/sprites/"+name).convert_alpha()
+        image = pygame.image.load(str(resources_dir / "assets" / "sprites" / name)).convert_alpha()
         if scale_width is not None and scale_height is not None:
             image = pygame.transform.scale(image, (scale_width, scale_height))
         self.screen.blit(image, (x, y))

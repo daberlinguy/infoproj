@@ -1,0 +1,1355 @@
+{
+  "name": "Untitled Level",
+  "world": "world1",
+  "spawn_point": [
+    1,
+    14
+  ],
+  "background_color": [
+    128,
+    0,
+    128
+  ],
+  "grid_size": 32,
+  "platforms": [
+    {
+      "grid_x1": 1,
+      "grid_y1": 14,
+      "grid_x2": 1,
+      "grid_y2": 14,
+      "type": "spawn",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 2,
+      "grid_y1": 14,
+      "grid_x2": 9,
+      "grid_y2": 14,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 6,
+      "grid_y1": 13,
+      "grid_x2": 9,
+      "grid_y2": 13,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": "GRASS"
+    },
+    {
+      "grid_x1": 7,
+      "grid_y1": 12,
+      "grid_x2": 9,
+      "grid_y2": 12,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 8,
+      "grid_y1": 11,
+      "grid_x2": 9,
+      "grid_y2": 11,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 15,
+      "grid_x2": 9,
+      "grid_y2": 15,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 14,
+      "grid_x2": 0,
+      "grid_y2": 14,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 13,
+      "grid_x2": 0,
+      "grid_y2": 13,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 12,
+      "grid_x2": 0,
+      "grid_y2": 12,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 11,
+      "grid_x2": 0,
+      "grid_y2": 11,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 10,
+      "grid_x2": 0,
+      "grid_y2": 10,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 9,
+      "grid_x2": 0,
+      "grid_y2": 9,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": -1,
+      "grid_y1": 9,
+      "grid_x2": 0,
+      "grid_y2": 9,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": -1,
+      "grid_y1": 8,
+      "grid_x2": 0,
+      "grid_y2": 8,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 7,
+      "grid_x2": 0,
+      "grid_y2": 7,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 6,
+      "grid_x2": 0,
+      "grid_y2": 6,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 5,
+      "grid_x2": 0,
+      "grid_y2": 5,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 4,
+      "grid_x2": 0,
+      "grid_y2": 4,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 10,
+      "grid_y1": 15,
+      "grid_x2": 13,
+      "grid_y2": 15,
+      "type": "death",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 15,
+      "grid_x2": 15,
+      "grid_y2": 15,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 14,
+      "grid_x2": 15,
+      "grid_y2": 14,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 13,
+      "grid_x2": 16,
+      "grid_y2": 13,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 12,
+      "grid_x2": 17,
+      "grid_y2": 12,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 11,
+      "grid_x2": 14,
+      "grid_y2": 11,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 10,
+      "grid_x2": 14,
+      "grid_y2": 10,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 20,
+      "grid_y1": 15,
+      "grid_x2": 21,
+      "grid_y2": 15,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 20,
+      "grid_y1": 14,
+      "grid_x2": 21,
+      "grid_y2": 14,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 20,
+      "grid_y1": 13,
+      "grid_x2": 21,
+      "grid_y2": 13,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 16,
+      "grid_y1": 15,
+      "grid_x2": 19,
+      "grid_y2": 15,
+      "type": "death",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 22,
+      "grid_y1": 15,
+      "grid_x2": 39,
+      "grid_y2": 15,
+      "type": "death",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 25,
+      "grid_y1": 12,
+      "grid_x2": 26,
+      "grid_y2": 12,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 29,
+      "grid_y1": 12,
+      "grid_x2": 30,
+      "grid_y2": 12,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 34,
+      "grid_y1": 11,
+      "grid_x2": 36,
+      "grid_y2": 11,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 39,
+      "grid_y1": 11,
+      "grid_x2": 39,
+      "grid_y2": 11,
+      "type": "finish",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 3,
+      "grid_x2": 12,
+      "grid_y2": 3,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 5,
+      "grid_y1": 4,
+      "grid_x2": 12,
+      "grid_y2": 4,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 9,
+      "grid_y1": 5,
+      "grid_x2": 11,
+      "grid_y2": 5,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 12,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 13,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 16,
+      "grid_y1": 2,
+      "grid_x2": 25,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 17,
+      "grid_y1": 3,
+      "grid_x2": 24,
+      "grid_y2": 3,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 17,
+      "grid_y1": 4,
+      "grid_x2": 24,
+      "grid_y2": 4,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 28,
+      "grid_y1": 2,
+      "grid_x2": 39,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 29,
+      "grid_y1": 3,
+      "grid_x2": 35,
+      "grid_y2": 3,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 31,
+      "grid_y1": 4,
+      "grid_x2": 32,
+      "grid_y2": 4,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 27,
+      "grid_y1": 2,
+      "grid_x2": 39,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 35,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 34,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 33,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 32,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 31,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 30,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 29,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 28,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 27,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 26,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 25,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 24,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 23,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 22,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 21,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 20,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 19,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 18,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 17,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 16,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 15,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 14,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 13,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 12,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 11,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 10,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 10,
+      "grid_y1": -1,
+      "grid_x2": 10,
+      "grid_y2": -1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 9,
+      "grid_y1": -1,
+      "grid_x2": 10,
+      "grid_y2": -1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 8,
+      "grid_y1": -1,
+      "grid_x2": 10,
+      "grid_y2": -1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 7,
+      "grid_y1": -1,
+      "grid_x2": 10,
+      "grid_y2": -1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 6,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 5,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 4,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 4,
+      "grid_y1": -1,
+      "grid_x2": 5,
+      "grid_y2": -1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 3,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 2,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 1,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": -1,
+      "grid_y1": 0,
+      "grid_x2": 40,
+      "grid_y2": 0,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 6,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 5,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 4,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 9,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 8,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 7,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 6,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 5,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 4,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 3,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 2,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 1,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 0,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": -1,
+      "grid_y1": 2,
+      "grid_x2": 13,
+      "grid_y2": 2,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 2,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": -1,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": -2,
+      "grid_y1": 1,
+      "grid_x2": 40,
+      "grid_y2": 1,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    },
+    {
+      "grid_x1": 6,
+      "grid_y1": 11,
+      "grid_x2": 6,
+      "grid_y2": 11,
+      "type": "normal",
+      "color": [
+        34,
+        139,
+        34
+      ],
+      "texture": null
+    }
+  ]
+}

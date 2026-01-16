@@ -1,0 +1,98 @@
+{
+  // Example level with comments (JSONC format)
+  "name": "Tutorial Level",
+  "world": "world1",
+  "spawn_point": [2, 18],  // Grid coordinates for player spawn
+  "background_color": [50, 150, 200],  // Sky blue background
+  "grid_size": 32,
+  
+  "platforms": [
+    // Spawn platform
+    {
+      "grid_x1": 1,
+      "grid_y1": 19,
+      "grid_x2": 3,
+      "grid_y2": 19,
+      "type": "spawn",
+      "color": [0, 255, 0],
+      "texture": null
+    },
+    
+    // Starting ground
+    {
+      "grid_x1": 0,
+      "grid_y1": 20,
+      "grid_x2": 10,
+      "grid_y2": 20,
+      "type": "normal",
+      "color": [139, 69, 19],
+      "texture": null
+    },
+    
+    // First jump platform
+    {
+      "grid_x1": 12,
+      "grid_y1": 18,
+      "grid_x2": 15,
+      "grid_y2": 18,
+      "type": "normal",
+      "color": [34, 139, 34],
+      "texture": null
+    },
+    
+    // Checkpoint
+    {
+      "grid_x1": 13,
+      "grid_y1": 17,
+      "grid_x2": 13,
+      "grid_y2": 17,
+      "type": "checkpoint",
+      "color": [255, 255, 0],
+      "texture": null
+    },
+    
+    // Death trap
+    {
+      "grid_x1": 17,
+      "grid_y1": 20,
+      "grid_x2": 19,
+      "grid_y2": 20,
+      "type": "death",
+      "color": [255, 0, 0],
+      "texture": null
+    },
+    
+    // Slippery ice platform
+    {
+      "grid_x1": 21,
+      "grid_y1": 18,
+      "grid_x2": 25,
+      "grid_y2": 18,
+      "type": "slippery",
+      "color": [100, 200, 255],
+      "texture": null
+    },
+    
+    // Final platform with finish
+    {
+      "grid_x1": 28,
+      "grid_y1": 16,
+      "grid_x2": 31,
+      "grid_y2": 16,
+      "type": "normal",
+      "color": [169, 169, 169],
+      "texture": null
+    },
+    
+    // Finish block
+    {
+      "grid_x1": 30,
+      "grid_y1": 15,
+      "grid_x2": 30,
+      "grid_y2": 15,
+      "type": "finish",
+      "color": [255, 215, 0],
+      "texture": null
+    }
+  ]
+}

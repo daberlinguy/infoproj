@@ -1,0 +1,29 @@
+{
+  "name": "Untitled Level",
+  "world": "world1",
+  "spawn_point": [
+    1,
+    14
+  ],
+  "background_color": [
+    128,
+    0,
+    128
+  ],
+  "grid_size": 32,
+  "platforms": [
+    {
+      "grid_x1": 1,
+      "grid_y1": 14,
+      "grid_x2": 1,
+      "grid_y2": 14,
+      "type": "spawn",
+      "color": [
+        100,
+        100,
+        100
+      ],
+      "texture": "GRASS"
+    }
+  ]
+}

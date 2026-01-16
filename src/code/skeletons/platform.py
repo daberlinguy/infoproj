@@ -1,8 +1,6 @@
 import pygame
 import sys
 
-path = sys.argv[0].replace("main.py", "")
-
 class Cell:
     """Represents a single cell in a platform"""
     def __init__(self, x, y, size, color=(100, 100, 100), texture=None):
@@ -57,6 +55,7 @@ class Platform:
     SPAWN = "spawn"
     CHECKPOINT = "checkpoint"
     SLIPPERY = "slippery"
+    FINISH = "finish"
     
     def __init__(self, x1, y1, x2, y2, grid_size, platform_type=None, color=None, texture=None, velocity_x=0):
         """
@@ -94,6 +93,8 @@ class Platform:
                 self.color = (255, 255, 0)  # Yellow
             elif platform_type == Platform.SLIPPERY:
                 self.color = (100, 200, 255)  # Light blue
+            elif platform_type == Platform.FINISH:
+                self.color = (255, 215, 0)  # Gold
             else:
                 self.color = (100, 100, 100)  # Gray
         else:
@@ -144,6 +145,15 @@ class Platform:
                 # Draw S on center cell
                 center_cell = self.cells[len(self.cells) // 2]
                 font = pygame.font.Font(None, 20)
+            elif self.platform_type == Platform.FINISH:
+                # Draw F on center cell with checkered flag pattern
+                center_cell = self.cells[len(self.cells) // 2]
+                font = pygame.font.Font(None, 24)
+                text = font.render("F", True, (0, 0, 0))
+                screen.blit(text, (center_cell.rect.centerx - 6, center_cell.rect.centery - 12))
+                # Draw stars around it
+                pygame.draw.circle(screen, (255, 255, 255), (center_cell.rect.left + 5, center_cell.rect.top + 5), 3)
+                pygame.draw.circle(screen, (255, 255, 255), (center_cell.rect.right - 5, center_cell.rect.top + 5), 3)
                 text = font.render("S", True, (0, 150, 0))
                 screen.blit(text, (center_cell.rect.centerx - 5, center_cell.rect.centery - 10))
     
@@ -157,6 +167,10 @@ class Platform:
     def is_deadly(self):
         """Check if platform kills player"""
         return self.platform_type == Platform.DEATH
+    
+    def is_finish(self):
+        """Check if platform is finish/goal"""
+        return self.platform_type == Platform.FINISH
     
     def is_checkpoint(self):
         """Check if platform is a checkpoint"""

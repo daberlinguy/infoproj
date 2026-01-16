@@ -3,8 +3,6 @@ import sys
 
 from skeletons.platform import Platform
 
-path=sys.argv[0].replace("main.py","")
-
 class Spieler:
     def __init__(self, player_pos, dt, radius=24):
         self.player_pos = player_pos
@@ -106,6 +104,7 @@ class Spieler:
                 self.is_on_ground = True
                 self.current_platform = platform
                 self.friction = platform.get_friction()
+                
                 # Inherit platform velocity if it's moving
                 if hasattr(platform, 'velocity_x') and platform.velocity_x != 0:
                     self.player_pos.x += platform.velocity_x * self.dt
@@ -142,28 +141,40 @@ class Spieler:
                     self.prev_x = self.player_pos.x
                     self.player_pos.x += (self.player_pos.x - self.prev_x) * 0.2
                     pass  # This would be integrated with player movement logic
+                elif platform_type == Platform.DEATH:
+                    print("Player hit death platform")
+                    pass  # Death handled in special interactions
     
     def check_special_platform_interactions(self, platforms, current_checkpoint):
         """
-        Check for special platform interactions (death, checkpoint)
+        Check for special platform interactions (death, checkpoint, finish)
         Returns: tuple (new_checkpoint, should_respawn)
         """
-        player_rect = pygame.Rect(self.player_pos.x - 18, self.player_pos.y - 24, 36, 48)
+        # Use the same rect as get_rect() for consistency, plus a small buffer for touching
+        player_rect = self.get_rect()
+        player_rect.inflate_ip(0, 2)  # Slightly extend vertically to detect touching platforms
         
         for platform in platforms:
             if player_rect.colliderect(platform.rect):
-                # Death platform - trigger respawn
+                # Death platform - trigger respawn (check any collision)
                 if platform.is_deadly():
-                    self.player_pos = current_checkpoint.copy()
+                    self.player_pos.x = current_checkpoint.x
+                    self.player_pos.y = current_checkpoint.y
                     self.velocity_x = 0
                     self.velocity_y = 0
-                    return (current_checkpoint, True)
+                    self.is_on_ground = False
+                    return (current_checkpoint.copy(), True)
                 
-                # Checkpoint platform - save position
-                elif platform.is_checkpoint() and not platform.checkpoint_activated:
-                    platform.activate_checkpoint()
-                    new_checkpoint = pygame.Vector2(platform.rect.centerx, platform.rect.top - 30)
-                    return (new_checkpoint, False)
+                # Checkpoint platform - save position (only when standing on top)
+                elif platform.is_checkpoint():
+                    # Only activate if player is on top of the checkpoint
+                    if self.is_on_ground and abs(self.player_pos.y + 24 - platform.rect.top) < 5:
+                        if not platform.checkpoint_activated:
+                            platform.activate_checkpoint()
+                        new_checkpoint = pygame.Vector2(platform.rect.centerx, platform.rect.top - 30)
+                        return (new_checkpoint, False)
+                
+                # Finish platform is handled in GameScreen for level completion
         
         return (current_checkpoint, False)
     
