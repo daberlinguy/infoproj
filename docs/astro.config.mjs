@@ -29,6 +29,7 @@ export default defineConfig({
             { label: 'Creating Screens', slug: 'guides/creating-screens' },
             { label: 'Using Textures', slug: 'guides/using-textures' },
             { label: 'Deploying to GitHub Pages', slug: 'guides/deploying-to-github-pages' },
+            { label: 'AI Contribution Guide', slug: 'guides/ai-contribution-guide' },
           ],
         },
         {
