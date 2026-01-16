@@ -1,6 +1,7 @@
 import pygame
 import pygame_widgets
 from pygame_widgets.button import Button
+from pygame_widgets.widget import WidgetHandler
 import sys
 
 from skeletons.screen import Screen
@@ -8,6 +9,10 @@ from assets.assets import getFont
 
 class TitleScreen(Screen):
     def __init__(self, screen, caption):
+        # Clear all previous widgets
+        widgets = WidgetHandler.getWidgets()
+        for widget in list(widgets):
+            WidgetHandler.removeWidget(widget)
 
         # Define buttons
         button_width = 150
@@ -23,7 +28,7 @@ class TitleScreen(Screen):
                 onClick=self.onBtnOpenCharacterScreen, font=getFont(30), radius=10)
         self.settings_btn = Button(screen, (screen.get_width() / 2) - (button_width / 2), start_y + 2 * (button_height + button_spacing), 
                 button_width, button_height, False, text="Settings", 
-                onClick=self.onBtnOpenGameScreen, font=getFont(30), radius=10)
+                onClick=self.onBtnOpenSettingsScreen, font=getFont(30), radius=10)
         self.exit_btn = Button(screen, (screen.get_width() / 2) - (button_width / 2), start_y + 3 * (button_height + button_spacing), 
                 button_width, button_height, False, text="Exit", 
                 onClick=sys.exit, font=getFont(30), radius=10)
@@ -42,6 +47,10 @@ class TitleScreen(Screen):
     def onBtnOpenCharacterScreen(self):
         from screens.CharacterScreen import CharacterScreen
         CharacterScreen(self.screen, "Charaktere")
+    
+    def onBtnOpenSettingsScreen(self):
+        from screens.SettingsScreen import SettingsScreen
+        SettingsScreen(self.screen, "Settings")
 
     def run(self):
         for event in pygame.event.get():

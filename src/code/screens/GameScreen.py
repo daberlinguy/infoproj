@@ -6,9 +6,16 @@ from skeletons.screen import Screen
 from skeletons.spieler import Spieler
 from skeletons.platform import Platform, Grid
 from assets.assets import getFont, getMinecraftTexture, Texture
+from screens.SettingsScreen import SETTINGS
 
 class GameScreen(Screen):
     def __init__(self, screen, caption):
+        # Clear all previous widgets
+        from pygame_widgets.widget import WidgetHandler
+        widgets = WidgetHandler.getWidgets()
+        for widget in list(widgets):
+            WidgetHandler.removeWidget(widget)
+        
         self.dt = 0
         self.clock=pygame.time.Clock()
 
@@ -21,7 +28,7 @@ class GameScreen(Screen):
         
         # Create debug grid
         self.grid = Grid(cell_size=32, color=(80, 80, 80), line_width=1)
-        self.grid.visible = True  # Start with grid visible
+        self.grid.visible = False  # Grid is part of debug mode
         
         # Grid cell size for alignment
         grid_size = 32
@@ -57,7 +64,10 @@ class GameScreen(Screen):
             
             # Orange platform - 3x2 cells at grid position (28, 9)
             Platform(28 * grid_size, 9 * grid_size, 30 * grid_size, 10 * grid_size, grid_size, 
-                     color=(255, 140, 0)),
+                     texture=Texture.LAVA),
+
+            Platform(0 * grid_size, 22 * grid_size, 500 * grid_size, 22 * grid_size, grid_size, 
+                     texture=Texture.LAVA, platform_type=Platform.DEATH),
         ]
 
         super().__init__(screen, caption)
@@ -75,16 +85,13 @@ class GameScreen(Screen):
                 exit()
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_g:  # Toggle grid with 'G' key
-                    self.grid.toggle()
+                if event.key == pygame.K_F3:  # Toggle debug mode with 'F3' key
+                    SETTINGS['debug_mode'] = not SETTINGS.get('debug_mode', False)
                 if event.key == pygame.K_r:  # Reset to spawn point with 'R' key
                     self.player.player_pos = self.spawn_point.copy()
                     self.player.velocity = pygame.Vector2(0, 0)
 
         self.screen.fill("purple")
-        
-        # Draw grid first (behind everything)
-        self.grid.draw(self.screen)
         
         self.draw_text(f"FPS: {int(self.clock.get_fps())}", getFont(30), 255, 255, 255, 10, 10)
 
@@ -95,16 +102,22 @@ class GameScreen(Screen):
 
         # Draw player
         scale_factor = 0.2# Scale factor for the sprite and bounding box
-        sprite_width = int(182 * scale_factor)
-        sprite_height = int(243 * scale_factor)
+        sprite_width = self.player.sprite_width
+        sprite_height = self.player.sprite_height
         self.draw_sprite("Sprite_laufen-0001.png", 
                  self.player.player_pos.x - sprite_width / 2, 
                  self.player.player_pos.y - sprite_height / 2, 
                  sprite_width, sprite_height)
-        pygame.draw.rect(self.screen, "black", 
-                 pygame.Rect(self.player.player_pos.x - sprite_width / 2, 
-                         self.player.player_pos.y - sprite_height / 2, 
-                         sprite_width, sprite_height), 2)  # Draw scaled bounding box for debugging
+        
+        # Debug mode: Draw bounding boxes and grid
+        if SETTINGS.get('debug_mode', False):
+            # Draw grid
+            self.grid.draw(self.screen)
+            # Draw player collision bounding box (now matches sprite)
+            pygame.draw.rect(self.screen, "yellow", self.player.get_rect(), 2)
+            # Draw platform bounding boxes
+            for platform in self.platforms:
+                pygame.draw.rect(self.screen, "red", platform.rect, 2)
 
         # Handle input
         keys = pygame.key.get_pressed()
@@ -133,7 +146,6 @@ class GameScreen(Screen):
         
         # Apply physics - apply gravity first, then check collisions to resolve
         self.player.apply_physics(self.dt)
-        #[pygame.draw.rect(self.screen, "red", platform.rect, 2) for platform in self.platforms]  # Draw platform bounding boxes for debugging
         self.player.check_platform_collision(self.platforms)
         
         # Check if player fell off the screen
@@ -145,5 +157,6 @@ class GameScreen(Screen):
         # Flip() the display to put your work on screen
         pygame.display.flip()
 
-        # Limits FPS to 60 and cap dt to prevent large jumps
-        self.dt = min(self.clock.tick(60) / 1000, 0.05)  # Cap at 50ms (20 FPS minimum)
+        # Cap dt to prevent large jumps and physics issues
+        # Limit to max 16.67ms (60 FPS) to prevent tunneling on lag spikes
+        self.dt = min(self.clock.tick() / 1000, 0.0167)
