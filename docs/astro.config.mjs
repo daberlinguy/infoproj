@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/infoproj/',
   integrations: [
     starlight({
       title: 'Parkour Game Docs',
