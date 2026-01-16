@@ -1,0 +1,83 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+eggs/
+*.manifest
+*.spec
+
+# =========================
+# Virtual Environments
+# =========================
+parkour/
+venv/
+.venv/
+env/
+ENV/
+
+# =========================
+# PyInstaller Build
+# =========================
+build/
+*.spec
+
+# =========================
+# IDE / Editor Files
+# =========================
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Emacs
+*~
+\#*\#
+.#*
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# Documentation Build
+# =========================
+docs/node_modules/
+docs/dist/
+docs/.astro/
+
+# =========================
+# Misc
+# =========================
+.env
+.env.local
+*.log
+*.bak
+*.tmp
+*.temp

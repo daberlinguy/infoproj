@@ -1,0 +1,15 @@
+{
+  "name": "World 1 - Level 1",
+  "player_spawn": {"x":6, "y":14, "grid": true, "grid_size": 32},
+  "background_color": {"r":135, "g":206, "b":235, "a":255},
+  "pages": {
+    "1": {
+      "platforms": [
+        { "x1": 6, "y1": 16, "x2": 15, "y2": 16, "color": [139, 69, 19], "texture":"ICE", "type":"SLIPPERY" },
+        { "x1": 19, "y1": 13, "x2": 27, "y2": 13, "color": [34, 139, 34] },
+        { "x1": 13, "y1": 19, "x2": 25, "y2": 19, "color": [169, 169, 169] },
+        { "x1": 28, "y1": 9, "x2": 34, "y2": 10, "color": [255, 140, 0] }
+      ]
+    }
+  }
+}

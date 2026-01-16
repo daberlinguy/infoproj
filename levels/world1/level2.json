@@ -1,0 +1,157 @@
+{
+  "name": "Test",
+  "player_spawn": {
+    "x": 1,
+    "y": 16,
+    "grid": true,
+    "grid_size": 32
+  },
+  "background_color": {
+    "r": 135,
+    "g": 206,
+    "b": 235,
+    "a": 255
+  },
+  "platforms": [
+    {
+      "x1": 0,
+      "y1": 22,
+      "x2": 23,
+      "y2": 22,
+      "grid_size": 32,
+      "type": "DEATH",
+      "texture": "LAVA",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 24,
+      "y1": 22,
+      "x2": 38,
+      "y2": 22,
+      "grid_size": 32,
+      "type": "DEATH",
+      "texture": "LAVA",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 39,
+      "y1": 22,
+      "x2": 39,
+      "y2": 22,
+      "grid_size": 32,
+      "type": "DEATH",
+      "texture": "LAVA",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 1,
+      "y1": 14,
+      "x2": 1,
+      "y2": 14,
+      "grid_size": 32,
+      "type": "NORMAL",
+      "texture": "STONE",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 14,
+      "grid_size": 32,
+      "type": "DEATH",
+      "texture": "LAVA",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 0,
+      "y1": 15,
+      "x2": 0,
+      "y2": 21,
+      "grid_size": 32,
+      "type": "DEATH",
+      "texture": "LAVA",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 3,
+      "y1": 14,
+      "x2": 6,
+      "y2": 14,
+      "grid_size": 32,
+      "type": "NORMAL",
+      "texture": "STONE",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 5,
+      "y1": 13,
+      "x2": 10,
+      "y2": 13,
+      "grid_size": 32,
+      "type": "NORMAL",
+      "texture": "STONE",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 12,
+      "y1": 18,
+      "x2": 14,
+      "y2": 18,
+      "grid_size": 32,
+      "type": "NORMAL",
+      "texture": "STONE",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "x1": 18,
+      "y1": 14,
+      "x2": 19,
+      "y2": 14,
+      "grid_size": 32,
+      "type": "NORMAL",
+      "texture": "STONE",
+      "color": [
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+    "$schema": "./textures.schema.json",
+    "_description": "Texture atlas configuration. Add new textures here and they will be automatically available in both the game and editor.",
+    "atlas": "assets/sprites/tiles/texture_atlas.png",
+    "tile_size": 16,
+    "textures": {
+        "GRASS": {
+            "x": 352,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Green grass block"
+        },
+        "ICE": {
+            "x": 112,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Ice block"
+        },
+        "ICE_BROKEN": {
+            "x": 128,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Cracked ice block stage 1"
+        },
+        "ICE_BROKEN2": {
+            "x": 144,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Cracked ice block stage 2"
+        },
+        "ICE_BROKEN3": {
+            "x": 160,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Cracked ice block stage 3"
+        },
+        "STONE": {
+            "x": 640,
+            "y": 640,
+            "width": 16,
+            "height": 16,
+            "description": "Stone block"
+        },
+        "GOLD_BLOCK": {
+            "x": 288,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Golden block"
+        },
+        "LAVA": {
+            "x": 400,
+            "y": 592,
+            "width": 16,
+            "height": 16,
+            "description": "Lava texture"
+        },
+        "FLETCHING_TABLE": {
+            "x": 48,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Fletching table front"
+        },
+        "FLETCHING_TABLE_SIDE": {
+            "x": 64,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Fletching table side"
+        },
+        "FLETCHING_TABLE_TOP": {
+            "x": 80,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Fletching table top"
+        },
+        "OVEN_OFF": {
+            "x": 176,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Furnace (off)"
+        },
+        "OVEN_ON": {
+            "x": 192,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Furnace (on)"
+        },
+        "OVEN_BACK": {
+            "x": 208,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Furnace back side"
+        },
+        "OVEN_TOP": {
+            "x": 224,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Furnace top"
+        }
+    },
+    "platform_types": [
+        {
+            "name": "NORMAL",
+            "description": "Standard solid platform"
+        },
+        {
+            "name": "DEATH",
+            "description": "Kills player on contact"
+        },
+        {
+            "name": "CHECKPOINT",
+            "description": "Saves player progress"
+        },
+        {
+            "name": "FINISH",
+            "description": "Level completion trigger"
+        },
+        {
+            "name": "SLIPPERY",
+            "description": "Reduced friction platform"
+        }
+    ]
+}
