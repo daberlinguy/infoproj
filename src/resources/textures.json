@@ -108,6 +108,195 @@
             "width": 16,
             "height": 16,
             "description": "Furnace top"
+        },
+        "GLASS": {
+            "x": 240,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Glass"
+        },
+        "GLOWSTONE": {
+            "x": 272,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Glowstone"
+        },
+        "GOLDORE": {
+            "x": 304,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Goldore"
+        },
+        "GRANIT": {
+            "x": 320,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Granite"
+        },
+        "SNOW_EARTH": {
+            "x": 384,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Snow earth"
+        },
+        "GRAVEL": {
+            "x": 448,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Gravel"
+        },
+        "DARK_GREY_CONCRETE": {
+            "x": 464,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Dark grey concrete"
+        },
+        "GREY_CONCRETE_POWDER": {
+            "x": 480,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "grey concrete powder"
+        },
+        "GREY_GLAZED_TERRACOTTA": {
+            "x": 496,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "grey glazed terracotta"
+        },
+        "GREY_SHULKER_TOP": {
+            "x": 512,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Grey shulker top"
+        },
+        "GREY_GLASS": {
+            "x": 528,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Grey glass"
+        },
+        "BROWN_TERRACOTTA": {
+            "x": 560,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Brown Terracotta"
+        },
+        "DARK_GREY_WOOL": {
+            "x": 576,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Dark grey wool"
+        },
+        "Dark_GREEN_CONCRETE": {
+            "x": 592,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Dark green wool"
+        },
+        "DARK_GREEN_TERRACOTTA_POWDER": {
+            "x": 608,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Dark green terracotta powder"
+        },
+        "DARK_GREEN_GLAZED_TERRACOTTA": {
+            "x": 624,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Dark green glazed terracotta"
+        },
+        "DARK_GREEN_SHULKER_TOP": {
+            "x": 640,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "dark green shulker top"
+        },
+        "DARK_GREEN_GLASS": {
+            "x": 656,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Dark green glass"
+        },
+        "DARK_GREEN_TERRACOTTA": {
+            "x": 688,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "dark green terracotta"
+        },
+        "DARK_GREEN_WOOL": {
+            "x": 704,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "dark green wool"
+        },
+        "HAY": {
+            "x": 768,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Hay"
+        },
+        "HAY_TOP": {
+            "x": 784,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Hay top"
+        },
+        "IRON_BLOCK": {
+            "x": 992,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Iron block"
+        },
+        "CAULDRON_BOT": {
+            "x": 864,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Cauldron bot"
+        },
+        "CAULDRON": {
+            "x": 880,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "CAULDRON"
+        },
+        "CAULDRON_TOP": {
+            "x": 896,
+            "y": 576,
+            "width": 16,
+            "height": 16,
+            "description": "Cauldron top"
+        },
+        "IRON_ORE": {
+            "x": 0,
+            "y": 592,
+            "width": 16,
+            "height": 16,
+            "description": "Iron ore"
         }
     },
     "platform_types": [

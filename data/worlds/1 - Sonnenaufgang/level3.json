@@ -10,8 +10,7 @@
     "r": 135,
     "g": 206,
     "b": 235,
-    "a": 255,
-    "image": "G:\\LKInf12_Gruppe3\\src\\resources\\assets\\backgrounds\\character_selection.jpg"
+    "a": 255
   },
   "pages": {
     "1": {
@@ -821,7 +820,7 @@
         {
           "x1": 38,
           "y1": 18,
-          "x2": 39,
+          "x2": 38,
           "y2": 18,
           "grid_size": 32,
           "type": "FINISH",
@@ -831,6 +830,20 @@
             0
           ],
           "texture": "GOLD_BLOCK"
+        },
+        {
+          "x1": 39,
+          "y1": 18,
+          "x2": 39,
+          "y2": 18,
+          "grid_size": 32,
+          "type": "FINISH",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "IRON_BLOCK"
         }
       ]
     }

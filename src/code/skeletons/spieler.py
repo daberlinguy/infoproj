@@ -137,8 +137,9 @@ class Spieler:
                 continue
                 
             if player_rect.colliderect(platform.rect):
-                # Skip if this is the platform we're standing on
+                # Check if we're standing on this platform (update current_platform)
                 if self.is_on_ground and abs(self.player_pos.y + self.sprite_height / 2 - platform.rect.top) < 2:
+                    self.current_platform = platform
                     continue
 
                 # Head (bottom of platform) collision when moving up
@@ -173,23 +174,22 @@ class Spieler:
         Returns: tuple (new_checkpoint, should_respawn)
         """
         player_rect = self.get_rect()
+        new_checkpoint = current_checkpoint
+        should_respawn = False
         
         for platform in platforms:
             if player_rect.colliderect(platform.rect):
                 # Death platform - trigger respawn
                 if platform.is_deadly():
-                    self.player_pos = current_checkpoint.copy()
-                    self.velocity_x = 0
-                    self.velocity_y = 0
                     return (current_checkpoint, True)
                 
                 # Checkpoint platform - save position
-                elif platform.is_checkpoint() and not platform.checkpoint_activated:
-                    platform.activate_checkpoint()
+                elif platform.is_checkpoint():
+                    if not platform.checkpoint_activated:
+                        platform.activate_checkpoint()
                     new_checkpoint = pygame.Vector2(platform.rect.centerx, platform.rect.top - 30)
-                    return (new_checkpoint, False)
         
-        return (current_checkpoint, False)
+        return (new_checkpoint, should_respawn)
     
     def check_fell_off_screen(self, screen_height, current_checkpoint):
         """

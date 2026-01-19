@@ -44,6 +44,9 @@ class GameScreen(Screen):
         self.current_checkpoint = self.spawn_point.copy()
         self.current_checkpoint_page = self.page_index
         
+        # Track activated checkpoints across all pages (page_index, x1, y1, x2, y2)
+        self.activated_checkpoints = set()
+        
         # Create debug grid
         self.grid = Grid(cell_size=32, color=(80, 80, 80), line_width=1)
         self.grid.visible = False  # Grid is part of debug mode
@@ -155,7 +158,17 @@ class GameScreen(Screen):
                 )
 
         self.platforms = self._build_platforms_from_level(level_data, self.page_index)
-        self.checkpoints_required = sum(1 for platform in self.platforms if platform.is_checkpoint())
+        
+        # Count total checkpoints across ALL pages
+        total_checkpoints = 0
+        pages = level_data.get("pages")
+        if pages:
+            for page_key in pages.keys():
+                page_platforms = self._build_platforms_from_level(level_data, int(page_key) if str(page_key).isdigit() else page_key)
+                total_checkpoints += sum(1 for p in page_platforms if p.is_checkpoint())
+        else:
+            total_checkpoints = sum(1 for platform in self.platforms if platform.is_checkpoint())
+        self.checkpoints_required = total_checkpoints-1
 
     def _build_platforms_from_level(self, level_data, page_index=1):
         pages = level_data.get("pages")
@@ -204,8 +217,22 @@ class GameScreen(Screen):
             return
         if str(new_page) not in pages and new_page not in pages:
             return
+        
+        # Save current checkpoint states before switching
+        for platform in self.platforms:
+            if platform.is_checkpoint() and platform.checkpoint_activated:
+                checkpoint_key = (self.page_index, platform.x1, platform.y1, platform.x2, platform.y2)
+                self.activated_checkpoints.add(checkpoint_key)
+        
         self.page_index = new_page
         self.platforms = self._build_platforms_from_level(self.level_data, self.page_index)
+        
+        # Restore checkpoint states for this page
+        for platform in self.platforms:
+            if platform.is_checkpoint():
+                checkpoint_key = (self.page_index, platform.x1, platform.y1, platform.x2, platform.y2)
+                if checkpoint_key in self.activated_checkpoints:
+                    platform.activate_checkpoint()
 
     def _mark_level_complete(self):
         if not self.level_path:
@@ -290,24 +317,29 @@ class GameScreen(Screen):
             self.platforms,
             self.current_checkpoint,
         )
-        self.checkpoints_activated = sum(1 for platform in self.platforms if platform.checkpoint_activated)
+        
+        # Check if player is standing on a checkpoint platform
+        if self.player.current_platform and self.player.current_platform.is_checkpoint():
+            if not self.player.current_platform.checkpoint_activated:
+                self.player.current_platform.activate_checkpoint()
+                self.current_checkpoint = pygame.Vector2(
+                    self.player.current_platform.rect.centerx, 
+                    self.player.current_platform.rect.top - 30
+                )
+                # Save to global activated checkpoints set
+                checkpoint_key = (self.page_index, self.player.current_platform.x1, 
+                                self.player.current_platform.y1, self.player.current_platform.x2, 
+                                self.player.current_platform.y2)
+                self.activated_checkpoints.add(checkpoint_key)
+        
+        # Count all activated checkpoints across all pages (not just current page)
+        prev_checkpoint_count = self.checkpoints_activated
+        self.checkpoints_activated = len(self.activated_checkpoints)
         if self.checkpoints_activated > prev_checkpoint_count:
             self.current_checkpoint_page = self.page_index
         if respawned or should_respawn:
             if self.page_index != self.current_checkpoint_page:
                 self._switch_page(self.current_checkpoint_page)
-        if self.level_path and not self.level_completed:
-            player_rect = self.player.get_rect()
-            for platform in self.platforms:
-                if platform.is_finish() and player_rect.colliderect(platform.rect):
-                    if self.checkpoints_activated < self.checkpoints_required:
-                        break
-                    self.level_completed = True
-                    self._mark_level_complete()
-                    from screens.FinishScreen import FinishScreen
-                    self.running = False
-                    FinishScreen(self.screen, "Finished")
-                    return
 
         is_moving = abs(self.player.velocity_x) > 0 or keys[pygame.K_a] or keys[pygame.K_d]
         is_landing = (not self.was_on_ground) and self.player.is_on_ground
@@ -363,6 +395,14 @@ class GameScreen(Screen):
 
         # Draw player (animated)
         self.character.draw(self.screen)
+
+        if self.player.current_platform and self.player.current_platform.is_finish() and not self.checkpoints_activated < self.checkpoints_required:
+            self.level_completed = True
+            self._mark_level_complete()
+            from screens.FinishScreen import FinishScreen
+            self.running = False
+            FinishScreen(self.screen, "Finished")
+            return
         
         # Debug mode: Draw bounding boxes on top.
         if SETTINGS.get('debug_mode', False):
@@ -371,8 +411,32 @@ class GameScreen(Screen):
             # Draw platform bounding boxes
             for platform in self.platforms:
                 pygame.draw.rect(self.screen, "red", platform.rect, 2)
-            # Draw FPS counter
-            self.draw_text(f"FPS: {int(self.clock.get_fps())}", getFont(30), 255, 255, 255, 10, 10)
+            # Draw FPS counter and platform info
+            debug_y = 10
+            self.draw_text(f"FPS: {int(self.clock.get_fps())}", getFont(30), 255, 255, 255, 10, debug_y)
+            
+            # Display checkpoint progress
+            debug_y += 40
+            self.draw_text(f"Checkpoints: {self.checkpoints_activated}/{self.checkpoints_required}", getFont(24), 255, 255, 0, 10, debug_y)
+            
+            # Display current platform info
+            if self.player.current_platform:
+                platform = self.player.current_platform
+                texture_name = "None"
+                if platform.texture:
+                    # Try to get texture name from Texture enum
+                    for attr_name in dir(Texture):
+                        if not attr_name.startswith('_'):
+                            if getattr(Texture, attr_name) == platform.texture:
+                                texture_name = attr_name
+                                break
+                
+                debug_y += 40
+                self.draw_text(f"Platform Type: {platform.platform_type}", getFont(20), 100, 200, 255, 10, debug_y)
+                debug_y += 25
+                self.draw_text(f"Coords: ({platform.rect.x}, {platform.rect.y})", getFont(20), 100, 200, 255, 10, debug_y)
+                debug_y += 25
+                self.draw_text(f"Texture: {texture_name}", getFont(20), 100, 200, 255, 10, debug_y)
 
         # Flip() the display to put your work on screen
         pygame.display.flip()
