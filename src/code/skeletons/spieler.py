@@ -1,9 +1,6 @@
 import pygame
-import sys
 
 from skeletons.platform import Platform
-
-path=sys.argv[0].replace("main.py","")
 
 class Spieler:
     def __init__(self, player_pos, dt, radius=24):
@@ -25,6 +22,10 @@ class Spieler:
         self.is_on_ground = False
         self.prev_y = player_pos.y
         self.prev_x = player_pos.x
+
+    def set_sprite_size(self, width, height):
+        self.sprite_width = int(width)
+        self.sprite_height = int(height)
         
     def move_left(self):
         # On slippery platforms, use acceleration. Otherwise, direct movement

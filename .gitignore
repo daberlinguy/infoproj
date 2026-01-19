@@ -1,6 +1,87 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+eggs/
+*.manifest
+*.spec
+
+# =========================
+# Virtual Environments
+# =========================
 parkour/
-python3.13/
-PortableGit-2.52.0-64-bit.7z.exe
-*_Gruppe3.docx
-start.bat
-libresprite/
+venv/
+.venv/
+env/
+ENV/
+
+# =========================
+# PyInstaller Build
+# =========================
+build/
+*.spec
+
+# =========================
+# IDE / Editor Files
+# =========================
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Emacs
+*~
+\#*\#
+.#*
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# Documentation Build
+# =========================
+docs/node_modules/
+docs/dist/
+docs/.astro/
+
+# =========================
+# Misc
+# =========================
+.env
+.env.local
+*.log
+*.bak
+*.tmp
+*.temp
+libresprite
+python*
+*otokoll_Gruppe3*
+PortableGit*

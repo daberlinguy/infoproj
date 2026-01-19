@@ -7,11 +7,10 @@ import sys
 
 from skeletons.screen import Screen
 from assets.assets import getFont
+from data.storage import load_settings, save_settings
 
 # Global settings dictionary
-SETTINGS = {
-    'debug_mode': False
-}
+SETTINGS = load_settings()
 
 class SettingsScreen(Screen):
     def __init__(self, screen, caption):
@@ -44,6 +43,8 @@ class SettingsScreen(Screen):
     def onBtnBack(self):
         # Save settings before going back
         SETTINGS['debug_mode'] = self.debug_toggle.getValue()
+        save_settings(SETTINGS)
+        self.running = False
         from screens.TitleScreen import TitleScreen
         TitleScreen(self.screen, "Title Screen")
 
