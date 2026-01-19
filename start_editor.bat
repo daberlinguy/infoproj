@@ -1,0 +1,1 @@
+.\parkour\Scripts\python.exe .\editor\main.py
