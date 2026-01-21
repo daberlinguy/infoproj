@@ -84,8 +84,8 @@ class Screen:
     def set_backgroundImage(
         self,
         name: str,
-        scale_width: int = 1280,
-        scale_height: int = 720,
+        scale_width: int = pygame.display.Info().current_w,
+        scale_height: int = pygame.display.Info().current_h,
     ) -> None:
         """Set a background image from the assets/backgrounds folder.
 
@@ -104,6 +104,16 @@ class Screen:
         image = pygame.transform.scale(image, (scale_width, scale_height))
         self.screen.blit(image, (0, 0))
 
+    """def set_btntexture(
+            self,
+            name: str,
+            scale_width: int = 128
+            scale_height: int = 64
+    ) -> None:
+        image = pygame.image.load(assetees_path("button_textures", name)).convert()
+        image = pygame.transform.scale(image, (scale_width, scale_height))
+        self.screen.blit(image, (20,20))"""
+    
     def draw_text(
         self,
         text: str,

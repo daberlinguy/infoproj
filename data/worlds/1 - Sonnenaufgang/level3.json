@@ -1,5 +1,7 @@
 {
   "name": "Test 2",
+  "page_width_cells": 60,
+  "page_height_cells": 34,
   "player_spawn": {
     "x": 3,
     "y": 13,

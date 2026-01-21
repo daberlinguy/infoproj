@@ -35,8 +35,8 @@ class GameScreen(Screen):
         self.background_image_cached = None
         self.level_data = None
         self.page_index = 1
-        self.page_width_cells = 40
-        self.page_height_cells = 23
+        self.page_width_cells = 60
+        self.page_height_cells = 34
         self.page_grid_size = 32
         
         # Spawn point and checkpoint tracking
@@ -56,6 +56,8 @@ class GameScreen(Screen):
 
         self.isImageLoaded = False
         self.imageTick = 20
+
+        self.timer = 0.0
         
         # Create platforms - all grid-aligned with different types
         self.platforms = [
@@ -128,6 +130,9 @@ class GameScreen(Screen):
             return
         self.level_data = level_data
 
+        self.page_width_cells = int(level_data.get("page_width_cells", self.page_width_cells))
+        self.page_height_cells = int(level_data.get("page_height_cells", self.page_height_cells))
+
         player_spawn = level_data.get("player_spawn")
         if player_spawn:
             spawn_grid = player_spawn.get("grid", True)
@@ -164,11 +169,12 @@ class GameScreen(Screen):
         pages = level_data.get("pages")
         if pages:
             for page_key in pages.keys():
-                page_platforms = self._build_platforms_from_level(level_data, int(page_key) if str(page_key).isdigit() else page_key)
+                page_platforms = self._build_platforms_from_level(level_data, page_key)
                 total_checkpoints += sum(1 for p in page_platforms if p.is_checkpoint())
         else:
             total_checkpoints = sum(1 for platform in self.platforms if platform.is_checkpoint())
-        self.checkpoints_required = total_checkpoints-1
+        self.checkpoints_required = total_checkpoints
+        print(f"Total checkpoints in level: {self.checkpoints_required}")
 
     def _build_platforms_from_level(self, level_data, page_index=1):
         pages = level_data.get("pages")
@@ -266,7 +272,6 @@ class GameScreen(Screen):
             f"X: {int(self.player_pos.x)} Y: {int(self.player_pos.y)} On Ground: {self.player.is_on_ground}"
         )
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
@@ -284,6 +289,9 @@ class GameScreen(Screen):
         
         # Update player dt
         self.player.dt = self.dt
+
+        # Timer
+        self.timer += self.dt
         
         # Store previous position before any movement
         self.player.prev_x = self.player.player_pos.x
@@ -419,6 +427,9 @@ class GameScreen(Screen):
             debug_y += 40
             self.draw_text(f"Checkpoints: {self.checkpoints_activated}/{self.checkpoints_required}", getFont(24), 255, 255, 0, 10, debug_y)
             
+            debug_y += 50
+            self.draw_text(f"Timer: {self.timer:.2f} seconds", getFont(24), 255, 255, 255, 10, debug_y)
+
             # Display current platform info
             if self.player.current_platform:
                 platform = self.player.current_platform

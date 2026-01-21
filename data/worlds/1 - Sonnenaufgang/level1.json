@@ -1,5 +1,7 @@
 {
   "name": "World 1 - Level 1",
+  "page_width_cells": 60,
+  "page_height_cells": 34,
   "player_spawn": {"x":6, "y":14, "grid": true, "grid_size": 32},
   "background_color": {"r":135, "g":206, "b":235, "a":255},
   "pages": {

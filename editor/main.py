@@ -93,6 +93,10 @@ TEXTURE_ATLAS = {
     for name, data in _CONFIG.get("textures", {}).items()
 }
 
+# Global grid defaults (in cells)
+DEFAULT_GRID_COLUMNS = 60
+DEFAULT_GRID_ROWS = 34
+
 
 class LevelEditor(QMainWindow):
     def __init__(self):
@@ -104,6 +108,8 @@ class LevelEditor(QMainWindow):
             "name": "New Level",
             "player_spawn": {"x": 0, "y": 0, "grid": True, "grid_size": 32},
             "background_color": {"r": 135, "g": 206, "b": 235, "a": 255},
+            "page_width_cells": DEFAULT_GRID_COLUMNS,
+            "page_height_cells": DEFAULT_GRID_ROWS,
             "pages": {"1": {"cells": []}},
         }
         self.current_path = None
@@ -425,6 +431,8 @@ class LevelEditor(QMainWindow):
             with open(path, "r", encoding="utf-8") as f:
                 self.level_data = json.load(f)
             self.current_path = path
+            self.level_data.setdefault("page_width_cells", DEFAULT_GRID_COLUMNS)
+            self.level_data.setdefault("page_height_cells", DEFAULT_GRID_ROWS)
             self._ensure_pages()
             self._expand_platforms_to_cells()
             self._apply_level_to_form()
@@ -561,6 +569,8 @@ class LevelEditor(QMainWindow):
             "name": self.level_data.get("name", "New Level"),
             "player_spawn": self.level_data.get("player_spawn", {}),
             "background_color": self.level_data.get("background_color", {}),
+            "page_width_cells": self.level_data.get("page_width_cells", DEFAULT_GRID_COLUMNS),
+            "page_height_cells": self.level_data.get("page_height_cells", DEFAULT_GRID_ROWS),
             "pages": {},
         }
         for page_key, page in self.level_data.get("pages", {}).items():
@@ -706,8 +716,11 @@ class LevelCanvas(QGraphicsView):
         self.setRenderHint(QPainter.RenderHint.Antialiasing, False)
         self.setDragMode(self.DragMode.RubberBandDrag)
         self.grid_size = 32
-        self.columns = 40
-        self.rows = 23
+        self.columns = int(editor.level_data.get("page_width_cells", DEFAULT_GRID_COLUMNS))
+        self.rows = int(editor.level_data.get("page_height_cells", DEFAULT_GRID_ROWS))
+        self._zoom = 1.0
+        self._min_zoom = 0.25
+        self._max_zoom = 4.0
         self._dragging = False
         self._start_cell = None
         self._preview_item = None
@@ -717,6 +730,8 @@ class LevelCanvas(QGraphicsView):
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.scene.selectionChanged.connect(self.selectionChanged)
         self._outline_items = {}
+        self.setTransformationAnchor(QGraphicsView.ViewportAnchor.AnchorUnderMouse)
+        self.setResizeAnchor(QGraphicsView.ViewportAnchor.AnchorViewCenter)
 
     def set_mode(self, mode):
         self.mode = mode
@@ -737,6 +752,8 @@ class LevelCanvas(QGraphicsView):
 
     def render_scene(self):
         self.scene.clear()
+        self.columns = int(self.editor.level_data.get("page_width_cells", self.columns))
+        self.rows = int(self.editor.level_data.get("page_height_cells", self.rows))
         width = self.columns * self.grid_size
         height = self.rows * self.grid_size
         self.scene.setSceneRect(0, 0, width, height)
@@ -913,6 +930,25 @@ class LevelCanvas(QGraphicsView):
         right = (max(x1, x2) + 1) * self.grid_size
         bottom = (max(y1, y2) + 1) * self.grid_size
         return QRectF(left, top, right - left, bottom - top)
+
+    def _zoom_by(self, factor):
+        new_zoom = max(self._min_zoom, min(self._zoom * factor, self._max_zoom))
+        if abs(new_zoom - self._zoom) < 1e-6:
+            return
+        scale_factor = new_zoom / self._zoom
+        self.scale(scale_factor, scale_factor)
+        self._zoom = new_zoom
+
+    def wheelEvent(self, event):
+        angle = event.angleDelta().y()
+        if angle == 0:
+            super().wheelEvent(event)
+            return
+        if angle > 0:
+            self._zoom_by(1.15)
+        else:
+            self._zoom_by(1 / 1.15)
+        event.accept()
 
 
 def main():

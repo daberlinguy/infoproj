@@ -3,7 +3,7 @@ import pygame
 from pygame_widgets.widget import OrderedSet
 
 pygame.init()
-screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.FULLSCREEN)
 
 def main():
     # WeakSet iteration expects OrderedSet.copy on Python 3.14.

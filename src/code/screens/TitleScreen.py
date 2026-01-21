@@ -21,16 +21,18 @@ class TitleScreen(Screen):
         button_spacing = 20
         start_y = (screen.get_height() / 2) - ((button_height + button_spacing) * 1.5)
 
-        self.worlds_btn = Button(screen, (screen.get_width() / 2) - (button_width / 2), start_y,
+        button_x = (screen.get_width() / 2) - (button_width / 2)
+        
+        self.worlds_btn = Button(screen, button_x, start_y,
                 button_width, button_height, False, text="Worlds",
                 onClick=self.onBtnOpenWorldsScreen, font=getFont(30), radius=10)
-        self.character_btn = Button(screen, (screen.get_width() / 2) - (button_width / 2), start_y + button_height + button_spacing,
-                button_width, button_height, False, text="Charachters", 
+        self.character_btn = Button(screen, button_x, start_y + button_height + button_spacing,
+                button_width, button_height, False, text="Characters", 
                 onClick=self.onBtnOpenCharacterScreen, font=getFont(30), radius=10)
-        self.settings_btn = Button(screen, (screen.get_width() / 2) - (button_width / 2), start_y + 2 * (button_height + button_spacing),
+        self.settings_btn = Button(screen, button_x, start_y + 2 * (button_height + button_spacing),
                 button_width, button_height, False, text="Settings", 
                 onClick=self.onBtnOpenSettingsScreen, font=getFont(30), radius=10)
-        self.exit_btn = Button(screen, (screen.get_width() / 2) - (button_width / 2), start_y + 3 * (button_height + button_spacing),
+        self.exit_btn = Button(screen, button_x, start_y + 3 * (button_height + button_spacing),
                 button_width, button_height, False, text="Exit", 
                 onClick=sys.exit, font=getFont(30), radius=10)
 
@@ -78,7 +80,7 @@ class TitleScreen(Screen):
                 pygame.quit()
         
         # Fill screen with Background Image
-        self.set_backgroundImage("title.jpg")
+        self.set_backgroundImage("title.jpg", scale_height=self.screen.get_height(), scale_width=self.screen.get_width())
 
         # Draw the Title with a rounded translucent badge
         badge_padding_x = 24
@@ -100,7 +102,7 @@ class TitleScreen(Screen):
         self.character_btn.draw()
         self.settings_btn.draw()
         self.exit_btn.draw()
-
+        #self.set_btntexture()
         # Update widgets
         pygame_widgets.update(pygame.event.get())
 
