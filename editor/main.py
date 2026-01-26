@@ -74,6 +74,7 @@ def _load_texture_config():
             {"name": "CHECKPOINT"},
             {"name": "FINISH"},
             {"name": "SLIPPERY"},
+            {"name": "NOCLIP"},
         ],
     }
 
@@ -215,6 +216,7 @@ class LevelEditor(QMainWindow):
         self.y2 = QSpinBox()
         for spin in (self.x1, self.y1, self.x2, self.y2):
             spin.setRange(-9999, 9999)
+            spin.setReadOnly(True)
         coord_layout.addWidget(QLabel("x1"), 0, 0)
         coord_layout.addWidget(self.x1, 0, 1)
         coord_layout.addWidget(QLabel("y1"), 0, 2)
@@ -228,6 +230,7 @@ class LevelEditor(QMainWindow):
         self.grid_size = QSpinBox()
         self.grid_size.setRange(1, 512)
         self.grid_size.setValue(32)
+        self.grid_size.setReadOnly(True)
         form.addRow("Grid Size", self.grid_size)
 
         self.platform_type = QComboBox()

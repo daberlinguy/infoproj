@@ -6,6 +6,7 @@ import sys
 
 from skeletons.screen import Screen
 from assets.assets import getFont
+from utils.paths import assets_path
 from screens.SettingsScreen import SETTINGS
 
 class TitleScreen(Screen):
@@ -23,20 +24,33 @@ class TitleScreen(Screen):
 
         button_x = (screen.get_width() / 2) - (button_width / 2)
         
-        self.texture = "button_background.png"
+        self.button_texture = pygame.image.load(assets_path("backgrounds/button_background.png")).convert_alpha()
+        self.button_texture = pygame.transform.scale(self.button_texture, (button_width, button_height))
         
+        self.button_hover_texture = self.button_texture.copy()
+        # Create a white overlay with alpha to brighten the image for hover effect
+        brighten_surface = pygame.Surface(self.button_hover_texture.get_size(), pygame.SRCALPHA)
+        brighten_surface.fill((255, 255, 255, 50)) 
+        self.button_hover_texture.blit(brighten_surface, (0, 0))
+
         self.worlds_btn = Button(screen, button_x, start_y,
                 button_width, button_height, False, text="Worlds",
-                onClick=self.onBtnOpenWorldsScreen, font=getFont(30), radius=10)
+                onClick=self.onBtnOpenWorldsScreen, font=getFont(30), radius=10, image=self.button_texture)
         self.character_btn = Button(screen, button_x, start_y + button_height + button_spacing,
                 button_width, button_height, False, text="Characters", 
-                onClick=self.onBtnOpenCharacterScreen, font=getFont(30), radius=10)
+                onClick=self.onBtnOpenCharacterScreen, font=getFont(30), radius=10, image=self.button_texture)
         self.settings_btn = Button(screen, button_x, start_y + 2 * (button_height + button_spacing),
                 button_width, button_height, False, text="Settings", 
-                onClick=self.onBtnOpenSettingsScreen, font=getFont(30), radius=10)
+                onClick=self.onBtnOpenSettingsScreen, font=getFont(30), radius=10, image=self.button_texture)
         self.exit_btn = Button(screen, button_x, start_y + 3 * (button_height + button_spacing),
                 button_width, button_height, False, text="Exit",
-                onClick=sys.exit, font=getFont(30), radius=10)
+                onClick=sys.exit, font=getFont(30), radius=10, image=self.button_texture)
+
+        buttons = [self.worlds_btn, self.character_btn, self.settings_btn, self.exit_btn]
+        for btn in buttons:
+            btn.onHover = lambda b=btn: b.setImage(self.button_hover_texture)
+            btn.onHoverRelease = lambda b=btn: b.setImage(self.button_texture)
+
 
         # Set Title Text
         self.title_text = "Platformer"

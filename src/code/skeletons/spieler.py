@@ -13,7 +13,7 @@ class Spieler:
         self.velocity_x = 0
         self.velocity_y = 0
         self.gravity = 980
-        self.jump_strength = -500
+        self.jump_strength = -400
         self.acceleration = 1200  # Horizontal acceleration
         self.max_speed = 300  # Maximum horizontal speed
         self.max_fall_speed = 1000  # Maximum falling speed to prevent tunneling
@@ -133,7 +133,7 @@ class Spieler:
         player_rect = self.get_rect()  # Update rect after potential ground correction
         for platform in platforms:
             # Skip death platforms - they don't block movement
-            if platform.is_deadly():
+            if platform.is_noclip() or platform.is_deadly():
                 continue
                 
             if player_rect.colliderect(platform.rect):
@@ -181,6 +181,9 @@ class Spieler:
             if player_rect.colliderect(platform.rect):
                 # Death platform - trigger respawn
                 if platform.is_deadly():
+                    self.player_pos = current_checkpoint.copy()
+                    self.velocity_x = 0
+                    self.velocity_y = 0
                     return (current_checkpoint, True)
                 
                 # Checkpoint platform - save position

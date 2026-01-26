@@ -250,6 +250,7 @@ class Platform:
     CHECKPOINT: str = "checkpoint"
     FINISH: str = "finish"
     SLIPPERY: str = "slippery"
+    NOCLIP: str = "noclip"
 
     # Default colors for each platform type
     _TYPE_COLORS = {
@@ -258,6 +259,7 @@ class Platform:
         CHECKPOINT: (255, 255, 0),  # Yellow
         FINISH: (0, 150, 255),  # Blue
         SLIPPERY: (100, 200, 255),  # Light blue
+        NORMAL: (100, 100, 100),  # Gray
     }
     _DEFAULT_COLOR = (100, 100, 100)  # Gray
 
@@ -425,6 +427,14 @@ class Platform:
             True if this is a SPAWN platform.
         """
         return self.platform_type == Platform.SPAWN
+    
+    def is_noclip(self) -> bool:
+        """Check if this platform is a noclip platform.
+
+        Returns:
+            True if this is a NOCLIP platform.
+        """
+        return self.platform_type == Platform.NOCLIP
 
     def activate_checkpoint(self) -> None:
         """Activate this checkpoint.

@@ -9,6 +9,8 @@ settings_path = os.path.join(data_dir, "settings.json")
 worlds_dir = os.path.join(data_dir, "worlds")
 legacy_levels_dir = levels_root()
 
+_cached_worlds = None
+
 
 def ensure_data_dirs():
     os.makedirs(worlds_dir, exist_ok=True)
@@ -74,7 +76,11 @@ def _maybe_migrate_legacy_levels():
             shutil.copytree(world_path, dest_path, dirs_exist_ok=True)
 
 
-def load_worlds():
+def load_worlds(force_reload=False):
+    global _cached_worlds
+    if _cached_worlds is not None and not force_reload:
+        return _cached_worlds
+
     ensure_data_dirs()
     _maybe_migrate_legacy_levels()
     worlds = {}
@@ -105,4 +111,6 @@ def load_worlds():
                 }
             )
         worlds[world_name] = {"name": world_name, "path": world_path, "levels": levels}
+
+    _cached_worlds = worlds
     return worlds

@@ -1,6 +1,7 @@
 import os
 import pygame
 import sys
+import json
 
 from skeletons.screen import Screen
 from skeletons.spieler import Spieler
@@ -117,17 +118,16 @@ class GameScreen(Screen):
         print("Game Screen would open here.")  # Add your game screen transition here
 
     def _load_level(self, level_path):
-        worlds = load_worlds()
-        level_data = None
-        for world in worlds.values():
-            for level in world["levels"]:
-                if level["path"] == level_path:
-                    level_data = level.get("data", {})
-                    break
-            if level_data is not None:
-                break
-        if not level_data:
+        if not level_path or not os.path.exists(level_path):
             return
+
+        try:
+            with open(level_path, "r", encoding="utf-8") as f:
+                level_data = json.load(f)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"Error loading level file: {e}")
+            return
+
         self.level_data = level_data
 
         self.page_width_cells = int(level_data.get("page_width_cells", self.page_width_cells))
