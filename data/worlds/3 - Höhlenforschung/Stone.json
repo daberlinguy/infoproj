@@ -37,7 +37,7 @@
           "x2": 0,
           "y2": 7,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -51,7 +51,7 @@
           "x2": 0,
           "y2": 10,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -65,7 +65,7 @@
           "x2": 0,
           "y2": 13,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -79,7 +79,7 @@
           "x2": 0,
           "y2": 16,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -93,7 +93,7 @@
           "x2": 0,
           "y2": 19,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -107,7 +107,7 @@
           "x2": 0,
           "y2": 22,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -121,7 +121,7 @@
           "x2": 0,
           "y2": 26,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -261,7 +261,7 @@
           "x2": 12,
           "y2": 24,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -275,7 +275,7 @@
           "x2": 15,
           "y2": 29,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -289,7 +289,7 @@
           "x2": 14,
           "y2": 31,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -303,7 +303,7 @@
           "x2": 15,
           "y2": 32,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,
@@ -317,7 +317,7 @@
           "x2": 18,
           "y2": 28,
           "grid_size": 32,
-          "type": "NORMAL",
+          "type": "NOCLIP",
           "color": [
             0,
             0,

@@ -13,7 +13,7 @@ class Spieler:
         self.velocity_x = 0
         self.velocity_y = 0
         self.gravity = 980
-        self.jump_strength = -400
+        self.jump_strength = -450
         self.acceleration = 1200  # Horizontal acceleration
         self.max_speed = 300  # Maximum horizontal speed
         self.max_fall_speed = 1000  # Maximum falling speed to prevent tunneling
@@ -110,6 +110,8 @@ class Spieler:
         for platform in platforms:
             # Skip death platforms - don't allow standing on them
             if platform.is_deadly():
+                continue
+            if platform.is_noclip():
                 continue
             
             # More robust ground collision: check if we're moving downward and crossing the platform top
