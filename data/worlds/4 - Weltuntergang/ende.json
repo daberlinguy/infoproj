@@ -1,0 +1,387 @@
+{
+  "name": "Das Ende",
+  "player_spawn": {
+    "x": 4,
+    "y": 5,
+    "grid": true,
+    "grid_size": 32
+  },
+  "background_color": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 255
+  },
+  "page_width_cells": 60,
+  "page_height_cells": 34,
+  "pages": {
+    "1": {
+      "platforms": [
+        {
+          "x1": 2,
+          "y1": 28,
+          "x2": 4,
+          "y2": 28,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDPORTAL"
+        },
+        {
+          "x1": 1,
+          "y1": 29,
+          "x2": 7,
+          "y2": 29,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 2,
+          "y1": 30,
+          "x2": 6,
+          "y2": 30,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 3,
+          "y1": 31,
+          "x2": 3,
+          "y2": 31,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 13,
+          "y1": 27,
+          "x2": 18,
+          "y2": 27,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 14,
+          "y1": 28,
+          "x2": 18,
+          "y2": 28,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 15,
+          "y1": 29,
+          "x2": 16,
+          "y2": 29,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 23,
+          "y1": 26,
+          "x2": 26,
+          "y2": 26,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 24,
+          "y1": 27,
+          "x2": 27,
+          "y2": 27,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 24,
+          "y1": 28,
+          "x2": 26,
+          "y2": 28,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 25,
+          "y1": 29,
+          "x2": 26,
+          "y2": 29,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 34,
+          "y1": 26,
+          "x2": 41,
+          "y2": 26,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 35,
+          "y1": 27,
+          "x2": 59,
+          "y2": 27,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 37,
+          "y1": 28,
+          "x2": 59,
+          "y2": 29,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 38,
+          "y1": 32,
+          "x2": 59,
+          "y2": 33,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 39,
+          "y1": 30,
+          "x2": 59,
+          "y2": 30,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 40,
+          "y1": 31,
+          "x2": 59,
+          "y2": 31,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 47,
+          "y1": 26,
+          "x2": 59,
+          "y2": 26,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        },
+        {
+          "x1": 39,
+          "y1": 18,
+          "x2": 47,
+          "y2": 18,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PURPUR_BLOCK"
+        },
+        {
+          "x1": 40,
+          "y1": 19,
+          "x2": 48,
+          "y2": 19,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PURPUR_BLOCK"
+        },
+        {
+          "x1": 41,
+          "y1": 20,
+          "x2": 47,
+          "y2": 20,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PURPUR_BLOCK"
+        },
+        {
+          "x1": 43,
+          "y1": 12,
+          "x2": 43,
+          "y2": 17,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PURPUR_BLOCK"
+        },
+        {
+          "x1": 39,
+          "y1": 13,
+          "x2": 42,
+          "y2": 13,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PINK_WOOL"
+        },
+        {
+          "x1": 40,
+          "y1": 12,
+          "x2": 42,
+          "y2": 12,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PINK_WOOL"
+        },
+        {
+          "x1": 40,
+          "y1": 14,
+          "x2": 42,
+          "y2": 14,
+          "grid_size": 32,
+          "type": "NORMAL",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "PINK_WOOL"
+        },
+        {
+          "x1": 42,
+          "y1": 26,
+          "x2": 46,
+          "y2": 26,
+          "grid_size": 32,
+          "type": "CHECKPOINT",
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "texture": "ENDSTONE"
+        }
+      ]
+    }
+  }
+}

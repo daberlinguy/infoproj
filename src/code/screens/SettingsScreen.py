@@ -25,7 +25,7 @@ class SettingsScreen(Screen):
         start_y = int((screen.get_height() / 2) - 100)
 
         # Debug mode toggle
-        self.debug_toggle = Toggle(screen, int((screen.get_width() / 2) - 75), start_y, 150, 40,
+        self.debug_toggle = Toggle(screen, int((screen.get_width() / 2) + 100), start_y, 100, 40,
                                    startOn=SETTINGS['debug_mode'])
         
         # Back button
@@ -54,9 +54,10 @@ class SettingsScreen(Screen):
                 self.running = False
                 exit()
                 pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.onBtnBack()
+        
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            self.onBtnBack()
         
         # Fill screen with Background Image
         self.set_backgroundImage("title.jpg")

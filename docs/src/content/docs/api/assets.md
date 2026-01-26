@@ -10,7 +10,14 @@ Functions and classes for loading game assets.
 ## Module Location
 
 ```python
-from assets.assets import getFont, getMinecraftTexture, Texture
+from assets.assets import (
+    getFont,
+    getMinecraftTexture,
+    get_texture_config,
+    get_platform_types,
+    get_texture_names,
+    Texture,
+)
 ```
 
 ## Functions
@@ -75,27 +82,74 @@ grass = getMinecraftTexture(352, 576, 16, 16)
 
 ---
 
+### get_texture_config()
+
+Load the full texture configuration from `textures.json`.
+
+```python
+def get_texture_config() -> dict
+```
+
+**Returns:** Configuration dictionary with atlas, textures, and platform types.
+
+---
+
+### get_platform_types()
+
+Get the list of platform type names defined in `textures.json`.
+
+```python
+def get_platform_types() -> List[str]
+```
+
+**Example:**
+```python
+types = get_platform_types()
+print(types)  # ['NORMAL', 'DEATH', 'CHECKPOINT', ...]
+```
+
+---
+
+### get_texture_names()
+
+Get the list of available texture names.
+
+```python
+def get_texture_names() -> List[str]
+```
+
+**Example:**
+```python
+names = get_texture_names()
+print(names)  # ['GRASS', 'ICE', 'STONE', ...]
+```
+
+---
+
 ## Texture Class
 
-Pre-loaded textures from the atlas.
+Dynamically loaded textures from `textures.json`.
 
 ```python
 class Texture:
+    # Dynamically generated attributes
     GRASS: pygame.Surface
     STONE: pygame.Surface
     ICE: pygame.Surface
-    ICEBROKEN: pygame.Surface
-    ICEBROKEN2: pygame.Surface
-    ICEBROKEN3: pygame.Surface
     LAVA: pygame.Surface
-    GOLD_BLOCK: pygame.Surface
-    FLETCHINGTABLE: pygame.Surface
-    FLETCHINGTABLE2: pygame.Surface
-    FLETCHINGTABLE3: pygame.Surface
-    OVENOFF: pygame.Surface
-    OVENON: pygame.Surface
-    OVENBEHIND: pygame.Surface
-    OVENTOP: pygame.Surface
+    # ...and more from textures.json
+
+    @classmethod
+    def get(cls, name: str) -> Optional[pygame.Surface]: ...
+
+    @classmethod
+    def list_all(cls) -> List[str]: ...
+
+    @classmethod
+    def reload(cls) -> None: ...
+
+    @classmethod
+    def get_config(cls) -> dict: ...
 ```
 
 **Example:**
@@ -108,6 +162,48 @@ platform = Platform(..., texture=Texture.GRASS)
 
 ---
 
+## Texture Helper Methods
+
+### Texture.get(name)
+
+Get a texture by string name.
+
+```python
+texture = Texture.get("GRASS")
+```
+
+---
+
+### Texture.list_all()
+
+List all texture names loaded from config.
+
+```python
+names = Texture.list_all()
+```
+
+---
+
+### Texture.reload()
+
+Reload textures after editing `textures.json`.
+
+```python
+Texture.reload()
+```
+
+---
+
+### Texture.get_config()
+
+Return the raw `textures` dictionary from config.
+
+```python
+config = Texture.get_config()
+```
+
+---
+
 ## Adding Custom Textures
 
 ```python
@@ -116,3 +212,5 @@ class Texture:
     # ... existing textures ...
     MY_TEXTURE = getMinecraftTexture(x, y, 16, 16)
 ```
+
+With dynamic textures, you can also add entries directly in `textures.json` without touching code. See [Using Textures](../guides/using-textures).

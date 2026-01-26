@@ -35,7 +35,7 @@ class CharacterScreen(Screen):
         grid_y = (screen.get_height() / 2) - 140
         row_height = 110
         row_width = 640
-        for idx, character_id in enumerate(self.character_ids):
+        for idx, _ in enumerate(self.character_ids):
             y = grid_y + idx * row_height
             self.row_rects.append(pygame.Rect(grid_x, y, row_width, row_height - 10))
         
@@ -62,8 +62,8 @@ class CharacterScreen(Screen):
             character_instance = character_cls()
             preview = character_instance.build(pygame.Vector2(0, 0))
             preview.set_state("walk", force=True)
-            preview.scale_x = 0.25
-            preview.scale_y = 0.25
+            preview.scale_x = character_instance.sprite_scale[0]
+            preview.scale_y = character_instance.sprite_scale[1]
             previews[character_id] = preview
         return previews
 

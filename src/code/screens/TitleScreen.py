@@ -23,6 +23,8 @@ class TitleScreen(Screen):
 
         button_x = (screen.get_width() / 2) - (button_width / 2)
         
+        self.texture = "button_background.png"
+        
         self.worlds_btn = Button(screen, button_x, start_y,
                 button_width, button_height, False, text="Worlds",
                 onClick=self.onBtnOpenWorldsScreen, font=getFont(30), radius=10)
@@ -33,12 +35,13 @@ class TitleScreen(Screen):
                 button_width, button_height, False, text="Settings", 
                 onClick=self.onBtnOpenSettingsScreen, font=getFont(30), radius=10)
         self.exit_btn = Button(screen, button_x, start_y + 3 * (button_height + button_spacing),
-                button_width, button_height, False, text="Exit", 
+                button_width, button_height, False, text="Exit",
                 onClick=sys.exit, font=getFont(30), radius=10)
 
         # Set Title Text
         self.title_text = "Platformer"
         self.title_width = getFont(60).size(self.title_text)[0]
+        
 
         
         super().__init__(screen, caption)

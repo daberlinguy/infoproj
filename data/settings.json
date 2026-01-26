@@ -1,8 +1,8 @@
 {
   "debug_mode": true,
-  "character": "character3",
-  "selected_world": "1 - Sonnenaufgang",
-  "selected_level": "level3 - Kopie.json",
+  "character": "character2",
+  "selected_world": "4 - Weltuntergang",
+  "selected_level": "level1.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {
