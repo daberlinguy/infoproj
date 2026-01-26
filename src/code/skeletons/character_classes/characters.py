@@ -89,23 +89,31 @@ class CharacterThree(CharacterClass):
     Uses the same sprites as ChatLink but at a larger scale.
     """
 
-    name = "Character 3"
-    sprite_scale = (0.25, 0.25)
-    sprite_folder = "characters/chatlink"
+    name = "CKghnit"
+    sprite_scale = (3.3, 3.3)
+    sprite_folder = "characters/kngiht"
 
     walk_frames = [
-        "walk1.png",
-        "walk2.png",
-        "walk3.png",
-        "walk4.png",
-        "walk5.png",
+        "l1.png",
+        "l2.png",
+        "l3.png",
+        "l4.png",
+        "l5.png",
+        "l6.png",
+        "l7.png",
+        "l8.png",
+        "l9.png",
+        "l10.png",
+        "l11.png",
+        "l12.png",
+        "l13.png",
+        "l14.png",
+        "l15.png",
+        "l16.png",
     ]
 
     jump_frames = [
-        "jump1.png",
-        "jump2.png",
-        "jump3.png",
-        "jump4.png",
+        "l1.png"
     ]
 
 
