@@ -11,6 +11,8 @@ This page documents all available platform types, their behaviors, and visual in
 
 Platforms are defined in the `Platform` class in `src/code/skeletons/platform.py`. Each type has distinct gameplay behavior and visual appearance.
 
+**New in v2.0:** Platforms can now have **multiple types simultaneously**. For example, a platform can be both `CHECKPOINT` and `SLIPPERY` at the same time.
+
 ## Type Constants
 
 ```python
@@ -22,6 +24,40 @@ Platform.SPAWN       # "spawn"
 Platform.CHECKPOINT  # "checkpoint"
 Platform.FINISH      # "finish"
 Platform.SLIPPERY    # "slippery"
+Platform.NOCLIP      # "noclip"
+Platform.BOOST_UP    # "boost_up"
+Platform.BOOST_DOWN  # "boost_down"
+```
+
+## Multiple Types
+
+Platforms can have multiple types, combining different behaviors:
+
+**Code Example:**
+```python
+Platform(
+    x1=400, y1=450,
+    x2=600, y2=450,
+    grid_size=32,
+    platform_types=[Platform.CHECKPOINT, Platform.SLIPPERY],  # Both checkpoint and slippery
+    texture=Texture.ICE,
+)
+```
+
+**JSON Example:**
+```json
+{
+  "x1": 15, "y1": 12, "x2": 25, "y2": 12,
+  "types": ["CHECKPOINT", "SLIPPERY"],
+  "texture": "ICE"
+}
+```
+
+**Legacy Support:** The old single `type` field is still supported for backward compatibility:
+```json
+{
+  "type": "NORMAL"
+}
 ```
 
 ## Detailed Reference
@@ -273,15 +309,120 @@ Platform(
 
 ---
 
+### NOCLIP
+
+**Purpose:** Passthrough platform that doesn't block player
+
+**Behavior:**
+- Player can pass through from any direction
+- No collision detection
+- Visual indicator only
+- Often combined with other types (BOOST_UP, BOOST_DOWN)
+
+**Visual:**
+- Default: Light Gray (200, 200, 200)
+- No special indicator
+
+**Code Example:**
+```python
+Platform(
+    x1=300, y1=400,
+    x2=500, y2=400,
+    grid_size=32,
+    platform_types=[Platform.NOCLIP],
+)
+```
+
+**JSON Example:**
+```json
+{
+  "x1": 10, "y1": 12, "x2": 15, "y2": 12,
+  "types": ["NOCLIP"]
+}
+```
+
+---
+
+### BOOST_UP
+
+**Purpose:** Boost player upward when passing through
+
+**Behavior:**
+- Player can pass through (like NOCLIP)
+- Applies upward velocity boost when touched
+- Useful for creating wind currents or jump pads
+- Often combined with NOCLIP type
+
+**Visual:**
+- Default: Light Green (150, 255, 150)
+- Shows upward arrow indicator
+
+**Code Example:**
+```python
+Platform(
+    x1=300, y1=400,
+    x2=300, y2=500,
+    grid_size=32,
+    platform_types=[Platform.NOCLIP, Platform.BOOST_UP],
+)
+```
+
+**JSON Example:**
+```json
+{
+  "x1": 10, "y1": 10, "x2": 10, "y2": 15,
+  "types": ["NOCLIP", "BOOST_UP"]
+}
+```
+
+---
+
+### BOOST_DOWN
+
+**Purpose:** Boost player downward when passing through
+
+**Behavior:**
+- Player can pass through (like NOCLIP)
+- Applies downward velocity boost when touched
+- Useful for creating downdrafts
+- Often combined with NOCLIP type
+
+**Visual:**
+- Default: Light Red (255, 150, 150)
+- Shows downward arrow indicator
+
+**Code Example:**
+```python
+Platform(
+    x1=300, y1=400,
+    x2=300, y2=500,
+    grid_size=32,
+    platform_types=[Platform.NOCLIP, Platform.BOOST_DOWN],
+)
+```
+
+**JSON Example:**
+```json
+{
+  "x1": 10, "y1": 10, "x2": 10, "y2": 15,
+  "types": ["NOCLIP", "BOOST_DOWN"]
+}
+```
+
+---
+
 ## Helper Methods
 
 The `Platform` class provides type-checking methods:
 
 ```python
-platform.is_deadly()      # True for DEATH
-platform.is_checkpoint()  # True for CHECKPOINT
-platform.is_finish()      # True for FINISH
-platform.is_spawn()       # True for SPAWN
+platform.is_deadly()      # True if DEATH in types
+platform.is_checkpoint()  # True if CHECKPOINT in types
+platform.is_finish()      # True if FINISH in types
+platform.is_spawn()       # True if SPAWN in types
+platform.is_noclip()      # True if NOCLIP in types
+platform.is_boost_up()    # True if BOOST_UP in types
+platform.is_boost_down()  # True if BOOST_DOWN in types
 platform.get_friction()   # 0.05 for SLIPPERY, 0.8 for others
 ```
 
@@ -295,6 +436,9 @@ platform.get_friction()   # 0.05 for SLIPPERY, 0.8 for others
 | CHECKPOINT | (255, 255, 0) | #FFFF00 |
 | FINISH | (0, 150, 255) | #0096FF |
 | SLIPPERY | (100, 200, 255) | #64C8FF |
+| NOCLIP | (200, 200, 200) | #C8C8C8 |
+| BOOST_UP | (150, 255, 150) | #96FF96 |
+| BOOST_DOWN | (255, 150, 150) | #FF9696 |
 
 ## Custom Colors
 

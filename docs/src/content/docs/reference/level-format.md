@@ -45,9 +45,11 @@ data/worlds/<world_name>/<level_name>.json
           "w": "number (width, alternative to x2)",
           "h": "number (height, alternative to y2)",
           "grid_size": "number (default: 32)",
-          "type": "string (NORMAL|DEATH|SPAWN|CHECKPOINT|FINISH|SLIPPERY)",
+          "type": "string (legacy, use types instead)",
+          "types": "array of strings (NORMAL|DEATH|SPAWN|CHECKPOINT|FINISH|SLIPPERY|NOCLIP|BOOST_UP|BOOST_DOWN)",
           "texture": "string (texture name)",
-          "color": "[r, g, b] array"
+          "color": "[r, g, b] array",
+          "layer": "number (-10 to +10, default: 0)"
         }
       ]
     }
@@ -180,13 +182,38 @@ Platforms can be defined using two methods:
 
 Both methods result in a platform from (0, 15) to (10, 15).
 
-### type
+### types (New in v2.0)
+
+| Property | Value |
+|----------|-------|
+| Type | `array of strings` |
+| Default | `["NORMAL"]` |
+| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY`, `NOCLIP`, `BOOST_UP`, `BOOST_DOWN` |
+
+Platforms can now have multiple types simultaneously:
+
+```json
+{
+  "types": ["CHECKPOINT", "SLIPPERY"]
+}
+```
+
+```json
+{
+  "types": ["NOCLIP", "BOOST_UP"]
+}
+```
+
+### type (Legacy)
 
 | Property | Value |
 |----------|-------|
 | Type | `string` |
 | Default | `"NORMAL"` |
-| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY` |
+| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY`, `NOCLIP`, `BOOST_UP`, `BOOST_DOWN` |
+| Status | **Deprecated** - Use `types` array instead |
+
+The old single type format is still supported for backward compatibility:
 
 ```json
 {
@@ -233,6 +260,54 @@ Both methods result in a platform from (0, 15) to (10, 15).
 ```json
 {
   "grid_size": 32
+}
+```
+
+### layer (New in v2.0)
+
+| Property | Value |
+|----------|-------|
+| Type | `number` |
+| Default | `0` |
+| Range | `-10` to `+10` |
+| Description | Rendering layer for depth effect |
+
+The layer system creates a visual depth effect:
+
+- **Negative layers (-10 to -1):** Background layers, rendered darker (10% per layer)
+- **Layer 0:** Normal rendering, no tint applied
+- **Positive layers (+1 to +10):** Foreground layers, rendered brighter (10% per layer)
+
+Platforms are rendered in layer order (background first, foreground last).
+
+```json
+{
+  "layer": -5
+}
+```
+
+**Examples:**
+
+```json
+// Far background (50% darker)
+{
+  "x1": 0, "y1": 0, "x2": 60, "y2": 18,
+  "layer": -5,
+  "texture": "STONE"
+}
+
+// Normal layer
+{
+  "x1": 10, "y1": 15, "x2": 20, "y2": 15,
+  "layer": 0,
+  "texture": "GRASS"
+}
+
+// Foreground (30% brighter)
+{
+  "x1": 5, "y1": 5, "x2": 8, "y2": 5,
+  "layer": 3,
+  "texture": "GOLD_BLOCK"
 }
 ```
 
@@ -307,6 +382,39 @@ Low friction surface (ice). Player slides and has momentum.
 }
 ```
 
+### NOCLIP (New in v2.0)
+
+Platform the player can pass through (no collision). Useful for visual elements or combined with boost types.
+
+```json
+{
+  "x1": 10, "y1": 10, "x2": 15, "y2": 10,
+  "type": "NOCLIP"
+}
+```
+
+### BOOST_UP (New in v2.0)
+
+Applies upward velocity boost when player passes through. Typically combined with NOCLIP.
+
+```json
+{
+  "x1": 12, "y1": 8, "x2": 14, "y2": 8,
+  "types": ["NOCLIP", "BOOST_UP"]
+}
+```
+
+### BOOST_DOWN (New in v2.0)
+
+Applies downward velocity boost when player passes through. Typically combined with NOCLIP.
+
+```json
+{
+  "x1": 20, "y1": 5, "x2": 22, "y2": 5,
+  "types": ["NOCLIP", "BOOST_DOWN"]
+}
+```
+
 ## Complete Example
 
 ```json
@@ -331,23 +439,24 @@ Low friction surface (ice). Player slides and has momentum.
           "y1": 15,
           "x2": 12,
           "y2": 15,
-          "type": "NORMAL",
+          "types": ["NORMAL"],
           "texture": "GRASS",
-          "grid_size": 32
+          "grid_size": 32,
+          "layer": 0
         },
         {
           "x1": 3,
           "y1": 14,
           "x2": 3,
           "y2": 14,
-          "type": "SPAWN"
+          "types": ["SPAWN"]
         },
         {
           "x1": 15,
           "y1": 12,
           "x2": 20,
           "y2": 12,
-          "type": "NORMAL",
+          "types": ["NORMAL"],
           "texture": "STONE"
         },
         {
@@ -355,7 +464,7 @@ Low friction surface (ice). Player slides and has momentum.
           "y1": 17,
           "x2": 14,
           "y2": 17,
-          "type": "DEATH",
+          "types": ["DEATH"],
           "texture": "LAVA"
         },
         {
@@ -363,7 +472,7 @@ Low friction surface (ice). Player slides and has momentum.
           "y1": 9,
           "x2": 28,
           "y2": 9,
-          "type": "SLIPPERY",
+          "types": ["SLIPPERY"],
           "texture": "ICE"
         },
         {
@@ -371,14 +480,32 @@ Low friction surface (ice). Player slides and has momentum.
           "y1": 8,
           "x2": 30,
           "y2": 8,
-          "type": "CHECKPOINT"
+          "types": ["CHECKPOINT"]
+        },
+        {
+          "x1": 25,
+          "y1": 6,
+          "x2": 25,
+          "y2": 6,
+          "types": ["NOCLIP", "BOOST_UP"],
+          "comment": "Boost pad"
+        },
+        {
+          "x1": 0,
+          "y1": 0,
+          "x2": 40,
+          "y2": 18,
+          "types": ["NORMAL"],
+          "texture": "STONE",
+          "layer": -5,
+          "comment": "Background layer"
         },
         {
           "x1": 35,
           "y1": 6,
           "x2": 35,
           "y2": 6,
-          "type": "FINISH"
+          "types": ["FINISH"]
         }
       ]
     },
@@ -389,7 +516,7 @@ Low friction surface (ice). Player slides and has momentum.
           "y1": 6,
           "x2": 38,
           "y2": 6,
-          "type": "NORMAL",
+          "types": ["NORMAL"],
           "texture": "STONE"
         }
       ]

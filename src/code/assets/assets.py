@@ -101,6 +101,7 @@ def getFont(size: int) -> pygame.font.Font:
 # Texture Configuration Loading
 # ---------------------------------------------------------------------------
 
+
 def _load_texture_config() -> dict:
     """Load the texture configuration from textures.json.
 
@@ -151,6 +152,10 @@ def get_texture_names() -> List[str]:
 # Texture Loading
 # ---------------------------------------------------------------------------
 
+# Cache for the texture atlas to avoid reloading it multiple times
+_texture_atlas_cache: Optional[pygame.Surface] = None
+
+
 def getMinecraftTexture(
     location_x: int,
     location_y: int,
@@ -161,6 +166,7 @@ def getMinecraftTexture(
     """Extract a texture region from the Minecraft texture atlas.
 
     Loads a rectangular region from the texture_atlas.png sprite sheet.
+    The atlas is cached after first load to improve performance.
 
     Args:
         location_x: X coordinate in the atlas (pixels from left).
@@ -177,12 +183,16 @@ def getMinecraftTexture(
         # Extract grass texture at position (352, 576)
         grass = getMinecraftTexture(352, 576, 16, 16)
     """
-    texture_path = assets_path("sprites", "tiles", "texture_atlas.png")
-    minecraft_texture = pygame.image.load(texture_path).convert_alpha()
+    global _texture_atlas_cache
+
+    # Load and cache the texture atlas on first use
+    if _texture_atlas_cache is None:
+        texture_path = assets_path("sprites", "tiles", "texture_atlas.png")
+        _texture_atlas_cache = pygame.image.load(texture_path).convert_alpha()
 
     texture_surface = pygame.Surface((width, height), pygame.SRCALPHA)
     texture_surface.blit(
-        minecraft_texture,
+        _texture_atlas_cache,
         top_left,
         pygame.Rect(location_x, location_y, width, height),
     )
@@ -287,8 +297,8 @@ class Texture(metaclass=TextureMeta):
         Returns:
             The pygame Surface, or None if not found.
         """
-        cls.__class__._ensure_loaded()
-        return cls.__class__._textures.get(name)
+        type(cls)._ensure_loaded(cls)
+        return type(cls)._textures.get(name)
 
     @classmethod
     def list_all(cls) -> List[str]:
@@ -297,8 +307,8 @@ class Texture(metaclass=TextureMeta):
         Returns:
             List of texture name strings.
         """
-        cls.__class__._ensure_loaded()
-        return list(cls.__class__._textures.keys())
+        type(cls)._ensure_loaded(cls)
+        return list(type(cls)._textures.keys())
 
     @classmethod
     def reload(cls) -> None:
@@ -306,9 +316,19 @@ class Texture(metaclass=TextureMeta):
 
         Call this after modifying textures.json to pick up changes.
         """
-        cls.__class__._loaded = False
-        cls.__class__._textures.clear()
-        cls.__class__._ensure_loaded()
+        type(cls)._loaded = False
+        type(cls)._textures.clear()
+        type(cls)._ensure_loaded(cls)
+
+    @classmethod
+    def preload(cls) -> None:
+        """Preload all textures immediately.
+
+        Call this during game initialization to load all textures
+        upfront rather than on first access. This improves performance
+        when loading levels.
+        """
+        type(cls)._ensure_loaded(cls)
 
     @classmethod
     def get_config(cls) -> dict:
@@ -317,5 +337,5 @@ class Texture(metaclass=TextureMeta):
         Returns:
             The textures section from textures.json.
         """
-        cls.__class__._ensure_loaded()
-        return cls.__class__._config.get("textures", {})
+        type(cls)._ensure_loaded(cls)
+        return type(cls)._config.get("textures", {})

@@ -22,10 +22,12 @@ from PyQt6.QtWidgets import (
     QGraphicsScene,
     QGraphicsView,
     QGridLayout,
+    QGroupBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
     QListWidget,
+    QListWidgetItem,
     QMainWindow,
     QMessageBox,
     QPushButton,
@@ -130,6 +132,9 @@ class LevelEditor(QMainWindow):
         splitter.addWidget(self.canvas)
 
         self.platform_list = QListWidget()
+        self.platform_list.setSelectionMode(
+            QListWidget.SelectionMode.ExtendedSelection
+        )  # Enable multi-select
         self.platform_list.currentRowChanged.connect(self._load_platform_into_form)
         splitter.addWidget(self.platform_list)
 
@@ -233,9 +238,21 @@ class LevelEditor(QMainWindow):
         self.grid_size.setReadOnly(True)
         form.addRow("Grid Size", self.grid_size)
 
-        self.platform_type = QComboBox()
-        self.platform_type.addItems(PLATFORM_TYPES)
-        form.addRow("Type", self.platform_type)
+        # Platform types with checkboxes
+        types_group = QGroupBox("Platform Types")
+        types_layout = QVBoxLayout()
+        self.type_checkboxes = {}
+        for ptype in PLATFORM_TYPES:
+            checkbox = QCheckBox(ptype)
+            self.type_checkboxes[ptype] = checkbox
+            types_layout.addWidget(checkbox)
+        types_group.setLayout(types_layout)
+        form.addRow(types_group)
+
+        self.texture_search = QLineEdit()
+        self.texture_search.setPlaceholderText("Search textures...")
+        self.texture_search.textChanged.connect(self._filter_textures)
+        form.addRow("Search", self.texture_search)
 
         self.texture_type = QComboBox()
         self.texture_type.addItems(TEXTURE_TYPES)
@@ -255,9 +272,27 @@ class LevelEditor(QMainWindow):
         color_layout.addWidget(self.color_b, 0, 5)
         form.addRow("Color", color_layout)
 
-        self.apply_selected_btn = QPushButton("Apply to Selected")
+        # Layer depth control
+        self.layer = QSpinBox()
+        self.layer.setRange(-10, 10)
+        self.layer.setValue(0)
+        self.layer.setToolTip(
+            "Layer depth: negative = background (darker), positive = foreground (brighter)"
+        )
+        form.addRow("Layer", self.layer)
+
+        self.apply_selected_btn = QPushButton("Apply All to Selected")
         self.apply_selected_btn.clicked.connect(self._apply_to_selected)
         form.addRow(self.apply_selected_btn)
+
+        quick_update_layout = QHBoxLayout()
+        self.apply_type_btn = QPushButton("Update Type Only")
+        self.apply_type_btn.clicked.connect(self._apply_type_to_selected)
+        self.apply_texture_btn = QPushButton("Update Texture Only")
+        self.apply_texture_btn.clicked.connect(self._apply_texture_to_selected)
+        quick_update_layout.addWidget(self.apply_type_btn)
+        quick_update_layout.addWidget(self.apply_texture_btn)
+        form.addRow(quick_update_layout)
 
         return form
 
@@ -293,8 +328,6 @@ class LevelEditor(QMainWindow):
         update_btn.clicked.connect(self._update_platform)
         remove_btn = QPushButton("Remove Platform")
         remove_btn.clicked.connect(self._remove_platform)
-        merge_btn = QPushButton("Merge Platforms")
-        merge_btn.clicked.connect(self._merge_platforms)
         load_btn = QPushButton("Load JSON")
         load_btn.clicked.connect(self._load_json)
         save_btn = QPushButton("Save JSON")
@@ -303,7 +336,6 @@ class LevelEditor(QMainWindow):
         layout.addWidget(add_btn)
         layout.addWidget(update_btn)
         layout.addWidget(remove_btn)
-        layout.addWidget(merge_btn)
         layout.addWidget(load_btn)
         layout.addWidget(save_btn)
         return layout
@@ -337,18 +369,33 @@ class LevelEditor(QMainWindow):
             self.level_data["background_color"]["image"] = image_path
 
     def _collect_platform_fields(self):
+        # Collect selected types
+        selected_types = [
+            ptype
+            for ptype, checkbox in self.type_checkboxes.items()
+            if checkbox.isChecked()
+        ]
+        # If no types selected, default to NORMAL
+        if not selected_types:
+            selected_types = ["NORMAL"]
+
         platform = {
             "x1": self.x1.value(),
             "y1": self.y1.value(),
             "x2": self.x2.value(),
             "y2": self.y2.value(),
             "grid_size": self.grid_size.value(),
-            "type": self.platform_type.currentText(),
+            "types": selected_types,  # Changed from "type" to "types"
+            "layer": self.layer.value(),  # Add layer support
         }
         texture = self.texture_type.currentText()
         if texture:
             platform["texture"] = texture
-        platform["color"] = [self.color_r.value(), self.color_g.value(), self.color_b.value()]
+        platform["color"] = [
+            self.color_r.value(),
+            self.color_g.value(),
+            self.color_b.value(),
+        ]
         return platform
 
     def _load_platform_into_form(self, index):
@@ -356,13 +403,21 @@ class LevelEditor(QMainWindow):
         if index < 0 or index >= len(cells):
             return
         cell = cells[index]
+
+        # Handle both old "type" and new "types" format
+        cell_types = cell.get("types", [])
+        if not cell_types:
+            # Fallback to old single type format
+            old_type = cell.get("type", "NORMAL")
+            cell_types = [old_type] if old_type else ["NORMAL"]
+
         platform = {
             "x1": cell.get("x", 0),
             "y1": cell.get("y", 0),
             "x2": cell.get("x", 0),
             "y2": cell.get("y", 0),
             "grid_size": cell.get("grid_size", 32),
-            "type": cell.get("type", "NORMAL"),
+            "types": cell_types,
             "texture": cell.get("texture", ""),
             "color": cell.get("color", [0, 0, 0]),
         }
@@ -371,19 +426,40 @@ class LevelEditor(QMainWindow):
         self.x2.setValue(platform.get("x2", 0))
         self.y2.setValue(platform.get("y2", 0))
         self.grid_size.setValue(platform.get("grid_size", 32))
-        self.platform_type.setCurrentText(platform.get("type", "NORMAL"))
+
+        # Update type checkboxes
+        for ptype, checkbox in self.type_checkboxes.items():
+            checkbox.setChecked(ptype in platform.get("types", []))
+
         self.texture_type.setCurrentText(platform.get("texture", ""))
         color = platform.get("color", [0, 0, 0])
         if len(color) >= 3:
             self.color_r.setValue(color[0])
             self.color_g.setValue(color[1])
             self.color_b.setValue(color[2])
+
+        # Load layer value
+        self.layer.setValue(cell.get("layer", 0))
+
         self.canvas.select_platform_index(index)
 
     def _refresh_platform_list(self):
         self.platform_list.clear()
         for idx, cell in enumerate(self._current_cells()):
-            label = f"{idx + 1}: ({cell.get('x')},{cell.get('y')}) {cell.get('type', '')}"
+            # Handle both old "type" and new "types" format
+            cell_types = cell.get("types", [])
+            if not cell_types:
+                old_type = cell.get("type", "NORMAL")
+                cell_types = [old_type] if old_type else ["NORMAL"]
+            types_str = "+".join(cell_types)
+
+            # Add layer info to label
+            layer = cell.get("layer", 0)
+            layer_str = f" [L{layer:+d}]" if layer != 0 else ""
+
+            label = (
+                f"{idx + 1}: ({cell.get('x')},{cell.get('y')}) {types_str}{layer_str}"
+            )
             self.platform_list.addItem(label)
         self.canvas.render_scene()
 
@@ -400,34 +476,85 @@ class LevelEditor(QMainWindow):
         self._set_status("Platform added.")
 
     def _update_platform(self):
-        index = self.platform_list.currentRow()
-        if index < 0:
-            QMessageBox.warning(self, "No selection", "Select a platform to update.")
-            return
-        self._record_undo()
-        self._sync_level_fields()
-        cell = self._collect_platform_fields()
-        cell["x"] = cell.pop("x1")
-        cell["y"] = cell.pop("y1")
-        cell.pop("x2", None)
-        cell.pop("y2", None)
-        self._current_cells()[index] = cell
-        self._refresh_platform_list()
-        self.platform_list.setCurrentRow(index)
-        self._set_status("Platform updated.")
+        # Check if there are multiple selections from the canvas or list
+        selected_indices = self.canvas.get_selected_indices()
+
+        # If no canvas selection, check list widget for multi-selection
+        if not selected_indices:
+            list_items = self.platform_list.selectedItems()
+            if list_items:
+                selected_indices = [self.platform_list.row(item) for item in list_items]
+
+        if selected_indices and len(selected_indices) > 1:
+            # Update multiple platforms
+            self._record_undo()
+            self._sync_level_fields()
+            payload = self._collect_platform_fields()
+            for index in selected_indices:
+                cell = self._current_cells()[index]
+                cell.update(payload)
+                cell["x"] = cell.pop("x1")
+                cell["y"] = cell.pop("y1")
+                cell.pop("x2", None)
+                cell.pop("y2", None)
+            self._refresh_platform_list()
+            self._set_status(f"Updated {len(selected_indices)} platform(s).")
+        else:
+            # Fall back to single platform update
+            index = self.platform_list.currentRow()
+            if index < 0:
+                QMessageBox.warning(
+                    self, "No selection", "Select a platform to update."
+                )
+                return
+            self._record_undo()
+            self._sync_level_fields()
+            cell = self._collect_platform_fields()
+            cell["x"] = cell.pop("x1")
+            cell["y"] = cell.pop("y1")
+            cell.pop("x2", None)
+            cell.pop("y2", None)
+            self._current_cells()[index] = cell
+            self._refresh_platform_list()
+            self.platform_list.setCurrentRow(index)
+            self._set_status("Platform updated.")
 
     def _remove_platform(self):
-        index = self.platform_list.currentRow()
-        if index < 0:
-            QMessageBox.warning(self, "No selection", "Select a platform to remove.")
-            return
-        self._record_undo()
-        self._current_cells().pop(index)
-        self._refresh_platform_list()
-        self._set_status("Platform removed.")
+        # Check if there are multiple selections from the canvas or list
+        selected_indices = self.canvas.get_selected_indices()
+
+        # If no canvas selection, check list widget for multi-selection
+        if not selected_indices:
+            list_items = self.platform_list.selectedItems()
+            if list_items:
+                selected_indices = [self.platform_list.row(item) for item in list_items]
+
+        if selected_indices:
+            # Remove multiple platforms
+            self._record_undo()
+            # Sort in reverse to avoid index shifting during removal
+            for index in sorted(selected_indices, reverse=True):
+                if 0 <= index < len(self._current_cells()):
+                    self._current_cells().pop(index)
+            self._refresh_platform_list()
+            self._set_status(f"Removed {len(selected_indices)} platform(s).")
+        else:
+            # Fall back to single platform removal
+            index = self.platform_list.currentRow()
+            if index < 0:
+                QMessageBox.warning(
+                    self, "No selection", "Select a platform to remove."
+                )
+                return
+            self._record_undo()
+            self._current_cells().pop(index)
+            self._refresh_platform_list()
+            self._set_status("Platform removed.")
 
     def _load_json(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Open Level JSON", "", "JSON Files (*.json)")
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Open Level JSON", "", "JSON Files (*.json)"
+        )
         if not path:
             return
         try:
@@ -449,7 +576,9 @@ class LevelEditor(QMainWindow):
     def _save_json(self):
         self._sync_level_fields()
         if not self.current_path:
-            path, _ = QFileDialog.getSaveFileName(self, "Save Level JSON", "", "JSON Files (*.json)")
+            path, _ = QFileDialog.getSaveFileName(
+                self, "Save Level JSON", "", "JSON Files (*.json)"
+            )
             if not path:
                 return
             self.current_path = path
@@ -475,70 +604,6 @@ class LevelEditor(QMainWindow):
         self.bg_image.setText(bg.get("image", ""))
         self.canvas.render_scene()
 
-    def _merge_platforms(self):
-        platforms = self._cells_to_platforms(self._current_cells())
-        if not platforms:
-            QMessageBox.information(self, "No platforms", "No platforms to merge.")
-            return
-        self._record_undo()
-        merged = self._merge_platforms_internal(platforms)
-        self.level_data["pages"][self.current_page]["platforms"] = merged
-        self._refresh_platform_list()
-        self._set_status("Platforms merged.")
-
-    def _merge_platforms_internal(self, platforms):
-        cell_groups = {}
-        for platform in platforms:
-            x1 = int(platform.get("x1", 0))
-            y1 = int(platform.get("y1", 0))
-            x2 = int(platform.get("x2", 0))
-            y2 = int(platform.get("y2", 0))
-            grid_size = int(platform.get("grid_size", 32))
-            key = (
-                platform.get("type", "NORMAL"),
-                platform.get("texture"),
-                tuple(platform.get("color", [120, 120, 120])),
-                grid_size,
-            )
-            cells = cell_groups.setdefault(key, set())
-            for y in range(min(y1, y2), max(y1, y2) + 1):
-                for x in range(min(x1, x2), max(x1, x2) + 1):
-                    cells.add((x, y))
-
-        merged_platforms = []
-        for key, cells in cell_groups.items():
-            remaining = set(cells)
-            while remaining:
-                x, y = min(remaining)
-                width = 1
-                while (x + width, y) in remaining:
-                    width += 1
-                height = 1
-                while True:
-                    next_row = [(x + dx, y + height) for dx in range(width)]
-                    if all(cell in remaining for cell in next_row):
-                        height += 1
-                    else:
-                        break
-                for dy in range(height):
-                    for dx in range(width):
-                        remaining.discard((x + dx, y + dy))
-                platform_type, texture, color, grid_size = key
-                entry = {
-                    "x1": x,
-                    "y1": y,
-                    "x2": x + width - 1,
-                    "y2": y + height - 1,
-                    "grid_size": grid_size,
-                    "type": platform_type,
-                    "color": list(color),
-                }
-                if texture:
-                    entry["texture"] = texture
-                merged_platforms.append(entry)
-
-        return merged_platforms
-
     def _expand_platforms_to_cells(self):
         pages = self.level_data.get("pages", {})
         for page_key, page in pages.items():
@@ -551,13 +616,20 @@ class LevelEditor(QMainWindow):
                 y1 = int(platform.get("y1", 0))
                 x2 = int(platform.get("x2", 0))
                 y2 = int(platform.get("y2", 0))
+
+                # Handle both old "type" and new "types" format
+                platform_types = platform.get("types", [])
+                if not platform_types:
+                    old_type = platform.get("type", "NORMAL")
+                    platform_types = [old_type] if old_type else ["NORMAL"]
+
                 for y in range(min(y1, y2), max(y1, y2) + 1):
                     for x in range(min(x1, x2), max(x1, x2) + 1):
                         cell = {
                             "x": x,
                             "y": y,
                             "grid_size": platform.get("grid_size", 32),
-                            "type": platform.get("type", "NORMAL"),
+                            "types": platform_types,
                             "color": platform.get("color", [120, 120, 120]),
                         }
                         if platform.get("texture"):
@@ -572,26 +644,36 @@ class LevelEditor(QMainWindow):
             "name": self.level_data.get("name", "New Level"),
             "player_spawn": self.level_data.get("player_spawn", {}),
             "background_color": self.level_data.get("background_color", {}),
-            "page_width_cells": self.level_data.get("page_width_cells", DEFAULT_GRID_COLUMNS),
-            "page_height_cells": self.level_data.get("page_height_cells", DEFAULT_GRID_ROWS),
+            "page_width_cells": self.level_data.get(
+                "page_width_cells", DEFAULT_GRID_COLUMNS
+            ),
+            "page_height_cells": self.level_data.get(
+                "page_height_cells", DEFAULT_GRID_ROWS
+            ),
             "pages": {},
         }
         for page_key, page in self.level_data.get("pages", {}).items():
             cells = page.get("cells", [])
-            platforms = self._merge_platforms_internal(self._cells_to_platforms(cells))
+            platforms = self._cells_to_platforms(cells)
             payload["pages"][str(page_key)] = {"platforms": platforms}
         return payload
 
     def _cells_to_platforms(self, cells):
         platforms = []
         for cell in cells:
+            # Handle both old "type" and new "types" format
+            platform_types = cell.get("types", [])
+            if not platform_types:
+                old_type = cell.get("type", "NORMAL")
+                platform_types = [old_type] if old_type else ["NORMAL"]
+
             platform = {
                 "x1": cell.get("x", 0),
                 "y1": cell.get("y", 0),
                 "x2": cell.get("x", 0),
                 "y2": cell.get("y", 0),
                 "grid_size": cell.get("grid_size", 32),
-                "type": cell.get("type", "NORMAL"),
+                "types": platform_types,
                 "color": cell.get("color", [120, 120, 120]),
             }
             if cell.get("texture"):
@@ -624,7 +706,9 @@ class LevelEditor(QMainWindow):
     def _apply_to_selected(self):
         selected_indices = self.canvas.get_selected_indices()
         if not selected_indices:
-            QMessageBox.warning(self, "No selection", "Select platforms in the preview.")
+            QMessageBox.warning(
+                self, "No selection", "Select platforms in the preview."
+            )
             return
         self._record_undo()
         self._sync_level_fields()
@@ -638,6 +722,71 @@ class LevelEditor(QMainWindow):
             cell.pop("y2", None)
         self._refresh_platform_list()
         self._set_status(f"Updated {len(selected_indices)} platform(s).")
+
+    def _filter_textures(self, search_text):
+        """Filter texture dropdown based on search text."""
+        current_texture = self.texture_type.currentText()
+        self.texture_type.clear()
+
+        search_lower = search_text.lower()
+        filtered_textures = [""]  # Always include empty option
+
+        for texture in TEXTURE_TYPES[1:]:  # Skip the first empty string
+            if search_lower in texture.lower():
+                filtered_textures.append(texture)
+
+        self.texture_type.addItems(filtered_textures)
+
+        # Try to restore the previous selection if it's still in the filtered list
+        if current_texture in filtered_textures:
+            self.texture_type.setCurrentText(current_texture)
+
+    def _apply_type_to_selected(self):
+        """Update only the type for selected platforms."""
+        selected_indices = self.canvas.get_selected_indices()
+        if not selected_indices:
+            QMessageBox.warning(
+                self, "No selection", "Select platforms in the preview."
+            )
+            return
+        self._record_undo()
+
+        # Collect selected types
+        selected_types = [
+            ptype
+            for ptype, checkbox in self.type_checkboxes.items()
+            if checkbox.isChecked()
+        ]
+        if not selected_types:
+            selected_types = ["NORMAL"]
+
+        for index in selected_indices:
+            cell = self._current_cells()[index]
+            cell["types"] = selected_types
+            # Remove old single type field if it exists
+            if "type" in cell:
+                del cell["type"]
+        self._refresh_platform_list()
+        self._set_status(f"Updated type for {len(selected_indices)} platform(s).")
+
+    def _apply_texture_to_selected(self):
+        """Update only the texture for selected platforms."""
+        selected_indices = self.canvas.get_selected_indices()
+        if not selected_indices:
+            QMessageBox.warning(
+                self, "No selection", "Select platforms in the preview."
+            )
+            return
+        self._record_undo()
+        texture = self.texture_type.currentText()
+        for index in selected_indices:
+            cell = self._current_cells()[index]
+            if texture:
+                cell["texture"] = texture
+            elif "texture" in cell:
+                del cell["texture"]
+        self._refresh_platform_list()
+        self._set_status(f"Updated texture for {len(selected_indices)} platform(s).")
 
     def add_platform_from_rect(self, x1, y1, x2, y2):
         self._record_undo()
@@ -719,7 +868,9 @@ class LevelCanvas(QGraphicsView):
         self.setRenderHint(QPainter.RenderHint.Antialiasing, False)
         self.setDragMode(self.DragMode.RubberBandDrag)
         self.grid_size = 32
-        self.columns = int(editor.level_data.get("page_width_cells", DEFAULT_GRID_COLUMNS))
+        self.columns = int(
+            editor.level_data.get("page_width_cells", DEFAULT_GRID_COLUMNS)
+        )
         self.rows = int(editor.level_data.get("page_height_cells", DEFAULT_GRID_ROWS))
         self._zoom = 1.0
         self._min_zoom = 0.25
@@ -745,8 +896,12 @@ class LevelCanvas(QGraphicsView):
 
     def _load_texture_atlas(self):
         candidates = [
-            _resource_path("resources", "assets", "sprites", "tiles", "texture_atlas.png"),
-            _resource_path("src", "resources", "assets", "sprites", "tiles", "texture_atlas.png"),
+            _resource_path(
+                "resources", "assets", "sprites", "tiles", "texture_atlas.png"
+            ),
+            _resource_path(
+                "src", "resources", "assets", "sprites", "tiles", "texture_atlas.png"
+            ),
         ]
         for atlas_path in candidates:
             if os.path.exists(atlas_path):
@@ -809,7 +964,9 @@ class LevelCanvas(QGraphicsView):
             texture = cell.get("texture", "")
             if texture and self._atlas and texture in TEXTURE_ATLAS:
                 x, y, w, h = TEXTURE_ATLAS[texture]
-                tile = self._atlas.copy(x, y, w, h).scaled(self.grid_size, self.grid_size)
+                tile = self._atlas.copy(x, y, w, h).scaled(
+                    self.grid_size, self.grid_size
+                )
                 start_x = int(rect.x())
                 start_y = int(rect.y())
                 end_x = int(rect.x() + rect.width())
@@ -819,11 +976,17 @@ class LevelCanvas(QGraphicsView):
                         tile_item = self.scene.addPixmap(tile)
                         tile_item.setPos(tx, ty)
                         tile_item.setZValue(2)
+                        tile_item.setFlag(
+                            tile_item.GraphicsItemFlag.ItemIsSelectable, False
+                        )
+                        tile_item.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
             elif texture:
                 text = self.scene.addText(texture)
                 text.setDefaultTextColor(QColor(20, 20, 20))
                 text.setPos(rect.x() + 4, rect.y() + 4)
                 text.setZValue(3)
+                text.setFlag(text.GraphicsItemFlag.ItemIsSelectable, False)
+                text.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
             outline = QGraphicsRectItem(rect)
             outline.setBrush(QBrush(Qt.BrushStyle.NoBrush))
             outline.setPen(QPen(QColor(0, 0, 0, 0), 0))
@@ -851,12 +1014,15 @@ class LevelCanvas(QGraphicsView):
                 break
 
     def mousePressEvent(self, event):
-        if event.button() == Qt.MouseButton.LeftButton and event.modifiers() == Qt.KeyboardModifier.NoModifier:
+        if event.button() == Qt.MouseButton.LeftButton:
             pos = self.mapToScene(event.position().toPoint())
             cell_x = int(pos.x()) // self.grid_size
             cell_y = int(pos.y()) // self.grid_size
             if 0 <= cell_x < self.columns and 0 <= cell_y < self.rows:
-                if self.mode == "add":
+                if (
+                    self.mode == "add"
+                    and event.modifiers() == Qt.KeyboardModifier.NoModifier
+                ):
                     self._dragging = True
                     self._start_cell = (cell_x, cell_y)
                     if self._preview_item:
@@ -865,6 +1031,7 @@ class LevelCanvas(QGraphicsView):
                     self._preview_item.setBrush(QBrush(QColor(255, 255, 255, 40)))
                     self._preview_item.setPen(QPen(QColor(0, 0, 0), 1))
                     self.scene.addItem(self._preview_item)
+                    return  # Don't call super() for add mode
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
@@ -890,7 +1057,9 @@ class LevelCanvas(QGraphicsView):
             cell_y = max(0, min(self.rows - 1, cell_y))
             x1, y1 = self._start_cell
             x2, y2 = cell_x, cell_y
-            self.editor.add_platform_from_rect(min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2))
+            self.editor.add_platform_from_rect(
+                min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2)
+            )
             self._dragging = False
             self._start_cell = None
             if self._preview_item:
@@ -963,57 +1132,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-def merge_platforms(platforms):
-    cell_groups = {}
-    for platform in platforms:
-        x1 = int(platform.get("x1", 0))
-        y1 = int(platform.get("y1", 0))
-        x2 = int(platform.get("x2", 0))
-        y2 = int(platform.get("y2", 0))
-        grid_size = int(platform.get("grid_size", 32))
-        key = (
-            platform.get("type", "NORMAL"),
-            platform.get("texture"),
-            tuple(platform.get("color", [120, 120, 120])),
-            grid_size,
-        )
-        cells = cell_groups.setdefault(key, set())
-        for y in range(min(y1, y2), max(y1, y2) + 1):
-            for x in range(min(x1, x2), max(x1, x2) + 1):
-                cells.add((x, y))
-
-    merged_platforms = []
-    for key, cells in cell_groups.items():
-        remaining = set(cells)
-        while remaining:
-            x, y = min(remaining)
-            width = 1
-            while (x + width, y) in remaining:
-                width += 1
-            height = 1
-            while True:
-                next_row = [(x + dx, y + height) for dx in range(width)]
-                if all(cell in remaining for cell in next_row):
-                    height += 1
-                else:
-                    break
-            for dy in range(height):
-                for dx in range(width):
-                    remaining.discard((x + dx, y + dy))
-            platform_type, texture, color, grid_size = key
-            entry = {
-                "x1": x,
-                "y1": y,
-                "x2": x + width - 1,
-                "y2": y + height - 1,
-                "grid_size": grid_size,
-                "type": platform_type,
-                "color": list(color),
-            }
-            if texture:
-                entry["texture"] = texture
-            merged_platforms.append(entry)
-
-    return merged_platforms

@@ -1089,6 +1089,18 @@
         {
             "name": "SLIPPERY",
             "description": "Reduced friction platform"
+        },
+        {
+            "name": "NOCLIP",
+            "description": "Platform player can pass through"
+        },
+        {
+            "name": "BOOST_UP",
+            "description": "Boosts player upward when passing through"
+        },
+        {
+            "name": "BOOST_DOWN",
+            "description": "Boosts player downward when passing through"
         }
     ]
 }

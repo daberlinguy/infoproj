@@ -45,6 +45,9 @@ from typing import List, Optional, Tuple
 
 import pygame
 
+from utils.colors import ColorUtils
+from utils.platform_types import PlatformTypes
+
 
 class Cell:
     """Represents a single cell in a platform's grid.
@@ -163,15 +166,11 @@ class Grid:
 
         # Draw vertical lines
         for x in range(0, width + 1, self.cell_size):
-            pygame.draw.line(
-                screen, self.color, (x, 0), (x, height), self.line_width
-            )
+            pygame.draw.line(screen, self.color, (x, 0), (x, height), self.line_width)
 
         # Draw horizontal lines
         for y in range(0, height + 1, self.cell_size):
-            pygame.draw.line(
-                screen, self.color, (0, y), (width, y), self.line_width
-            )
+            pygame.draw.line(screen, self.color, (0, y), (width, y), self.line_width)
 
     def snap_to_grid(self, x: int, y: int) -> Tuple[int, int]:
         """Snap coordinates to the nearest grid point.
@@ -187,6 +186,7 @@ class Grid:
             (x // self.cell_size) * self.cell_size,
             (y // self.cell_size) * self.cell_size,
         )
+
 
 class Platform:
     """A platform that players can interact with.
@@ -243,25 +243,16 @@ class Platform:
         )
     """
 
-    # Platform type constants
-    NORMAL: str = "normal"
-    DEATH: str = "death"
-    SPAWN: str = "spawn"
-    CHECKPOINT: str = "checkpoint"
-    FINISH: str = "finish"
-    SLIPPERY: str = "slippery"
-    NOCLIP: str = "noclip"
-
-    # Default colors for each platform type
-    _TYPE_COLORS = {
-        DEATH: (255, 0, 0),  # Red
-        SPAWN: (0, 255, 0),  # Green
-        CHECKPOINT: (255, 255, 0),  # Yellow
-        FINISH: (0, 150, 255),  # Blue
-        SLIPPERY: (100, 200, 255),  # Light blue
-        NORMAL: (100, 100, 100),  # Gray
-    }
-    _DEFAULT_COLOR = (100, 100, 100)  # Gray
+    # Platform type constants (delegated to PlatformTypes for consistency)
+    NORMAL: str = PlatformTypes.NORMAL
+    DEATH: str = PlatformTypes.DEATH
+    SPAWN: str = PlatformTypes.SPAWN
+    CHECKPOINT: str = PlatformTypes.CHECKPOINT
+    FINISH: str = PlatformTypes.FINISH
+    SLIPPERY: str = PlatformTypes.SLIPPERY
+    NOCLIP: str = PlatformTypes.NOCLIP
+    BOOST_UP: str = PlatformTypes.BOOST_UP
+    BOOST_DOWN: str = PlatformTypes.BOOST_DOWN
 
     def __init__(
         self,
@@ -271,16 +262,31 @@ class Platform:
         y2: int,
         grid_size: int,
         platform_type: Optional[str] = None,
+        platform_types: Optional[List[str]] = None,
         color: Optional[Tuple[int, int, int]] = None,
         texture: Optional[pygame.Surface] = None,
         velocity_x: float = 0,
+        layer: int = 0,
     ) -> None:
-        self.platform_type: str = platform_type if platform_type else Platform.NORMAL
+        # Handle both single type (legacy) and multiple types (new)
+        if platform_types is not None:
+            self.platform_types: List[str] = (
+                platform_types if platform_types else [Platform.NORMAL]
+            )
+        elif platform_type is not None:
+            self.platform_types: List[str] = [platform_type]
+        else:
+            self.platform_types: List[str] = [Platform.NORMAL]
+
+        # Keep platform_type for backward compatibility (returns first type)
+        self.platform_type: str = self.platform_types[0]
+
         self.checkpoint_activated: bool = False
         self.grid_size: int = grid_size
         self.velocity_x: float = velocity_x
         self.original_x1: int = x1
         self.original_x2: int = x2
+        self.layer: int = layer  # Layer for depth rendering (-10 to +10, 0 is normal)
 
         # Ensure coordinates are properly ordered
         self.x1: int = min(x1, x2)
@@ -290,19 +296,26 @@ class Platform:
 
         # Determine color based on type if not provided
         if color is None:
-            self.color: Tuple[int, int, int] = self._TYPE_COLORS.get(
-                self.platform_type, self._DEFAULT_COLOR
+            self.color: Tuple[int, int, int] = PlatformTypes.get_color(
+                self.platform_type
             )
         else:
             self.color = color
 
         self.texture: Optional[pygame.Surface] = texture
 
-        # Create cells for the platform area
+        # Create cells for the platform area with layer tinting applied
         self.cells: List[Cell] = []
+
+        # Apply layer tint using ColorUtils
+        tinted_color = ColorUtils.apply_layer_tint(self.color, layer)
+        tinted_texture = (
+            ColorUtils.apply_layer_tint_to_texture(texture, layer) if texture else None
+        )
+
         for y in range(self.y1, self.y2 + 1, grid_size):
             for x in range(self.x1, self.x2 + 1, grid_size):
-                cell = Cell(x, y, grid_size, self.color, self.texture)
+                cell = Cell(x, y, grid_size, tinted_color, tinted_texture)
                 self.cells.append(cell)
 
         # Create bounding rect for collision detection
@@ -312,7 +325,7 @@ class Platform:
             self.x2 - self.x1 + grid_size,
             self.y2 - self.y1 + grid_size,
         )
-    
+
     def draw(self, screen: pygame.Surface) -> None:
         """Render the platform to the screen.
 
@@ -339,19 +352,18 @@ class Platform:
         Args:
             screen: The pygame Surface to draw to.
         """
-        if self.platform_type == Platform.DEATH:
+        # Draw indicators for each type the platform has
+        if Platform.DEATH in self.platform_types:
             # Draw X pattern for death platforms
             for cell in self.cells:
                 pygame.draw.line(
-                    screen, (150, 0, 0),
-                    cell.rect.topleft, cell.rect.bottomright, 2
+                    screen, (150, 0, 0), cell.rect.topleft, cell.rect.bottomright, 2
                 )
                 pygame.draw.line(
-                    screen, (150, 0, 0),
-                    cell.rect.topright, cell.rect.bottomleft, 2
+                    screen, (150, 0, 0), cell.rect.topright, cell.rect.bottomleft, 2
                 )
 
-        elif self.platform_type == Platform.CHECKPOINT:
+        if Platform.CHECKPOINT in self.platform_types:
             if self.checkpoint_activated:
                 # Green border when activated
                 pygame.draw.rect(screen, (0, 200, 0), self.rect, 3)
@@ -361,40 +373,104 @@ class Platform:
                 center_x = center_cell.rect.centerx
                 top_y = center_cell.rect.top + 5
                 pygame.draw.line(
-                    screen, (0, 0, 0),
-                    (center_x, top_y), (center_x, center_cell.rect.bottom - 5), 2
+                    screen,
+                    (0, 0, 0),
+                    (center_x, top_y),
+                    (center_x, center_cell.rect.bottom - 5),
+                    2,
                 )
                 pygame.draw.polygon(
-                    screen, (0, 0, 0),
-                    [(center_x, top_y), (center_x + 10, top_y + 5), (center_x, top_y + 10)]
+                    screen,
+                    (0, 0, 0),
+                    [
+                        (center_x, top_y),
+                        (center_x + 10, top_y + 5),
+                        (center_x, top_y + 10),
+                    ],
                 )
 
-        elif self.platform_type == Platform.SLIPPERY:
+        if Platform.SLIPPERY in self.platform_types:
             # Draw wavy lines for slippery surfaces
             for cell in self.cells:
                 for i in range(3):
                     y = cell.rect.centery - 5 + i * 5
                     pygame.draw.line(
-                        screen, (50, 100, 150),
-                        (cell.rect.left + 5, y), (cell.rect.right - 5, y), 1
+                        screen,
+                        (50, 100, 150),
+                        (cell.rect.left + 5, y),
+                        (cell.rect.right - 5, y),
+                        1,
                     )
 
-        elif self.platform_type == Platform.SPAWN:
+        if Platform.SPAWN in self.platform_types:
             # Draw "S" marker on center cell
             center_cell = self.cells[len(self.cells) // 2]
             font = pygame.font.Font(None, 20)
             text = font.render("S", True, (0, 150, 0))
-            screen.blit(text, (center_cell.rect.centerx - 5, center_cell.rect.centery - 10))
-    
+            screen.blit(
+                text, (center_cell.rect.centerx - 5, center_cell.rect.centery - 10)
+            )
+
+        if Platform.BOOST_UP in self.platform_types:
+            # Draw upward arrow
+            center_cell = self.cells[len(self.cells) // 2]
+            center_x = center_cell.rect.centerx
+            center_y = center_cell.rect.centery
+            # Arrow shaft
+            pygame.draw.line(
+                screen,
+                (0, 200, 0),
+                (center_x, center_y + 8),
+                (center_x, center_y - 8),
+                3,
+            )
+            # Arrow head
+            pygame.draw.polygon(
+                screen,
+                (0, 200, 0),
+                [
+                    (center_x, center_y - 10),
+                    (center_x - 5, center_y - 5),
+                    (center_x + 5, center_y - 5),
+                ],
+            )
+
+        if Platform.BOOST_DOWN in self.platform_types:
+            # Draw downward arrow
+            center_cell = self.cells[len(self.cells) // 2]
+            center_x = center_cell.rect.centerx
+            center_y = center_cell.rect.centery
+            # Arrow shaft
+            pygame.draw.line(
+                screen,
+                (200, 0, 0),
+                (center_x, center_y - 8),
+                (center_x, center_y + 8),
+                3,
+            )
+            # Arrow head
+            pygame.draw.polygon(
+                screen,
+                (200, 0, 0),
+                [
+                    (center_x, center_y + 10),
+                    (center_x - 5, center_y + 5),
+                    (center_x + 5, center_y + 5),
+                ],
+            )
+
     def get_friction(self) -> float:
         """Get the friction coefficient for this platform.
 
         Returns:
-            Friction value: 0.05 for slippery, 0.8 for normal platforms.
+            Friction value based on platform type.
         """
-        if self.platform_type == Platform.SLIPPERY:
-            return 0.05  # Very low friction (ice)
-        return 0.8  # Normal friction
+        # Check all types and use the most specific friction
+        for ptype in self.platform_types:
+            friction = PlatformTypes.get_friction(ptype)
+            if friction != PlatformTypes.DEFAULT_FRICTION:
+                return friction
+        return PlatformTypes.DEFAULT_FRICTION
 
     def is_deadly(self) -> bool:
         """Check if this platform kills the player on contact.
@@ -402,7 +478,7 @@ class Platform:
         Returns:
             True if this is a DEATH platform.
         """
-        return self.platform_type == Platform.DEATH
+        return Platform.DEATH in self.platform_types
 
     def is_checkpoint(self) -> bool:
         """Check if this platform is a checkpoint.
@@ -410,7 +486,7 @@ class Platform:
         Returns:
             True if this is a CHECKPOINT platform.
         """
-        return self.platform_type == Platform.CHECKPOINT
+        return Platform.CHECKPOINT in self.platform_types
 
     def is_finish(self) -> bool:
         """Check if this platform is a finish point.
@@ -418,7 +494,7 @@ class Platform:
         Returns:
             True if this is a FINISH platform.
         """
-        return self.platform_type == Platform.FINISH
+        return Platform.FINISH in self.platform_types
 
     def is_spawn(self) -> bool:
         """Check if this platform is a spawn point.
@@ -426,15 +502,31 @@ class Platform:
         Returns:
             True if this is a SPAWN platform.
         """
-        return self.platform_type == Platform.SPAWN
-    
+        return Platform.SPAWN in self.platform_types
+
     def is_noclip(self) -> bool:
         """Check if this platform is a noclip platform.
 
         Returns:
             True if this is a NOCLIP platform.
         """
-        return self.platform_type == Platform.NOCLIP
+        return Platform.NOCLIP in self.platform_types
+
+    def is_boost_up(self) -> bool:
+        """Check if this platform boosts player upward.
+
+        Returns:
+            True if this is a BOOST_UP platform.
+        """
+        return Platform.BOOST_UP in self.platform_types
+
+    def is_boost_down(self) -> bool:
+        """Check if this platform boosts player downward.
+
+        Returns:
+            True if this is a BOOST_DOWN platform.
+        """
+        return Platform.BOOST_DOWN in self.platform_types
 
     def activate_checkpoint(self) -> None:
         """Activate this checkpoint.
@@ -442,7 +534,7 @@ class Platform:
         Only affects CHECKPOINT platforms. Once activated, the checkpoint
         displays a green border and serves as the player's respawn point.
         """
-        if self.platform_type == Platform.CHECKPOINT:
+        if Platform.CHECKPOINT in self.platform_types:
             self.checkpoint_activated = True
 
     def update(self, dt: float) -> None:
