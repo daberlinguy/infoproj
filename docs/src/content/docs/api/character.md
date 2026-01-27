@@ -165,6 +165,9 @@ frames = Character.load_frames(
 
 **Returns:** `List[pygame.Surface]`
 
+**Note:** Results are cached by `(folder, names, scale)` to reduce repeated
+disk reads on network drives.
+
 ## Usage Example
 
 ```python

@@ -157,6 +157,7 @@ class Character:
     STATE_JUMP = "jump"
     STATE_FLY = "fly"
     STATE_LAND = "land"
+    _frames_cache: Dict[Tuple[str, Tuple[str, ...], float], List[pygame.Surface]] = {}
 
     def __init__(
         self,
@@ -299,6 +300,11 @@ class Character:
                 scale=0.5,
             )
         """
+        cache_key = (folder, tuple(names), scale)
+        cached_frames = Character._frames_cache.get(cache_key)
+        if cached_frames is not None:
+            return cached_frames
+
         frames: List[pygame.Surface] = []
 
         for name in names:
@@ -312,4 +318,5 @@ class Character:
 
             frames.append(image)
 
+        Character._frames_cache[cache_key] = frames
         return frames

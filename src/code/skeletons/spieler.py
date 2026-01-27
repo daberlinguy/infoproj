@@ -152,6 +152,12 @@ class Spieler:
             if self.is_on_ground and platform == self.current_platform:
                 continue
 
+            # Allow seamless movement across platform seams on the same top level
+            if self.is_on_ground and self.current_platform:
+                same_top = platform.rect.top == self.current_platform.rect.top
+                if same_top and curr_bottom <= platform.rect.top + 2:
+                    continue
+
             if player_rect.colliderect(platform.rect):
                 # Head (bottom of platform) collision when moving up
                 if (
@@ -183,21 +189,6 @@ class Spieler:
                     self.player_pos.x = platform.rect.right + self.sprite_width / 2
                     self.velocity_x = 0  # Stop horizontal velocity on wall hit
                     self.is_against_wall = True
-                    continue
-
-                if (
-                    prev_left >= platform.rect.right - 1
-                    and curr_left < platform.rect.right
-                ):  # Tighter tolerance
-                    # collided from right -> push player to right side of platform
-                    self.player_pos.x = platform.rect.right + self.sprite_width / 2
-                    self.velocity_x = 0  # Stop horizontal velocity on wall hit
-                    self.is_against_wall = True
-                    # Prevent climbing: if player is not on ground and touching wall, apply downward force
-                    if not self.is_on_ground and self.velocity_y < 0:
-                        self.velocity_y = max(
-                            self.velocity_y, 0
-                        )  # Cancel upward velocity
                     continue
 
                 platform_type = getattr(platform, "platform_type", None)

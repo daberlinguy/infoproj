@@ -1,8 +1,8 @@
 {
   "debug_mode": false,
   "character": "character3",
-  "selected_world": "3 - H\u00f6hlenforschung",
-  "selected_level": "Stone.json",
+  "selected_world": "1 - Sonnenaufgang",
+  "selected_level": "Nether.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {

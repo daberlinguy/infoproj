@@ -20,6 +20,7 @@ Complete documentation is available at: **[https://daberlinguy.github.io/infopro
 - 🏗️ Level editor for creating custom levels
 - 🔧 Extensible architecture for adding new features
 - 📦 Built with Python and Pygame
+- ⚡ Cached assets to reduce network-drive lag
 
 ## 🚀 Quick Start
 
@@ -58,6 +59,7 @@ For guidelines on contributing code and documentation, see the [AI Contribution 
 - All new classes must have block comments
 - Type hints required for functions
 - Documentation updates with code changes
+- Use `Screen.clear_widgets()` when switching screens (resets pygame_widgets state)
 
 ## 📖 Documentation Structure
 

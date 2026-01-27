@@ -81,6 +81,9 @@ class Cell:
         self.color: Tuple[int, int, int] = color
         self.texture: Optional[pygame.Surface] = texture
         self.size: int = size
+        self.texture_scaled: Optional[pygame.Surface] = None
+        if self.texture:
+            self.texture_scaled = pygame.transform.scale(self.texture, (size, size))
 
     def draw(
         self,
@@ -95,11 +98,8 @@ class Cell:
             platform_type: Optional platform type for special rendering.
             checkpoint_activated: Whether the checkpoint is active.
         """
-        if self.texture:
-            texture_scaled = pygame.transform.scale(
-                self.texture, (self.size, self.size)
-            )
-            screen.blit(texture_scaled, self.rect.topleft)
+        if self.texture_scaled:
+            screen.blit(self.texture_scaled, self.rect.topleft)
         else:
             pygame.draw.rect(screen, self.color, self.rect)
 
@@ -253,6 +253,10 @@ class Platform:
     NOCLIP: str = PlatformTypes.NOCLIP
     BOOST_UP: str = PlatformTypes.BOOST_UP
     BOOST_DOWN: str = PlatformTypes.BOOST_DOWN
+    x1: float
+    y1: int
+    x2: float
+    y2: int
 
     def __init__(
         self,
@@ -289,9 +293,9 @@ class Platform:
         self.layer: int = layer  # Layer for depth rendering (-10 to +10, 0 is normal)
 
         # Ensure coordinates are properly ordered
-        self.x1: int = min(x1, x2)
+        self.x1: float = float(min(x1, x2))
         self.y1: int = min(y1, y2)
-        self.x2: int = max(x1, x2)
+        self.x2: float = float(max(x1, x2))
         self.y2: int = max(y1, y2)
 
         # Determine color based on type if not provided
@@ -314,17 +318,18 @@ class Platform:
         )
 
         for y in range(self.y1, self.y2 + 1, grid_size):
-            for x in range(self.x1, self.x2 + 1, grid_size):
+            for x in range(int(self.x1), int(self.x2) + 1, grid_size):
                 cell = Cell(x, y, grid_size, tinted_color, tinted_texture)
                 self.cells.append(cell)
 
         # Create bounding rect for collision detection
         self.rect: pygame.Rect = pygame.Rect(
-            self.x1,
+            int(self.x1),
             self.y1,
-            self.x2 - self.x1 + grid_size,
+            int(self.x2 - self.x1 + grid_size),
             self.y2 - self.y1 + grid_size,
         )
+        self._surface_cache: dict[bool, pygame.Surface] = {}
 
     def draw(self, screen: pygame.Surface) -> None:
         """Render the platform to the screen.
@@ -338,15 +343,42 @@ class Platform:
         Args:
             screen: The pygame Surface to draw to.
         """
-        # Draw all cells
+        cache_key = (
+            self.checkpoint_activated and Platform.CHECKPOINT in self.platform_types
+        )
+        cached_surface = self._surface_cache.get(cache_key)
+        if cached_surface is None:
+            cached_surface = self._render_surface(checkpoint_activated=cache_key)
+            self._surface_cache[cache_key] = cached_surface
+        screen.blit(cached_surface, self.rect.topleft)
+
+    def _render_surface(self, checkpoint_activated: bool) -> pygame.Surface:
+        surface = pygame.Surface(self.rect.size, pygame.SRCALPHA)
+        offset_x = self.rect.x
+        offset_y = self.rect.y
         for cell in self.cells:
-            cell.draw(screen, self.platform_type, self.checkpoint_activated)
+            draw_rect = cell.rect.move(-offset_x, -offset_y)
+            if cell.texture_scaled:
+                surface.blit(cell.texture_scaled, draw_rect.topleft)
+            else:
+                pygame.draw.rect(surface, cell.color, draw_rect)
 
-        # Draw indicators on top for special platforms (only if no texture)
         if not self.texture:
-            self._draw_special_indicators(screen)
+            self._draw_special_indicators(
+                surface,
+                offset_x=offset_x,
+                offset_y=offset_y,
+                checkpoint_activated=checkpoint_activated,
+            )
+        return surface
 
-    def _draw_special_indicators(self, screen: pygame.Surface) -> None:
+    def _draw_special_indicators(
+        self,
+        screen: pygame.Surface,
+        offset_x: int = 0,
+        offset_y: int = 0,
+        checkpoint_activated: bool = False,
+    ) -> None:
         """Draw visual indicators for special platform types.
 
         Args:
@@ -356,27 +388,34 @@ class Platform:
         if Platform.DEATH in self.platform_types:
             # Draw X pattern for death platforms
             for cell in self.cells:
-                pygame.draw.line(
-                    screen, (150, 0, 0), cell.rect.topleft, cell.rect.bottomright, 2
+                top_left = (cell.rect.left - offset_x, cell.rect.top - offset_y)
+                bottom_right = (
+                    cell.rect.right - offset_x,
+                    cell.rect.bottom - offset_y,
                 )
-                pygame.draw.line(
-                    screen, (150, 0, 0), cell.rect.topright, cell.rect.bottomleft, 2
+                top_right = (cell.rect.right - offset_x, cell.rect.top - offset_y)
+                bottom_left = (
+                    cell.rect.left - offset_x,
+                    cell.rect.bottom - offset_y,
                 )
+                pygame.draw.line(screen, (150, 0, 0), top_left, bottom_right, 2)
+                pygame.draw.line(screen, (150, 0, 0), top_right, bottom_left, 2)
 
         if Platform.CHECKPOINT in self.platform_types:
-            if self.checkpoint_activated:
+            if checkpoint_activated:
                 # Green border when activated
-                pygame.draw.rect(screen, (0, 200, 0), self.rect, 3)
+                border_rect = self.rect.move(-offset_x, -offset_y)
+                pygame.draw.rect(screen, (0, 200, 0), border_rect, 3)
             else:
                 # Draw flag on center cell
                 center_cell = self.cells[len(self.cells) // 2]
-                center_x = center_cell.rect.centerx
-                top_y = center_cell.rect.top + 5
+                center_x = center_cell.rect.centerx - offset_x
+                top_y = center_cell.rect.top - offset_y + 5
                 pygame.draw.line(
                     screen,
                     (0, 0, 0),
                     (center_x, top_y),
-                    (center_x, center_cell.rect.bottom - 5),
+                    (center_x, center_cell.rect.bottom - offset_y - 5),
                     2,
                 )
                 pygame.draw.polygon(
@@ -393,12 +432,12 @@ class Platform:
             # Draw wavy lines for slippery surfaces
             for cell in self.cells:
                 for i in range(3):
-                    y = cell.rect.centery - 5 + i * 5
+                    y = cell.rect.centery - offset_y - 5 + i * 5
                     pygame.draw.line(
                         screen,
                         (50, 100, 150),
-                        (cell.rect.left + 5, y),
-                        (cell.rect.right - 5, y),
+                        (cell.rect.left - offset_x + 5, y),
+                        (cell.rect.right - offset_x - 5, y),
                         1,
                     )
 
@@ -408,14 +447,18 @@ class Platform:
             font = pygame.font.Font(None, 20)
             text = font.render("S", True, (0, 150, 0))
             screen.blit(
-                text, (center_cell.rect.centerx - 5, center_cell.rect.centery - 10)
+                text,
+                (
+                    center_cell.rect.centerx - offset_x - 5,
+                    center_cell.rect.centery - offset_y - 10,
+                ),
             )
 
         if Platform.BOOST_UP in self.platform_types:
             # Draw upward arrow
             center_cell = self.cells[len(self.cells) // 2]
-            center_x = center_cell.rect.centerx
-            center_y = center_cell.rect.centery
+            center_x = center_cell.rect.centerx - offset_x
+            center_y = center_cell.rect.centery - offset_y
             # Arrow shaft
             pygame.draw.line(
                 screen,
@@ -438,8 +481,8 @@ class Platform:
         if Platform.BOOST_DOWN in self.platform_types:
             # Draw downward arrow
             center_cell = self.cells[len(self.cells) // 2]
-            center_x = center_cell.rect.centerx
-            center_y = center_cell.rect.centery
+            center_x = center_cell.rect.centerx - offset_x
+            center_y = center_cell.rect.centery - offset_y
             # Arrow shaft
             pygame.draw.line(
                 screen,
@@ -548,8 +591,10 @@ class Platform:
             offset = self.velocity_x * dt
             self.x1 += offset
             self.x2 += offset
+            offset_int = int(round(offset))
 
             # Update cells and rect
-            for cell in self.cells:
-                cell.rect.x += offset
-            self.rect.x += offset
+            if offset_int != 0:
+                for cell in self.cells:
+                    cell.rect.x += offset_int
+                self.rect.x += offset_int

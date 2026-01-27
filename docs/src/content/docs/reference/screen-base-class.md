@@ -30,6 +30,7 @@ class Screen:
     def set_backgroundImage(self, name: str, scale_width: int = 1280, scale_height: int = 720) -> None: ...
     def draw_text(self, text: str, font: pygame.font.Font, r: int, g: int, b: int, x: float, y: float) -> None: ...
     def draw_sprite(self, name: str, x: float, y: float, scale_width: int = None, scale_height: int = None) -> None: ...
+    def clear_widgets(mode: str = "reset") -> None: ...
     def run(self) -> None: ...
 ```
 
@@ -88,8 +89,7 @@ Initialize the screen and start the game loop.
 class MyScreen(Screen):
     def __init__(self, screen, caption):
         # 1. Clear widgets first
-        widgets = WidgetHandler.getWidgets()
-        WidgetHandler._widgets = widgets.__class__()
+        self.clear_widgets()
         
         # 2. Initialize state
         self.score = 0
@@ -143,6 +143,9 @@ def set_backgroundImage(
 
 Set a background image from the assets folder.
 
+This method caches scaled backgrounds by filename and size so repeated calls
+in the main loop don't reload images every frame.
+
 **Parameters:**
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
@@ -159,6 +162,9 @@ def run(self):
     self.set_backgroundImage("title.jpg")
     # Or custom size
     self.set_backgroundImage("title.jpg", 1920, 1080)
+
+    # Sprite draws are cached by name and scale
+    self.draw_sprite("player.png", 100, 100, 64, 64)
 ```
 
 ---
@@ -483,3 +489,25 @@ class CreditsScreen(Screen):
         pygame.display.update()
         self.dt = min(self.clock.tick() / 1000, 0.0167)
 ```
+### clear_widgets
+
+```python
+def clear_widgets(mode: str = "reset") -> None
+```
+
+Clear `pygame_widgets` state between screens.
+
+**Parameters:**
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `str` | `"reset"` | `"reset"` to replace handler storage, `"remove"` to detach widgets |
+
+**Example:**
+```python
+def __init__(self, screen, caption):
+    self.clear_widgets()
+    # build UI, then start loop
+    super().__init__(screen, caption)
+```
+
+---

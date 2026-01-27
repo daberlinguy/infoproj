@@ -32,7 +32,7 @@ Example:
 
 from __future__ import annotations
 
-from typing import Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 import pygame
 
@@ -40,6 +40,8 @@ from utils.paths import assets_path
 
 
 class Screen:
+    _background_cache: Dict[Tuple[str, int, int], pygame.Surface] = {}
+    _sprite_cache: Dict[Tuple[str, Optional[int], Optional[int]], pygame.Surface] = {}
     """Base class for all game screens.
 
     This class provides the fundamental structure for screens in the game.
@@ -100,9 +102,32 @@ class Screen:
         Raises:
             FileNotFoundError: If the background image doesn't exist.
         """
-        image = pygame.image.load(assets_path("backgrounds", name)).convert()
-        image = pygame.transform.scale(image, (scale_width, scale_height))
+        cache_key = (name, scale_width, scale_height)
+        image = self._background_cache.get(cache_key)
+        if image is None:
+            image = pygame.image.load(assets_path("backgrounds", name)).convert()
+            image = pygame.transform.scale(image, (scale_width, scale_height))
+            self._background_cache[cache_key] = image
         self.screen.blit(image, (0, 0))
+
+    @staticmethod
+    def clear_widgets(mode: str = "reset") -> None:
+        """Clear pygame_widgets from previous screens.
+
+        Args:
+            mode: "reset" to replace handler storage, "remove" to detach widgets.
+        """
+        try:
+            from pygame_widgets.widget import WidgetHandler
+        except ImportError:
+            return
+
+        widgets = WidgetHandler.getWidgets()
+        if mode == "remove":
+            for widget in list(widgets):
+                WidgetHandler.removeWidget(widget)
+        else:
+            WidgetHandler._widgets = widgets.__class__()
 
     """def set_btntexture(
             self,
@@ -113,7 +138,7 @@ class Screen:
         image = pygame.image.load(assetees_path("button_textures", name)).convert()
         image = pygame.transform.scale(image, (scale_width, scale_height))
         self.screen.blit(image, (20,20))"""
-    
+
     def draw_text(
         self,
         text: str,
@@ -157,9 +182,13 @@ class Screen:
             scale_height: Optional target height. If provided with scale_width,
                 the sprite will be scaled.
         """
-        image = pygame.image.load(assets_path("sprites", name)).convert_alpha()
-        if scale_width is not None and scale_height is not None:
-            image = pygame.transform.scale(image, (scale_width, scale_height))
+        cache_key = (name, scale_width, scale_height)
+        image = self._sprite_cache.get(cache_key)
+        if image is None:
+            image = pygame.image.load(assets_path("sprites", name)).convert_alpha()
+            if scale_width is not None and scale_height is not None:
+                image = pygame.transform.scale(image, (scale_width, scale_height))
+            self._sprite_cache[cache_key] = image
         self.screen.blit(image, (x, y))
 
     def run(self) -> None:

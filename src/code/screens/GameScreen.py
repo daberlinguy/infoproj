@@ -18,12 +18,9 @@ from utils.platform_types import PlatformTypes
 class GameScreen(Screen):
     def __init__(self, screen, caption, level_path=None):
         # Clear all previous widgets
-        from pygame_widgets.widget import WidgetHandler
+        self.clear_widgets()
 
-        widgets = WidgetHandler.getWidgets()
-        WidgetHandler._widgets = widgets.__class__()
-
-        self.dt = 0
+        self.dt = 0.0
         self.clock = pygame.time.Clock()
 
         self.page_index = 1
@@ -42,7 +39,7 @@ class GameScreen(Screen):
         self.level_completed = False
         self.checkpoints_required = 0
         self.checkpoints_activated = 0
-        self.background_color = "purple"
+        self.background_color = (128, 0, 128)
         self.background_image = None
         self.background_image_cached = None
         self.level_data = None
@@ -66,93 +63,13 @@ class GameScreen(Screen):
         self.imageTick = 20
 
         self.timer = 0.0
+        self.run_timer = 0.0
+        self.latest_run_time = 0.0
+        self.attempts = 1
+        self.deaths = 0
 
-        # Create platforms - all grid-aligned with different types
-        self.platforms = [
-            # Spawn platform at grid position (6, 15) - single cell
-            Platform(
-                1 * grid_size,
-                15 * grid_size,
-                1 * grid_size,
-                15 * grid_size,
-                grid_size,
-                platform_type=Platform.SPAWN,
-                texture=Texture.GOLD_BLOCK,
-            ),
-            # Multi-segment normal platform - 5 cells next to each other at grid position (18, 12)
-            Platform(
-                2 * grid_size,
-                15 * grid_size,
-                7 * grid_size,
-                15 * grid_size,
-                grid_size,
-                texture=Texture.GRASS,
-            ),
-            # Multi-segment normal platform - 5 cells next to each other at grid position (18, 12)
-            Platform(
-                18 * grid_size,
-                12 * grid_size,
-                22 * grid_size,
-                12 * grid_size,
-                grid_size,
-                texture=Texture.GRASS,
-            ),
-            # Checkpoint platform at (25, 12)
-            Platform(
-                25 * grid_size,
-                12 * grid_size,
-                25 * grid_size,
-                12 * grid_size,
-                grid_size,
-                platform_type=Platform.CHECKPOINT,
-            ),
-            # Death platforms at (10, 17) - 3 cells
-            Platform(
-                10 * grid_size,
-                17 * grid_size,
-                12 * grid_size,
-                17 * grid_size,
-                grid_size,
-                platform_type=Platform.DEATH,
-            ),
-            # Slippery platform - 4 cells at (14, 16)
-            Platform(
-                14 * grid_size,
-                16 * grid_size,
-                17 * grid_size,
-                16 * grid_size,
-                grid_size,
-                platform_type=Platform.SLIPPERY,
-                texture=Texture.ICE,
-            ),
-            # Ground platform - 12 cells at bottom
-            Platform(
-                12 * grid_size,
-                18 * grid_size,
-                23 * grid_size,
-                18 * grid_size,
-                grid_size,
-                texture=Texture.STONE,
-            ),
-            # Orange platform - 3x2 cells at grid position (28, 9)
-            Platform(
-                28 * grid_size,
-                9 * grid_size,
-                30 * grid_size,
-                10 * grid_size,
-                grid_size,
-                texture=Texture.LAVA,
-            ),
-            Platform(
-                0 * grid_size,
-                22 * grid_size,
-                500 * grid_size,
-                22 * grid_size,
-                grid_size,
-                texture=Texture.LAVA,
-                platform_type=Platform.DEATH,
-            ),
-        ]
+        # Platforms are loaded from level JSON
+        self.platforms = []
 
         if self.level_path:
             self._load_level(self.level_path)
@@ -164,6 +81,10 @@ class GameScreen(Screen):
 
         # Save real screen for final blit
         self.real_screen = screen
+        self._real_screen_size = self.real_screen.get_size()
+        self._scaled_surface = None
+        if self._real_screen_size != (self.virtual_width, self.virtual_height):
+            self._scaled_surface = pygame.Surface(self._real_screen_size)
 
         # Pass virtual surface to superclass so drawing operations use it
         super().__init__(self.virtual_surface, caption)
@@ -197,6 +118,11 @@ class GameScreen(Screen):
             return
 
         self.level_data = level_data
+        self.timer = 0.0
+        self.run_timer = 0.0
+        self.latest_run_time = 0.0
+        self.attempts = 1
+        self.deaths = 0
 
         self.page_width_cells = int(
             level_data.get("page_width_cells", self.page_width_cells)
@@ -267,6 +193,7 @@ class GameScreen(Screen):
             if page_data
             else level_data.get("platforms", [])
         )
+        platforms_data = LevelDataUtils.merge_platform_cells(platforms_data)
 
         platforms = []
         for entry in platforms_data:
@@ -396,14 +323,14 @@ class GameScreen(Screen):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-                exit()
-                pygame.quit()
+                return  # Exit immediately without drawing
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F3:  # Toggle debug mode with 'F3' key
                     SETTINGS["debug_mode"] = not SETTINGS.get("debug_mode", False)
                 if event.key == pygame.K_r:  # Reset to spawn point with 'R' key
                     self.player.player_pos = self.spawn_point.copy()
-                    self.player.velocity = pygame.Vector2(0, 0)
+                    self.player.velocity_x = 0
+                    self.player.velocity_y = 0
 
         # Handle input
         keys = pygame.key.get_pressed()
@@ -413,6 +340,7 @@ class GameScreen(Screen):
 
         # Timer
         self.timer += self.dt
+        self.run_timer += self.dt
 
         # Store previous position before any movement
         self.player.prev_x = self.player.player_pos.x
@@ -425,8 +353,13 @@ class GameScreen(Screen):
         if keys[pygame.K_ESCAPE]:
             self.running = False
             from screens.TitleScreen import TitleScreen
-            TitleScreen(self.screen, "Title Screen")
-            return
+
+            TitleScreen(
+                self.real_screen,
+                "Title Screen",
+                block_escape_until_release=True,
+            )
+            return  # Exit immediately to prevent further updates
         if keys[pygame.K_SPACE] or keys[pygame.K_w]:
             self.player.jump()
 
@@ -479,6 +412,10 @@ class GameScreen(Screen):
         if self.checkpoints_activated > prev_checkpoint_count:
             self.current_checkpoint_page = self.page_index
         if respawned or should_respawn:
+            self.deaths += 1
+            self.attempts += 1
+            self.latest_run_time = self.run_timer
+            self.run_timer = 0.0
             if self.page_index != self.current_checkpoint_page:
                 self._switch_page(self.current_checkpoint_page)
 
@@ -499,12 +436,13 @@ class GameScreen(Screen):
 
         page_width_px = self.page_width_cells * self.page_grid_size
         player_pos = self.player.player_pos
+        half_width = self.player.sprite_width / 2
         if player_pos.x < 0:
             if self.level_data and self.level_data.get("pages") and self.page_index > 1:
-                player_pos.x = page_width_px - 1
+                player_pos.x = page_width_px - half_width
                 self._switch_page(self.page_index - 1)
             else:
-                player_pos.x = 0
+                player_pos.x = half_width
         elif player_pos.x > page_width_px:
             next_page = self.page_index + 1
             if (
@@ -515,10 +453,10 @@ class GameScreen(Screen):
                     or next_page in self.level_data["pages"]
                 )
             ):
-                player_pos.x = 1
+                player_pos.x = half_width
                 self._switch_page(next_page)
             else:
-                player_pos.x = page_width_px
+                player_pos.x = page_width_px - half_width
 
         if not self.isImageLoaded:
             if self.background_image:
@@ -562,7 +500,23 @@ class GameScreen(Screen):
             from screens.FinishScreen import FinishScreen
 
             self.running = False
-            FinishScreen(self.screen, "Finished")
+            background = None
+            if self._scaled_surface is not None:
+                pygame.transform.scale(
+                    self.screen, self._real_screen_size, self._scaled_surface
+                )
+                background = self._scaled_surface.copy()
+            else:
+                background = self.screen.copy()
+            FinishScreen(
+                self.real_screen,
+                "Finished",
+                attempts=self.attempts,
+                deaths=self.deaths,
+                total_time=self.timer,
+                latest_run_time=self.run_timer,
+                background=background,
+            )
             return
 
         # Debug mode: Draw bounding boxes on top.
@@ -645,10 +599,13 @@ class GameScreen(Screen):
                 )
 
         # Scale the virtual surface to the real screen size
-        scaled_surface = pygame.transform.scale(
-            self.screen, self.real_screen.get_size()
-        )
-        self.real_screen.blit(scaled_surface, (0, 0))
+        if self._scaled_surface is None:
+            self.real_screen.blit(self.screen, (0, 0))
+        else:
+            pygame.transform.scale(
+                self.screen, self._real_screen_size, self._scaled_surface
+            )
+            self.real_screen.blit(self._scaled_surface, (0, 0))
 
         # Flip() the display to put your work on screen
         pygame.display.flip()

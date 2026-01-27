@@ -1,4 +1,5 @@
 import pygame
+import sys
 
 from pygame_widgets.widget import OrderedSet
 
@@ -45,8 +46,20 @@ def main():
     # Start the game
     from screens.TitleScreen import TitleScreen
 
-    TitleScreen(screen, "Title Screen")
+    title_screen = TitleScreen(screen, "Title Screen")
+
+    # Check if we should quit the game
+    if hasattr(title_screen, "should_quit") and title_screen.should_quit:
+        return True  # Signal to quit
+
+    return False  # Continue normally
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        should_quit = main()
+    finally:
+        pygame.quit()
+
+    if should_quit:
+        sys.exit(0)

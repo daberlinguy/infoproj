@@ -90,7 +90,7 @@ class CharacterThree(CharacterClass):
     """
 
     name = "CKghnit"
-    sprite_scale = (3.3, 3.3)
+    sprite_scale = (3.1, 3.1)
     sprite_folder = "characters/kngiht"
 
     walk_frames = [
@@ -112,9 +112,123 @@ class CharacterThree(CharacterClass):
         "l16.png",
     ]
 
-    jump_frames = [
-        "l1.png"
+    jump_frames = ["l1.png"]
+
+
+class CharacterVillager(CharacterClass):
+    """Villager - Recolored knight variant."""
+
+    name = "Villager"
+    sprite_scale = (3.1, 3.1)
+    sprite_folder = "characters/villager"
+
+    walk_frames = [
+        "l1.png",
+        "l2.png",
+        "l3.png",
+        "l4.png",
+        "l5.png",
+        "l6.png",
+        "l7.png",
+        "l8.png",
+        "l9.png",
+        "l10.png",
+        "l11.png",
+        "l12.png",
+        "l13.png",
+        "l14.png",
+        "l15.png",
+        "l16.png",
     ]
+
+    jump_frames = ["l1.png"]
+
+
+class CharacterKing(CharacterClass):
+    """King - Recolored knight variant."""
+
+    name = "King"
+    sprite_scale = (3.1, 3.1)
+    sprite_folder = "characters/king"
+
+    walk_frames = [
+        "l1.png",
+        "l2.png",
+        "l3.png",
+        "l4.png",
+        "l5.png",
+        "l6.png",
+        "l7.png",
+        "l8.png",
+        "l9.png",
+        "l10.png",
+        "l11.png",
+        "l12.png",
+        "l13.png",
+        "l14.png",
+        "l15.png",
+        "l16.png",
+    ]
+
+    jump_frames = ["l1.png"]
+
+
+class CharacterQueen(CharacterClass):
+    """Queen - Recolored knight variant."""
+
+    name = "Queen"
+    sprite_scale = (3.1, 3.1)
+    sprite_folder = "characters/queen"
+
+    walk_frames = [
+        "l1.png",
+        "l2.png",
+        "l3.png",
+        "l4.png",
+        "l5.png",
+        "l6.png",
+        "l7.png",
+        "l8.png",
+        "l9.png",
+        "l10.png",
+        "l11.png",
+        "l12.png",
+        "l13.png",
+        "l14.png",
+        "l15.png",
+        "l16.png",
+    ]
+
+    jump_frames = ["l1.png"]
+
+
+class CharacterSteve(CharacterClass):
+    """Steve - Recolored knight variant."""
+
+    name = "Steve"
+    sprite_scale = (3.1, 3.1)
+    sprite_folder = "characters/steve"
+
+    walk_frames = [
+        "l1.png",
+        "l2.png",
+        "l3.png",
+        "l4.png",
+        "l5.png",
+        "l6.png",
+        "l7.png",
+        "l8.png",
+        "l9.png",
+        "l10.png",
+        "l11.png",
+        "l12.png",
+        "l13.png",
+        "l14.png",
+        "l15.png",
+        "l16.png",
+    ]
+
+    jump_frames = ["l1.png"]
 
 
 #: Global registry mapping character IDs to their class definitions.
@@ -128,4 +242,8 @@ CHARACTER_REGISTRY: Dict[str, Type[CharacterClass]] = {
     "character1": CharacterOne,
     "character2": CharacterTwo,
     "character3": CharacterThree,
+    "villager": CharacterVillager,
+    "king": CharacterKing,
+    "queen": CharacterQueen,
+    "steve": CharacterSteve,
 }
