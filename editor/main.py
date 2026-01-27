@@ -113,12 +113,13 @@ class LevelEditor(QMainWindow):
             "background_color": {"r": 135, "g": 206, "b": 235, "a": 255},
             "page_width_cells": DEFAULT_GRID_COLUMNS,
             "page_height_cells": DEFAULT_GRID_ROWS,
-            "pages": {"1": {"cells": []}},
+            "pages": {"1": {"cells": [], "triggers": []}},
         }
         self.current_path = None
         self.current_page = "1"
         self.undo_stack = []
         self.redo_stack = []
+        self.current_path_points = []
 
         root = QWidget()
         layout = QHBoxLayout()
@@ -131,12 +132,26 @@ class LevelEditor(QMainWindow):
         self.canvas = LevelCanvas(self)
         splitter.addWidget(self.canvas)
 
+        list_panel = QWidget()
+        list_layout = QVBoxLayout()
+        list_layout.setContentsMargins(0, 0, 0, 0)
+        list_panel.setLayout(list_layout)
+
+        list_layout.addWidget(QLabel("Platforms"))
         self.platform_list = QListWidget()
         self.platform_list.setSelectionMode(
             QListWidget.SelectionMode.ExtendedSelection
         )  # Enable multi-select
         self.platform_list.currentRowChanged.connect(self._load_platform_into_form)
-        splitter.addWidget(self.platform_list)
+        list_layout.addWidget(self.platform_list)
+
+        list_layout.addWidget(QLabel("Triggers"))
+        self.trigger_list = QListWidget()
+        self.trigger_list.setSelectionMode(QListWidget.SelectionMode.SingleSelection)
+        self.trigger_list.currentRowChanged.connect(self._load_trigger_into_form)
+        list_layout.addWidget(self.trigger_list)
+
+        splitter.addWidget(list_panel)
 
         right_panel = QWidget()
         right = QVBoxLayout()
@@ -149,14 +164,17 @@ class LevelEditor(QMainWindow):
         right.addLayout(self._build_page_controls())
         right.addLayout(self._build_mode_controls())
         right.addLayout(self._build_platform_form())
+        right.addLayout(self._build_trigger_form())
         right.addSpacing(10)
         right.addLayout(self._build_buttons())
+        right.addLayout(self._build_trigger_buttons())
         right.addStretch()
 
         self.status_label = QLabel("")
         right.addWidget(self.status_label)
         self._set_mode("add")
         self._refresh_platform_list()
+        self._refresh_trigger_list()
         self.canvas.render_scene()
 
     def _build_level_form(self):
@@ -281,6 +299,38 @@ class LevelEditor(QMainWindow):
         )
         form.addRow("Layer", self.layer)
 
+        self.platform_id = QLineEdit()
+        self.platform_id.setPlaceholderText("platform_id")
+        form.addRow("Platform ID", self.platform_id)
+
+        path_layout = QGridLayout()
+        self.path_speed = QSpinBox()
+        self.path_speed.setRange(1, 2000)
+        self.path_speed.setValue(120)
+        self.path_loop = QCheckBox("Loop")
+        self.path_loop.setChecked(True)
+        path_layout.addWidget(QLabel("Speed"), 0, 0)
+        path_layout.addWidget(self.path_speed, 0, 1)
+        path_layout.addWidget(self.path_loop, 0, 2)
+        form.addRow("Path", path_layout)
+
+        path_mode_layout = QGridLayout()
+        self.path_segment_type = QComboBox()
+        self.path_segment_type.addItems(["Line", "Curve"])
+        self.path_curve_offset = QSpinBox()
+        self.path_curve_offset.setRange(-300, 300)
+        self.path_curve_offset.setValue(40)
+        path_mode_layout.addWidget(QLabel("Segment"), 0, 0)
+        path_mode_layout.addWidget(self.path_segment_type, 0, 1)
+        path_mode_layout.addWidget(QLabel("Curve Offset"), 0, 2)
+        path_mode_layout.addWidget(self.path_curve_offset, 0, 3)
+        form.addRow("Path Mode", path_mode_layout)
+
+        self.path_points_label = QLabel("Points: 0")
+        self.clear_path_btn = QPushButton("Clear Path")
+        self.clear_path_btn.clicked.connect(self._clear_path_points)
+        form.addRow(self.path_points_label, self.clear_path_btn)
+
         self.apply_selected_btn = QPushButton("Apply All to Selected")
         self.apply_selected_btn.clicked.connect(self._apply_to_selected)
         form.addRow(self.apply_selected_btn)
@@ -312,11 +362,17 @@ class LevelEditor(QMainWindow):
         self.mode_label = QLabel("Mode: Select")
         self.mode_select_btn = QPushButton("Select")
         self.mode_add_btn = QPushButton("Add")
+        self.mode_trigger_btn = QPushButton("Trigger")
+        self.mode_path_btn = QPushButton("Path")
         self.mode_select_btn.clicked.connect(lambda: self._set_mode("select"))
         self.mode_add_btn.clicked.connect(lambda: self._set_mode("add"))
+        self.mode_trigger_btn.clicked.connect(lambda: self._set_mode("trigger"))
+        self.mode_path_btn.clicked.connect(lambda: self._set_mode("path"))
         layout.addWidget(self.mode_label)
         layout.addWidget(self.mode_select_btn)
         layout.addWidget(self.mode_add_btn)
+        layout.addWidget(self.mode_trigger_btn)
+        layout.addWidget(self.mode_path_btn)
         return layout
 
     def _build_buttons(self):
@@ -340,8 +396,203 @@ class LevelEditor(QMainWindow):
         layout.addWidget(save_btn)
         return layout
 
+    def _build_trigger_form(self):
+        form = QFormLayout()
+
+        self.trigger_id = QLineEdit()
+        self.trigger_id.setPlaceholderText("trigger_id")
+        form.addRow("Trigger ID", self.trigger_id)
+
+        self.trigger_type = QComboBox()
+        self.trigger_type.addItems(["plate", "button", "lever"])
+        form.addRow("Type", self.trigger_type)
+
+        self.trigger_targets = QLineEdit()
+        self.trigger_targets.setPlaceholderText("platform_id1, platform_id2")
+        form.addRow("Targets", self.trigger_targets)
+
+        coord_layout = QGridLayout()
+        self.trigger_x = QSpinBox()
+        self.trigger_y = QSpinBox()
+        self.trigger_w = QSpinBox()
+        self.trigger_h = QSpinBox()
+        for spin in (self.trigger_x, self.trigger_y):
+            spin.setRange(-9999, 9999)
+        for spin in (self.trigger_w, self.trigger_h):
+            spin.setRange(1, 2000)
+        self.trigger_w.setValue(32)
+        self.trigger_h.setValue(16)
+        coord_layout.addWidget(QLabel("X"), 0, 0)
+        coord_layout.addWidget(self.trigger_x, 0, 1)
+        coord_layout.addWidget(QLabel("Y"), 0, 2)
+        coord_layout.addWidget(self.trigger_y, 0, 3)
+        coord_layout.addWidget(QLabel("W"), 1, 0)
+        coord_layout.addWidget(self.trigger_w, 1, 1)
+        coord_layout.addWidget(QLabel("H"), 1, 2)
+        coord_layout.addWidget(self.trigger_h, 1, 3)
+        form.addRow("Rect", coord_layout)
+
+        self.trigger_duration = QSpinBox()
+        self.trigger_duration.setRange(1, 10000)
+        self.trigger_duration.setValue(1500)
+        form.addRow("Button ms", self.trigger_duration)
+
+        return form
+
+    def _build_trigger_buttons(self):
+        layout = QHBoxLayout()
+        add_btn = QPushButton("Add Trigger")
+        add_btn.clicked.connect(self._add_trigger)
+        update_btn = QPushButton("Update Trigger")
+        update_btn.clicked.connect(self._update_trigger)
+        remove_btn = QPushButton("Remove Trigger")
+        remove_btn.clicked.connect(self._remove_trigger)
+        layout.addWidget(add_btn)
+        layout.addWidget(update_btn)
+        layout.addWidget(remove_btn)
+        return layout
+
     def _set_status(self, text):
         self.status_label.setText(text)
+
+    def _update_path_label(self):
+        self.path_points_label.setText(f"Points: {len(self.current_path_points)}")
+
+    def _clear_path_points(self):
+        if not self.current_path_points:
+            return
+        self._record_undo()
+        self.current_path_points = []
+        self._apply_path_to_selected()
+        self._update_path_label()
+        self._set_status("Path cleared.")
+
+    def _apply_path_to_selected(self):
+        selected_indices = self.canvas.get_selected_indices()
+        if not selected_indices:
+            return
+        path_payload = None
+        if self.current_path_points:
+            path_payload = {
+                "points": list(self.current_path_points),
+                "speed": self.path_speed.value(),
+                "loop": self.path_loop.isChecked(),
+            }
+        for index in selected_indices:
+            cell = self._current_cells()[index]
+            if path_payload:
+                cell["path"] = path_payload
+            elif "path" in cell:
+                del cell["path"]
+
+    def add_path_point(self, x, y):
+        selected_indices = self.canvas.get_selected_indices()
+        if not selected_indices:
+            self._set_status("Select a platform to edit its path.")
+            return
+
+        self._record_undo()
+        new_point = {"x": int(x), "y": int(y)}
+        if self.current_path_points:
+            prev = self.current_path_points[-1]
+            if self.path_segment_type.currentText() == "Curve":
+                dx = new_point["x"] - prev["x"]
+                dy = new_point["y"] - prev["y"]
+                length = (dx * dx + dy * dy) ** 0.5
+                if length == 0:
+                    length = 1.0
+                nx = -dy / length
+                ny = dx / length
+                offset = self.path_curve_offset.value()
+                cx = (prev["x"] + new_point["x"]) / 2 + nx * offset
+                cy = (prev["y"] + new_point["y"]) / 2 + ny * offset
+                prev["control"] = {"x": int(cx), "y": int(cy)}
+            else:
+                prev.pop("control", None)
+        self.current_path_points.append(new_point)
+        self._apply_path_to_selected()
+        self._update_path_label()
+        self.canvas.render_scene()
+
+    def _collect_trigger_fields(self):
+        trigger_id = self.trigger_id.text().strip()
+        target_text = self.trigger_targets.text().strip()
+        targets = [t.strip() for t in target_text.split(",") if t.strip()]
+        return {
+            "id": trigger_id,
+            "type": self.trigger_type.currentText(),
+            "x": self.trigger_x.value(),
+            "y": self.trigger_y.value(),
+            "w": self.trigger_w.value(),
+            "h": self.trigger_h.value(),
+            "targets": targets,
+            "duration": self.trigger_duration.value() / 1000.0,
+        }
+
+    def _load_trigger_into_form(self, index):
+        triggers = self._current_triggers()
+        if index < 0 or index >= len(triggers):
+            return
+        entry = triggers[index]
+        self.trigger_id.setText(entry.get("id", ""))
+        self.trigger_type.setCurrentText(entry.get("type", "plate"))
+        self.trigger_targets.setText(", ".join(entry.get("targets", [])))
+        self.trigger_x.setValue(int(entry.get("x", 0)))
+        self.trigger_y.setValue(int(entry.get("y", 0)))
+        self.trigger_w.setValue(int(entry.get("w", 32)))
+        self.trigger_h.setValue(int(entry.get("h", 16)))
+        self.trigger_duration.setValue(int(entry.get("duration", 1.5) * 1000))
+
+    def _refresh_trigger_list(self):
+        self.trigger_list.clear()
+        for idx, entry in enumerate(self._current_triggers()):
+            trigger_type = entry.get("type", "plate")
+            trigger_id = entry.get("id", "")
+            targets = ",".join(entry.get("targets", []))
+            label = f"{idx + 1}: {trigger_type} {trigger_id} -> {targets}"
+            self.trigger_list.addItem(label)
+        self.canvas.render_scene()
+
+    def _add_trigger(self):
+        self._record_undo()
+        self._sync_level_fields()
+        entry = self._collect_trigger_fields()
+        self._current_triggers().append(entry)
+        self._refresh_trigger_list()
+        self._set_status("Trigger added.")
+
+    def _update_trigger(self):
+        index = self.trigger_list.currentRow()
+        if index < 0:
+            QMessageBox.warning(self, "No selection", "Select a trigger to update.")
+            return
+        self._record_undo()
+        self._sync_level_fields()
+        entry = self._collect_trigger_fields()
+        self._current_triggers()[index] = entry
+        self._refresh_trigger_list()
+        self.trigger_list.setCurrentRow(index)
+        self._set_status("Trigger updated.")
+
+    def _remove_trigger(self):
+        index = self.trigger_list.currentRow()
+        if index < 0:
+            QMessageBox.warning(self, "No selection", "Select a trigger to remove.")
+            return
+        self._record_undo()
+        self._current_triggers().pop(index)
+        self._refresh_trigger_list()
+        self._set_status("Trigger removed.")
+
+    def add_trigger_at(self, x, y):
+        self._record_undo()
+        self._sync_level_fields()
+        entry = self._collect_trigger_fields()
+        entry["x"] = int(x)
+        entry["y"] = int(y)
+        self._current_triggers().append(entry)
+        self._refresh_trigger_list()
+        self._set_status("Trigger placed.")
 
     def _snapshot_state(self):
         return copy.deepcopy(self.level_data)
@@ -388,6 +639,9 @@ class LevelEditor(QMainWindow):
             "types": selected_types,  # Changed from "type" to "types"
             "layer": self.layer.value(),  # Add layer support
         }
+        platform_id = self.platform_id.text().strip()
+        if platform_id:
+            platform["id"] = platform_id
         texture = self.texture_type.currentText()
         if texture:
             platform["texture"] = texture
@@ -396,6 +650,12 @@ class LevelEditor(QMainWindow):
             self.color_g.value(),
             self.color_b.value(),
         ]
+        if self.current_path_points:
+            platform["path"] = {
+                "points": list(self.current_path_points),
+                "speed": self.path_speed.value(),
+                "loop": self.path_loop.isChecked(),
+            }
         return platform
 
     def _load_platform_into_form(self, index):
@@ -420,12 +680,15 @@ class LevelEditor(QMainWindow):
             "types": cell_types,
             "texture": cell.get("texture", ""),
             "color": cell.get("color", [0, 0, 0]),
+            "id": cell.get("id", ""),
+            "path": cell.get("path"),
         }
         self.x1.setValue(platform.get("x1", 0))
         self.y1.setValue(platform.get("y1", 0))
         self.x2.setValue(platform.get("x2", 0))
         self.y2.setValue(platform.get("y2", 0))
         self.grid_size.setValue(platform.get("grid_size", 32))
+        self.platform_id.setText(platform.get("id", ""))
 
         # Update type checkboxes
         for ptype, checkbox in self.type_checkboxes.items():
@@ -440,6 +703,15 @@ class LevelEditor(QMainWindow):
 
         # Load layer value
         self.layer.setValue(cell.get("layer", 0))
+
+        path = platform.get("path")
+        if isinstance(path, dict):
+            self.current_path_points = list(path.get("points", []))
+            self.path_speed.setValue(int(path.get("speed", 120)))
+            self.path_loop.setChecked(bool(path.get("loop", True)))
+        else:
+            self.current_path_points = []
+        self._update_path_label()
 
         self.canvas.select_platform_index(index)
 
@@ -457,9 +729,10 @@ class LevelEditor(QMainWindow):
             layer = cell.get("layer", 0)
             layer_str = f" [L{layer:+d}]" if layer != 0 else ""
 
-            label = (
-                f"{idx + 1}: ({cell.get('x')},{cell.get('y')}) {types_str}{layer_str}"
-            )
+            platform_id = cell.get("id")
+            id_str = f" #{platform_id}" if platform_id else ""
+
+            label = f"{idx + 1}: ({cell.get('x')},{cell.get('y')}) {types_str}{layer_str}{id_str}"
             self.platform_list.addItem(label)
         self.canvas.render_scene()
 
@@ -567,6 +840,7 @@ class LevelEditor(QMainWindow):
             self._expand_platforms_to_cells()
             self._apply_level_to_form()
             self._refresh_platform_list()
+            self._refresh_trigger_list()
             self.undo_stack.clear()
             self.redo_stack.clear()
             self._set_status(f"Loaded {os.path.basename(path)}")
@@ -602,6 +876,8 @@ class LevelEditor(QMainWindow):
         self.bg_g.setValue(bg.get("g", 206))
         self.bg_b.setValue(bg.get("b", 235))
         self.bg_image.setText(bg.get("image", ""))
+        self.current_path_points = []
+        self._update_path_label()
         self.canvas.render_scene()
 
     def _expand_platforms_to_cells(self):
@@ -632,6 +908,10 @@ class LevelEditor(QMainWindow):
                             "types": platform_types,
                             "color": platform.get("color", [120, 120, 120]),
                         }
+                        if platform.get("id"):
+                            cell["id"] = platform.get("id")
+                        if platform.get("path"):
+                            cell["path"] = platform.get("path")
                         if platform.get("texture"):
                             cell["texture"] = platform["texture"]
                         cells.append(cell)
@@ -655,7 +935,10 @@ class LevelEditor(QMainWindow):
         for page_key, page in self.level_data.get("pages", {}).items():
             cells = page.get("cells", [])
             platforms = self._cells_to_platforms(cells)
-            payload["pages"][str(page_key)] = {"platforms": platforms}
+            payload["pages"][str(page_key)] = {
+                "platforms": platforms,
+                "triggers": page.get("triggers", []),
+            }
         return payload
 
     def _cells_to_platforms(self, cells):
@@ -676,6 +959,10 @@ class LevelEditor(QMainWindow):
                 "types": platform_types,
                 "color": cell.get("color", [120, 120, 120]),
             }
+            if cell.get("id"):
+                platform["id"] = cell.get("id")
+            if cell.get("path"):
+                platform["path"] = cell.get("path")
             if cell.get("texture"):
                 platform["texture"] = cell["texture"]
             platforms.append(platform)
@@ -685,19 +972,27 @@ class LevelEditor(QMainWindow):
         pages = self.level_data.get("pages")
         if not pages:
             platforms = self.level_data.pop("platforms", [])
-            self.level_data["pages"] = {"1": {"cells": []}}
+            self.level_data["pages"] = {"1": {"cells": [], "triggers": []}}
             pages = self.level_data["pages"]
         if str(self.current_page) not in pages:
-            pages[str(self.current_page)] = {"cells": []}
+            pages[str(self.current_page)] = {"cells": [], "triggers": []}
+
+        page = pages[str(self.current_page)]
+        page.setdefault("triggers", [])
 
     def _current_cells(self):
         self._ensure_pages()
         return self.level_data["pages"][self.current_page]["cells"]
 
+    def _current_triggers(self):
+        self._ensure_pages()
+        return self.level_data["pages"][self.current_page]["triggers"]
+
     def _on_page_change(self, value):
         self.current_page = str(value)
         self._ensure_pages()
         self._refresh_platform_list()
+        self._refresh_trigger_list()
 
     def _on_level_field_change(self):
         self._sync_level_fields()
@@ -994,6 +1289,80 @@ class LevelCanvas(QGraphicsView):
             self.scene.addItem(outline)
             self._outline_items[idx] = outline
 
+        # Draw platform paths
+        seen_paths = set()
+        for cell in self.editor._current_cells():
+            path = cell.get("path")
+            if not isinstance(path, dict):
+                continue
+            key = json.dumps(path, sort_keys=True)
+            if key in seen_paths:
+                continue
+            seen_paths.add(key)
+            self._draw_path(path.get("points", []))
+
+        # Draw triggers
+        for trigger in self.editor._current_triggers():
+            rect = QRectF(
+                trigger.get("x", 0),
+                trigger.get("y", 0),
+                trigger.get("w", 32),
+                trigger.get("h", 16),
+            )
+            trigger_type = trigger.get("type", "plate")
+            color = QColor(180, 180, 40)
+            if trigger_type == "button":
+                color = QColor(40, 180, 180)
+            elif trigger_type == "lever":
+                color = QColor(180, 40, 180)
+            trigger_item = QGraphicsRectItem(rect)
+            trigger_item.setBrush(
+                QBrush(QColor(color.red(), color.green(), color.blue(), 80))
+            )
+            trigger_item.setPen(QPen(color, 2))
+            trigger_item.setZValue(5)
+            self.scene.addItem(trigger_item)
+            label = self.scene.addText(trigger.get("id", trigger_type))
+            label.setDefaultTextColor(color)
+            label.setPos(rect.x() + 4, rect.y() + 2)
+            label.setZValue(6)
+
+    def _draw_path(self, points):
+        if not points or len(points) < 2:
+            return
+        path_pen = QPen(QColor(255, 200, 0), 2)
+        for idx in range(len(points) - 1):
+            start = points[idx]
+            end = points[idx + 1]
+            control = start.get("control") if isinstance(start, dict) else None
+            if control:
+                prev_x = start["x"]
+                prev_y = start["y"]
+                steps = 16
+                for step in range(1, steps + 1):
+                    t = step / steps
+                    inv = 1.0 - t
+                    x = (
+                        inv * inv * start["x"]
+                        + 2 * inv * t * control["x"]
+                        + t * t * end["x"]
+                    )
+                    y = (
+                        inv * inv * start["y"]
+                        + 2 * inv * t * control["y"]
+                        + t * t * end["y"]
+                    )
+                    self.scene.addLine(prev_x, prev_y, x, y, path_pen)
+                    prev_x, prev_y = x, y
+            else:
+                self.scene.addLine(
+                    start["x"],
+                    start["y"],
+                    end["x"],
+                    end["y"],
+                    path_pen,
+                )
+
     def _cell_rect(self, cell):
         x = cell.get("x", 0) * self.grid_size
         y = cell.get("y", 0) * self.grid_size
@@ -1019,6 +1388,14 @@ class LevelCanvas(QGraphicsView):
             cell_x = int(pos.x()) // self.grid_size
             cell_y = int(pos.y()) // self.grid_size
             if 0 <= cell_x < self.columns and 0 <= cell_y < self.rows:
+                snap_x = cell_x * self.grid_size
+                snap_y = cell_y * self.grid_size
+                if self.mode == "trigger":
+                    self.editor.add_trigger_at(snap_x, snap_y)
+                    return
+                if self.mode == "path":
+                    self.editor.add_path_point(snap_x, snap_y)
+                    return
                 if (
                     self.mode == "add"
                     and event.modifiers() == Qt.KeyboardModifier.NoModifier

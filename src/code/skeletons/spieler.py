@@ -136,7 +136,15 @@ class Spieler:
                         self.current_platform = platform
                         self.friction = platform.get_friction()
                         # Inherit platform velocity if it's moving
-                        if hasattr(platform, "velocity_x") and platform.velocity_x != 0:
+                        if (
+                            hasattr(platform, "velocity")
+                            and platform.velocity.length_squared() > 0
+                        ):
+                            self.player_pos.x += platform.velocity.x * self.dt
+                            self.player_pos.y += platform.velocity.y * self.dt
+                        elif (
+                            hasattr(platform, "velocity_x") and platform.velocity_x != 0
+                        ):
                             self.player_pos.x += platform.velocity_x * self.dt
                         break
 

@@ -167,10 +167,13 @@ class LevelDataUtils:
 
             grid_size = entry.get("grid_size", 32)
             layer = entry.get("layer", 0)
+            platform_id = entry.get("id")
             types = LevelDataUtils.normalize_platform_types(entry)
             texture = entry.get("texture")
             color = entry.get("color")
             comment = entry.get("comment")
+            path = entry.get("path")
+            path_key = json.dumps(path, sort_keys=True) if path else None
 
             key = (
                 grid_size,
@@ -179,6 +182,8 @@ class LevelDataUtils:
                 texture,
                 tuple(color) if isinstance(color, (list, tuple)) else color,
                 comment,
+                platform_id,
+                path_key,
             )
 
             group = cell_groups.get(key)
@@ -192,6 +197,8 @@ class LevelDataUtils:
                     "texture": texture,
                     "color": color,
                     "comment": comment,
+                    "id": platform_id,
+                    "path": path,
                 }
                 cell_groups[key] = group
             group["cells"].add((int(x1), int(y1)))
@@ -226,12 +233,16 @@ class LevelDataUtils:
                     "types": group["types"],
                     "layer": group["layer"],
                 }
+                if group.get("id"):
+                    merged_entry["id"] = group["id"]
                 if group["texture"]:
                     merged_entry["texture"] = group["texture"]
                 if group["color"] is not None:
                     merged_entry["color"] = group["color"]
                 if group["comment"]:
                     merged_entry["comment"] = group["comment"]
+                if group.get("path"):
+                    merged_entry["path"] = group["path"]
                 merged.append(merged_entry)
 
         return merged

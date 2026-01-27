@@ -36,6 +36,7 @@ data/worlds/<world_name>/<level_name>.json
     "<page_number>": {
       "platforms": [
         {
+          "id": "string (optional, unique id for triggers)",
           "x1": "number",
           "y1": "number",
           "x2": "number (or use w)",
@@ -49,7 +50,26 @@ data/worlds/<world_name>/<level_name>.json
           "types": "array of strings (NORMAL|DEATH|SPAWN|CHECKPOINT|FINISH|SLIPPERY|NOCLIP|BOOST_UP|BOOST_DOWN)",
           "texture": "string (texture name)",
           "color": "[r, g, b] array",
-          "layer": "number (-10 to +10, default: 0)"
+          "layer": "number (-10 to +10, default: 0)",
+          "path": {
+            "points": [
+              {"x": "number (px)", "y": "number (px)", "control": {"x": "number", "y": "number"}}
+            ],
+            "speed": "number (px/sec)",
+            "loop": "boolean"
+          }
+        }
+      ],
+      "triggers": [
+        {
+          "id": "string (optional)",
+          "type": "plate | button | lever",
+          "x": "number (px)",
+          "y": "number (px)",
+          "w": "number (px)",
+          "h": "number (px)",
+          "targets": "array of platform ids",
+          "duration": "number (seconds, button only)"
         }
       ]
     }
@@ -263,6 +283,40 @@ The old single type format is still supported for backward compatibility:
 }
 ```
 
+### id
+
+| Property | Value |
+|----------|-------|
+| Type | `string` |
+| Default | None |
+| Description | Unique platform id used by triggers |
+
+```json
+{
+  "id": "bridge_1"
+}
+```
+
+### path
+
+| Property | Value |
+|----------|-------|
+| Type | `object` |
+| Description | Movement path for moving platforms (pixel coords) |
+
+```json
+{
+  "path": {
+    "points": [
+      {"x": 256, "y": 384},
+      {"x": 512, "y": 384, "control": {"x": 420, "y": 300}}
+    ],
+    "speed": 140,
+    "loop": true
+  }
+}
+```
+
 ### layer (New in v2.0)
 
 | Property | Value |
@@ -308,6 +362,45 @@ Platforms are rendered in layer order (background first, foreground last).
   "x1": 5, "y1": 5, "x2": 8, "y2": 5,
   "layer": 3,
   "texture": "GOLD_BLOCK"
+}
+```
+
+## Triggers
+
+Triggers live under each page and control moving platforms by `id`.
+
+```json
+{
+  "triggers": [
+    {
+      "id": "plate_1",
+      "type": "plate",
+      "x": 300,
+      "y": 500,
+      "w": 64,
+      "h": 16,
+      "targets": ["bridge_1"]
+    },
+    {
+      "id": "lever_1",
+      "type": "lever",
+      "x": 120,
+      "y": 420,
+      "w": 16,
+      "h": 32,
+      "targets": ["bridge_1"]
+    },
+    {
+      "id": "button_1",
+      "type": "button",
+      "x": 420,
+      "y": 520,
+      "w": 32,
+      "h": 16,
+      "targets": ["bridge_1"],
+      "duration": 1.5
+    }
+  ]
 }
 ```
 

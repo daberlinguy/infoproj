@@ -139,6 +139,42 @@ Here's a minimal level file:
 }
 ```
 
+### Moving Platforms + Triggers
+
+Give a platform an `id` and `path`, then add a trigger in the page:
+
+```json
+{
+  "id": "bridge_1",
+  "x1": 8, "y1": 12, "x2": 10, "y2": 12,
+  "types": ["NORMAL"],
+  "path": {
+    "points": [
+      {"x": 256, "y": 384},
+      {"x": 512, "y": 384, "control": {"x": 420, "y": 300}}
+    ],
+    "speed": 140,
+    "loop": true
+  }
+}
+```
+
+```json
+{
+  "triggers": [
+    {
+      "id": "plate_1",
+      "type": "plate",
+      "x": 300,
+      "y": 500,
+      "w": 64,
+      "h": 16,
+      "targets": ["bridge_1"]
+    }
+  ]
+}
+```
+
 ### Alternative Size Syntax
 
 You can use width/height instead of x2/y2:

@@ -41,7 +41,9 @@ See Also:
 
 from __future__ import annotations
 
-from typing import List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
+import math
 
 import pygame
 
@@ -271,6 +273,8 @@ class Platform:
         texture: Optional[pygame.Surface] = None,
         velocity_x: float = 0,
         layer: int = 0,
+        platform_id: Optional[str] = None,
+        path: Optional[Dict[str, Any]] = None,
     ) -> None:
         # Handle both single type (legacy) and multiple types (new)
         if platform_types is not None:
@@ -288,9 +292,18 @@ class Platform:
         self.checkpoint_activated: bool = False
         self.grid_size: int = grid_size
         self.velocity_x: float = velocity_x
+        self.velocity: pygame.Vector2 = pygame.Vector2(0, 0)
         self.original_x1: int = x1
         self.original_x2: int = x2
         self.layer: int = layer  # Layer for depth rendering (-10 to +10, 0 is normal)
+        self.platform_id = platform_id
+
+        self.path_points: List[Dict[str, Any]] = []
+        self.path_speed: float = 0.0
+        self.path_loop: bool = True
+        self.path_active: bool = False
+        self._path_distance: float = 0.0
+        self._path_segments: List[Dict[str, Any]] = []
 
         # Ensure coordinates are properly ordered
         self.x1: float = float(min(x1, x2))
@@ -330,6 +343,9 @@ class Platform:
             self.y2 - self.y1 + grid_size,
         )
         self._surface_cache: dict[bool, pygame.Surface] = {}
+
+        if path:
+            self.set_path(path)
 
     def draw(self, screen: pygame.Surface) -> None:
         """Render the platform to the screen.
@@ -586,6 +602,10 @@ class Platform:
         Args:
             dt: Delta time in seconds since last update.
         """
+        if self.path_points and self.path_active:
+            self._update_path(dt)
+            return
+
         if self.velocity_x != 0:
             # Calculate movement offset
             offset = self.velocity_x * dt
@@ -593,8 +613,150 @@ class Platform:
             self.x2 += offset
             offset_int = int(round(offset))
 
+            if dt > 0:
+                self.velocity = pygame.Vector2(offset / dt, 0)
+
             # Update cells and rect
             if offset_int != 0:
                 for cell in self.cells:
                     cell.rect.x += offset_int
                 self.rect.x += offset_int
+        else:
+            self.velocity = pygame.Vector2(0, 0)
+
+    def set_path(self, path: Dict[str, Any]) -> None:
+        points = path.get("points", []) if isinstance(path, dict) else []
+        if len(points) < 2:
+            self.path_points = []
+            self._path_segments = []
+            return
+
+        self.path_points = points
+        self.path_speed = float(path.get("speed", 120))
+        self.path_loop = bool(path.get("loop", True))
+        self._path_segments = self._build_path_segments(points)
+        self._path_distance = 0.0
+
+        first = points[0]
+        target_x = int(first.get("x", self.rect.x))
+        target_y = int(first.get("y", self.rect.y))
+        self._move_to(target_x, target_y)
+
+    def set_active(self, active: bool) -> None:
+        self.path_active = active
+
+    def _build_path_segments(
+        self, points: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        segments: List[Dict[str, Any]] = []
+        for idx in range(len(points) - 1):
+            start = points[idx]
+            end = points[idx + 1]
+            control = start.get("control")
+            segment = {
+                "start": (float(start.get("x", 0)), float(start.get("y", 0))),
+                "end": (float(end.get("x", 0)), float(end.get("y", 0))),
+                "control": None,
+                "length": 0.0,
+            }
+            if control:
+                segment["control"] = (
+                    float(control.get("x", 0)),
+                    float(control.get("y", 0)),
+                )
+                segment["length"] = self._curve_length(segment)
+            else:
+                segment["length"] = self._line_length(segment)
+            segments.append(segment)
+        return segments
+
+    def _line_length(self, segment: Dict[str, Any]) -> float:
+        sx, sy = segment["start"]
+        ex, ey = segment["end"]
+        return math.hypot(ex - sx, ey - sy)
+
+    def _curve_length(self, segment: Dict[str, Any]) -> float:
+        length = 0.0
+        prev = self._curve_point(segment, 0.0)
+        steps = 12
+        for i in range(1, steps + 1):
+            t = i / steps
+            curr = self._curve_point(segment, t)
+            length += math.hypot(curr[0] - prev[0], curr[1] - prev[1])
+            prev = curr
+        return length
+
+    def _curve_point(self, segment: Dict[str, Any], t: float) -> Tuple[float, float]:
+        sx, sy = segment["start"]
+        ex, ey = segment["end"]
+        cx, cy = segment["control"]
+        inv = 1.0 - t
+        x = inv * inv * sx + 2 * inv * t * cx + t * t * ex
+        y = inv * inv * sy + 2 * inv * t * cy + t * t * ey
+        return x, y
+
+    def _path_position(self, distance: float) -> Tuple[float, float]:
+        if not self._path_segments:
+            return float(self.rect.x), float(self.rect.y)
+        remaining = distance
+        for segment in self._path_segments:
+            seg_len = segment["length"]
+            if seg_len <= 0:
+                continue
+            if remaining <= seg_len:
+                t = remaining / seg_len
+                if segment["control"]:
+                    return self._curve_point(segment, t)
+                sx, sy = segment["start"]
+                ex, ey = segment["end"]
+                return (sx + (ex - sx) * t, sy + (ey - sy) * t)
+            remaining -= seg_len
+        last = self._path_segments[-1]["end"]
+        return last[0], last[1]
+
+    def _update_path(self, dt: float) -> None:
+        if dt <= 0:
+            return
+        if not self._path_segments:
+            return
+
+        total = sum(seg["length"] for seg in self._path_segments)
+        if total <= 0:
+            return
+
+        self._path_distance += self.path_speed * dt
+        if self.path_loop:
+            self._path_distance %= total
+        else:
+            self._path_distance = min(self._path_distance, total)
+
+        target_x, target_y = self._path_position(self._path_distance)
+        dx = target_x - self.rect.x
+        dy = target_y - self.rect.y
+        if dx == 0 and dy == 0:
+            self.velocity = pygame.Vector2(0, 0)
+            return
+
+        self._move_by(dx, dy)
+        self.velocity = pygame.Vector2(dx / dt, dy / dt)
+        self.velocity_x = self.velocity.x
+
+    def _move_to(self, x: int, y: int) -> None:
+        dx = x - self.rect.x
+        dy = y - self.rect.y
+        self._move_by(dx, dy)
+
+    def _move_by(self, dx: float, dy: float) -> None:
+        dx_int = int(round(dx))
+        dy_int = int(round(dy))
+        if dx_int == 0 and dy_int == 0:
+            return
+        self.x1 += dx
+        self.x2 += dx
+        self.y1 += dy_int
+        self.y2 += dy_int
+        for cell in self.cells:
+            cell.rect.x += dx_int
+            cell.rect.y += dy_int
+        self.rect.x += dx_int
+        self.rect.y += dy_int

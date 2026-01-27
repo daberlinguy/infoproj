@@ -6,6 +6,7 @@ import json
 from skeletons.screen import Screen
 from skeletons.spieler import Spieler
 from skeletons.platform import Platform, Grid
+from skeletons.triggers import Trigger
 from skeletons.character import Character
 from skeletons.character_classes.characters import CHARACTER_REGISTRY
 from assets.assets import getFont, getMinecraftTexture, Texture, assets_path
@@ -43,6 +44,8 @@ class GameScreen(Screen):
         self.background_image = None
         self.background_image_cached = None
         self.level_data = None
+        self.triggers = []
+        self.platform_by_id = {}
 
         # Spawn point and checkpoint tracking
         self.spawn_point = pygame.Vector2(1 * 32 + 16, 14 * 32)  # Above spawn platform
@@ -161,6 +164,7 @@ class GameScreen(Screen):
                 )
 
         self.platforms = self._build_platforms_from_level(level_data, self.page_index)
+        self.triggers = self._build_triggers_from_level(level_data, self.page_index)
 
         # Count total checkpoints across ALL pages
         total_checkpoints = 0
@@ -196,6 +200,7 @@ class GameScreen(Screen):
         platforms_data = LevelDataUtils.merge_platform_cells(platforms_data)
 
         platforms = []
+        self.platform_by_id = {}
         for entry in platforms_data:
             grid_size = entry.get("grid_size", 32)
 
@@ -221,25 +226,57 @@ class GameScreen(Screen):
             # Get layer (defaults to 0 if not specified)
             layer = entry.get("layer", 0)
 
-            platforms.append(
-                Platform(
-                    x1,
-                    y1,
-                    x2,
-                    y2,
-                    grid_size,
-                    platform_types=platform_types,
-                    color=color,
-                    texture=texture,
-                    layer=layer,
-                )
+            platform_id = entry.get("id")
+            path = entry.get("path")
+            platform = Platform(
+                x1,
+                y1,
+                x2,
+                y2,
+                grid_size,
+                platform_types=platform_types,
+                color=color,
+                texture=texture,
+                layer=layer,
+                platform_id=platform_id,
+                path=path,
             )
+            platforms.append(platform)
+            if platform_id:
+                self.platform_by_id[platform_id] = platform
 
         # Sort platforms by layer (background to foreground)
         # This ensures proper rendering order
         platforms.sort(key=lambda p: p.layer)
 
         return platforms
+
+    def _build_triggers_from_level(self, level_data, page_index=1):
+        page_data = LevelDataUtils.get_page_data(level_data, page_index)
+        triggers_data = page_data.get("triggers", []) if page_data else []
+        triggers = []
+        for entry in triggers_data:
+            trigger_id = entry.get("id", "")
+            trigger_type = entry.get("type", Trigger.TYPE_PLATE)
+            x = int(entry.get("x", 0))
+            y = int(entry.get("y", 0))
+            width = int(entry.get("w", entry.get("width", 32)))
+            height = int(entry.get("h", entry.get("height", 16)))
+            targets = entry.get("targets", [])
+            duration = float(entry.get("duration", 1.5))
+            triggers.append(
+                Trigger(
+                    trigger_id,
+                    x,
+                    y,
+                    width,
+                    height,
+                    trigger_type,
+                    targets,
+                    duration,
+                )
+            )
+        return triggers
 
     def _switch_page(self, new_page):
         if not self.level_data:
@@ -264,6 +301,9 @@ class GameScreen(Screen):
 
         self.page_index = new_page
         self.platforms = self._build_platforms_from_level(
+            self.level_data, self.page_index
+        )
+        self.triggers = self._build_triggers_from_level(
             self.level_data, self.page_index
         )
 
@@ -363,8 +403,25 @@ class GameScreen(Screen):
         if keys[pygame.K_SPACE] or keys[pygame.K_w]:
             self.player.jump()
 
+        # Update triggers
+        active_platform_ids = set()
+        referenced_platform_ids = set()
+        for trigger in self.triggers:
+            trigger.update(self.player.get_rect(), keys, self.dt)
+            referenced_platform_ids.update(trigger.targets)
+            if trigger.is_active():
+                active_platform_ids.update(trigger.targets)
+
         # Update moving platforms
         for platform in self.platforms:
+            if platform.path_points:
+                if (
+                    platform.platform_id
+                    and platform.platform_id in referenced_platform_ids
+                ):
+                    platform.set_active(platform.platform_id in active_platform_ids)
+                else:
+                    platform.set_active(True)
             platform.update(self.dt)
 
         # Apply physics - apply gravity first, then check collisions to resolve
@@ -526,6 +583,8 @@ class GameScreen(Screen):
             # Draw platform bounding boxes
             for platform in self.platforms:
                 pygame.draw.rect(self.screen, "red", platform.rect, 2)
+            for trigger in self.triggers:
+                trigger.draw_debug(self.screen)
             # Draw FPS counter and platform info
             debug_y = 10
             self.draw_text(
