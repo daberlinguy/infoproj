@@ -425,8 +425,8 @@ class GameScreen(Screen):
         if keys[pygame.K_ESCAPE]:
             self.running = False
             from screens.TitleScreen import TitleScreen
-
             TitleScreen(self.screen, "Title Screen")
+            return
         if keys[pygame.K_SPACE] or keys[pygame.K_w]:
             self.player.jump()
 

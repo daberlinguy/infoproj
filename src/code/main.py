@@ -3,9 +3,13 @@ import pygame
 from pygame_widgets.widget import OrderedSet
 
 pygame.init()
+
+WIDTH = 1920
+HEIGHT = 1080
+
 screen = pygame.display.set_mode(
-    (pygame.display.Info().current_w, pygame.display.Info().current_h),
-    pygame.FULLSCREEN,
+    (WIDTH, HEIGHT),
+    pygame.SCALED | pygame.FULLSCREEN
 )
 
 

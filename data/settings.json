@@ -1,5 +1,5 @@
 {
-  "debug_mode": true,
+  "debug_mode": false,
   "character": "character3",
   "selected_world": "3 - H\u00f6hlenforschung",
   "selected_level": "Stone.json",
