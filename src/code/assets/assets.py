@@ -62,7 +62,7 @@ from utils.paths import assets_path, resources_path
 # Font Loading
 # ---------------------------------------------------------------------------
 
-_font_path: str = assets_path("fonts", "font.ttf")
+_font_path: str = assets_path("fonts", "Minecraft.ttf")
 _default_font_size: int = 40
 custom_font: pygame.font.Font = pygame.font.Font(_font_path, _default_font_size)
 

@@ -1,8 +1,8 @@
 {
   "debug_mode": false,
-  "character": "character3",
-  "selected_world": "1 - Sonnenaufgang",
-  "selected_level": "Nether.json",
+  "character": "queen",
+  "selected_world": "2 - Tiefenforschung",
+  "selected_level": "Erkundungstour.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {
@@ -12,7 +12,13 @@
           "level3.json": true,
           "Nether.json": true
         },
-        "complete": true
+        "complete": false
+      },
+      "2 - Tiefenforschung": {
+        "levels": {
+          "Erkundungstour.json": true
+        },
+        "complete": false
       }
     }
   }

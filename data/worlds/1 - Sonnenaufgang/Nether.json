@@ -10,7 +10,8 @@
     "r": 135,
     "g": 206,
     "b": 235,
-    "a": 255
+    "a": 255,
+    "image": "G:\\LKInf12_Gruppe3\\src\\resources\\assets\\backgrounds\\nether.png"
   },
   "page_width_cells": 60,
   "page_height_cells": 34,
@@ -21162,12 +21163,6 @@
           "texture": "NETHERRACK"
         }
       ]
-    },
-    "4": {
-      "platforms": []
-    },
-    "5": {
-      "platforms": []
     }
   }
 }

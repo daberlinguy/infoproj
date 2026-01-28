@@ -144,63 +144,34 @@ class CharacterVillager(CharacterClass):
     jump_frames = ["l1.png"]
 
 
-class CharacterKing(CharacterClass):
-    """King - Recolored knight variant."""
+class CharacterEmmanuel(CharacterClass):
+    """Emmanuel - Recolored knight variant."""
 
-    name = "King"
-    sprite_scale = (3.1, 3.1)
-    sprite_folder = "characters/king"
-
-    walk_frames = [
-        "l1.png",
-        "l2.png",
-        "l3.png",
-        "l4.png",
-        "l5.png",
-        "l6.png",
-        "l7.png",
-        "l8.png",
-        "l9.png",
-        "l10.png",
-        "l11.png",
-        "l12.png",
-        "l13.png",
-        "l14.png",
-        "l15.png",
-        "l16.png",
-    ]
-
-    jump_frames = ["l1.png"]
-
-
-class CharacterQueen(CharacterClass):
-    """Queen - Recolored knight variant."""
-
-    name = "Queen"
-    sprite_scale = (3.1, 3.1)
-    sprite_folder = "characters/queen"
+    name = "Emmanuel"
+    sprite_scale = (1.4, 1.4)
+    sprite_folder = "characters/emmanuel"
 
     walk_frames = [
-        "l1.png",
-        "l2.png",
-        "l3.png",
-        "l4.png",
-        "l5.png",
-        "l6.png",
-        "l7.png",
-        "l8.png",
-        "l9.png",
-        "l10.png",
-        "l11.png",
-        "l12.png",
-        "l13.png",
-        "l14.png",
-        "l15.png",
-        "l16.png",
+        "w1.png",
+        "w2.png"
     ]
 
-    jump_frames = ["l1.png"]
+    jump_frames = ["w1.png"]
 
+
+class CharacterDave(CharacterClass):
+    """Dave - Recolored knight variant."""
+
+    name = "Dave"
+    sprite_scale = (1.4, 1.4)
+    collider_size = (29.4, 51.8)
+    sprite_folder = "characters/dave"
+    walk_frames = [
+        "w1.png",
+        "w2.png",
+    ]
+
+    jump_frames = ["w1.png"]
 
 class CharacterSteve(CharacterClass):
     """Steve - Recolored knight variant."""
@@ -243,7 +214,7 @@ CHARACTER_REGISTRY: Dict[str, Type[CharacterClass]] = {
     "character2": CharacterTwo,
     "character3": CharacterThree,
     "villager": CharacterVillager,
-    "king": CharacterKing,
-    "queen": CharacterQueen,
+    "emmanuel": CharacterEmmanuel,
+    "dave": CharacterDave,
     "steve": CharacterSteve,
 }
