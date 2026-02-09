@@ -2,11 +2,13 @@ import os
 import pygame
 import sys
 import json
+import random
 
 from skeletons.screen import Screen
 from skeletons.spieler import Spieler
 from skeletons.platform import Platform, Grid
 from skeletons.character import Character
+from skeletons.enemy import Enemy
 from skeletons.character_classes.characters import CHARACTER_REGISTRY
 from assets.assets import getFont, getMinecraftTexture, Texture, assets_path
 from screens.SettingsScreen import SETTINGS
@@ -39,6 +41,11 @@ class GameScreen(Screen):
         self.level_completed = False
         self.checkpoints_required = 0
         self.checkpoints_activated = 0
+        self.enemy_count = 6
+        self.enemy_move_speed = 250
+        self.enemy_aggro_range = 100000
+        self.player_attack_range = 72
+        self.enemies = []
         self.background_color = (128, 0, 128)
         self.background_image = None
         self.background_image_cached = None
@@ -73,6 +80,8 @@ class GameScreen(Screen):
 
         if self.level_path:
             self._load_level(self.level_path)
+
+        self._spawn_enemies()
 
         # Setup virtual resolution handling
         self.virtual_width = self.page_width_cells * self.page_grid_size
@@ -161,6 +170,12 @@ class GameScreen(Screen):
                 )
 
         self.platforms = self._build_platforms_from_level(level_data, self.page_index)
+        self.enemy_count = int(
+            level_data.get(
+                "enemy_count",
+                level_data.get("enemies", {}).get("count", self.enemy_count),
+            )
+        )
 
         # Count total checkpoints across ALL pages
         total_checkpoints = 0
@@ -175,6 +190,140 @@ class GameScreen(Screen):
             )
         self.checkpoints_required = total_checkpoints
         print(f"Total checkpoints in level: {self.checkpoints_required}")
+
+    def _available_pages(self):
+        if self.level_data and self.level_data.get("pages"):
+            pages = []
+            for key in self.level_data["pages"].keys():
+                try:
+                    pages.append(int(key))
+                except (TypeError, ValueError):
+                    continue
+            return pages or [self.page_index]
+        return [self.page_index]
+
+    def _is_solid_platform(self, platform):
+        return (not platform.is_deadly()) and (not platform.is_noclip())
+
+    def _is_valid_enemy_spawn(self, enemy, platforms):
+        enemy_rect = enemy.body.get_rect()
+        feet_rect = enemy_rect.move(0, 1)
+
+        # Enemy body must be in empty space (not inside any solid platform)
+        for platform in platforms:
+            if not self._is_solid_platform(platform):
+                continue
+            if enemy_rect.colliderect(platform.rect):
+                return False
+
+        # But its feet must touch a solid platform so it can stand there
+        for platform in platforms:
+            if not self._is_solid_platform(platform):
+                continue
+            if feet_rect.colliderect(platform.rect):
+                return True
+        return False
+
+    def _spawn_enemy_on_page(self, page_index):
+        page_platforms = (
+            self._build_platforms_from_level(self.level_data, page_index)
+            if self.level_data
+            else self.platforms
+        )
+        walkable = [p for p in page_platforms if self._is_solid_platform(p)]
+
+        enemy = Enemy(
+            (0, 0),
+            page_index,
+            move_speed=self.enemy_move_speed,
+            aggro_range=self.enemy_aggro_range,
+        )
+        half_w = enemy.body.sprite_width / 2
+        half_h = enemy.body.sprite_height / 2
+
+        for _ in range(40):
+            if walkable:
+                spawn_platform = random.choice(walkable)
+                min_x = spawn_platform.rect.left + half_w + 2
+                max_x = spawn_platform.rect.right - half_w - 2
+                if min_x > max_x:
+                    continue
+                x = random.uniform(min_x, max_x)
+                y = spawn_platform.rect.top - half_h
+            else:
+                x = random.uniform(
+                    20 + half_w,
+                    self.page_width_cells * self.page_grid_size - 20 - half_w,
+                )
+                y = random.uniform(
+                    30 + half_h,
+                    self.page_height_cells * self.page_grid_size - 40 - half_h,
+                )
+
+            enemy.body.player_pos.update(x, y)
+
+            if not self._is_valid_enemy_spawn(enemy, page_platforms):
+                continue
+
+            if (
+                page_index != self.current_checkpoint_page
+                or pygame.Vector2(x, y).distance_to(self.current_checkpoint) > 150
+            ):
+                return enemy
+
+        fallback_x = min(
+            self.page_width_cells * self.page_grid_size - 20,
+            self.current_checkpoint.x + 200,
+        )
+        fallback_y = max(30, self.current_checkpoint.y - 40)
+        enemy.body.player_pos.update(fallback_x, fallback_y)
+        enemy.body.velocity_x = 0
+        enemy.body.velocity_y = 0
+        return enemy
+
+    def _spawn_enemies(self):
+        self.enemies = []
+        pages = self._available_pages()
+        if not pages:
+            return
+        for _ in range(max(0, self.enemy_count)):
+            page = random.choice(pages)
+            self.enemies.append(self._spawn_enemy_on_page(page))
+
+    def _is_control_pressed(self, keys, control_name):
+        for key_name in SETTINGS.get("controls", {}).get(control_name, []):
+            try:
+                if keys[pygame.key.key_code(key_name)]:
+                    return True
+            except ValueError:
+                continue
+        return False
+
+    def _respawn_player_to_checkpoint(self):
+        self.player.player_pos = self.current_checkpoint.copy()
+        self.player.velocity_x = 0
+        self.player.velocity_y = 0
+
+    def _update_enemies(self, attack_pressed):
+        player_pos = self.player.player_pos
+        player_caught = False
+        survivors = []
+
+        for enemy in self.enemies:
+            if enemy.page_index == self.page_index:
+                enemy.update_ai(player_pos, self.platforms, self.dt)
+                distance = enemy.distance_to(player_pos)
+
+                if attack_pressed and distance <= self.player_attack_range:
+                    continue
+
+                if distance <= enemy.attack_range:
+                    player_caught = True
+
+            survivors.append(enemy)
+
+        self.enemies = survivors
+        return player_caught
 
     def _build_platforms_from_level(self, level_data, page_index=1):
         """Build platforms from level data using utility functions.
@@ -331,6 +480,7 @@ class GameScreen(Screen):
                     self.player.player_pos = self.spawn_point.copy()
                     self.player.velocity_x = 0
                     self.player.velocity_y = 0
+                    self._spawn_enemies()
 
         # Handle input
         keys = pygame.key.get_pressed()
@@ -361,9 +511,11 @@ class GameScreen(Screen):
                 block_escape_until_release=True,
             )
             return  # Exit immediately to prevent further updates
-        
+
         if keys[pygame.key.key_code(keyss.get("jump", ["w"])[0])]:
             self.player.jump()
+
+        attack_pressed = self._is_control_pressed(keys, "attack")
 
         # Update moving platforms
         for platform in self.platforms:
@@ -386,6 +538,10 @@ class GameScreen(Screen):
                 self.current_checkpoint,
             )
         )
+
+        if self._update_enemies(attack_pressed):
+            self._respawn_player_to_checkpoint()
+            should_respawn = True
 
         # Check if player is standing on a checkpoint platform
         if (
@@ -420,9 +576,12 @@ class GameScreen(Screen):
             self.run_timer = 0.0
             if self.page_index != self.current_checkpoint_page:
                 self._switch_page(self.current_checkpoint_page)
+            self._spawn_enemies()
 
         is_moving = (
-            abs(self.player.velocity_x) > 0 or keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])] or keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]
+            abs(self.player.velocity_x) > 0
+            or keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]
+            or keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]
         )
         is_landing = (not self.was_on_ground) and self.player.is_on_ground
         if keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]:
@@ -489,13 +648,19 @@ class GameScreen(Screen):
         for platform in self.platforms:
             platform.draw(self.screen)
 
+        # Draw enemies for the current page
+        for enemy in self.enemies:
+            if enemy.page_index == self.page_index:
+                enemy.draw(self.screen)
+                if SETTINGS.get("debug_mode", False):
+                    enemy.draw_debug(self.screen)
+
         # Draw player (animated)
         self.character.draw(self.screen)
 
         if (
-            self.player.current_platform
-            and self.player.current_platform.is_finish()
-#            and not self.checkpoints_activated < self.checkpoints_required
+            self.player.current_platform and self.player.current_platform.is_finish()
+            #            and not self.checkpoints_activated < self.checkpoints_required
         ):
             self.level_completed = True
             self._mark_level_complete()
@@ -528,6 +693,11 @@ class GameScreen(Screen):
             # Draw platform bounding boxes
             for platform in self.platforms:
                 pygame.draw.rect(self.screen, "red", platform.rect, 2)
+            for enemy in self.enemies:
+                if enemy.page_index == self.page_index:
+                    pygame.draw.rect(
+                        self.screen, (255, 120, 120), enemy.body.get_rect(), 2
+                    )
             # Draw FPS counter and platform info
             debug_y = 10
             self.draw_text(

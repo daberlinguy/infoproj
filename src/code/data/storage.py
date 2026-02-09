@@ -27,7 +27,7 @@ def _maybe_seed_bundle_data():
 def _default_settings():
     return {
         "debug_mode": False,
-        "character": "queen",
+        "character": "character1",
         "selected_world": None,
         "selected_level": None,
         "progress": {"worlds": {}},

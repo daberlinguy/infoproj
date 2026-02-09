@@ -11,19 +11,25 @@ from data.storage import load_settings, save_settings
 SETTINGS = load_settings()
 
 import pygame as pg
-COLOR_INACTIVE = pg.Color('lightskyblue3')
-COLOR_ACTIVE = pg.Color('dodgerblue2')
+
+COLOR_INACTIVE = pg.Color("lightskyblue3")
+COLOR_ACTIVE = pg.Color("dodgerblue2")
 FONT = pg.font.Font(None, 32)
 
 
 class InputBox:
-
-    def __init__(self, x, y, w, h, text=''):
+    def __init__(self, x, y, w, h, text=""):
+        self.padding_x = 8
+        self.padding_y = 6
+        self.min_width = max(w, 140)
+        self.min_height = max(h, FONT.get_height() + (self.padding_y * 2))
         self.rect = pg.Rect(x, y, w, h)
         self.color = COLOR_INACTIVE
+        self.background_color = pg.Color("lightgray")
         self.text = text
         self.txt_surface = FONT.render(text, True, self.color)
         self.active = False
+        self.update()
 
     def handle_event(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
@@ -39,7 +45,7 @@ class InputBox:
             if self.active:
                 if event.key == pg.K_RETURN:
                     print(self.text)
-                    self.text = ''
+                    self.text = ""
                 elif event.key == pg.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
@@ -48,13 +54,18 @@ class InputBox:
                 self.txt_surface = FONT.render(self.text, True, self.color)
 
     def update(self):
-        # Resize the box if the text is too long.
-        width = max(200, self.txt_surface.get_width()+10)
+        # Resize box so text fits with padding and font height.
+        width = max(self.min_width, self.txt_surface.get_width() + (self.padding_x * 2))
         self.rect.w = width
+        self.rect.h = self.min_height
 
     def draw(self, screen):
+        pg.draw.rect(screen, self.background_color, self.rect, border_radius=4)
         # Blit the text.
-        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
+        screen.blit(
+            self.txt_surface,
+            (self.rect.x + self.padding_x, self.rect.y + self.padding_y),
+        )
         # Blit the rect.
         pg.draw.rect(screen, self.color, self.rect, 2)
 
@@ -84,6 +95,7 @@ def main():
         pg.display.flip()
         clock.tick(30)
 """
+
 
 class SettingsScreen(Screen):
     def __init__(self, screen, caption):
@@ -121,33 +133,33 @@ class SettingsScreen(Screen):
 
         self.input_boxes = [
             InputBox(
-            int((screen.get_width() / 2) + 100),
-            int((screen.get_height() / 2)),
-            50,
-            20,
-            text=",".join(SETTINGS["controls"]["attack"]),
-        ),
+                int((screen.get_width() / 2) + 100),
+                int((screen.get_height() / 2)),
+                50,
+                20,
+                text=",".join(SETTINGS["controls"]["attack"]),
+            ),
             InputBox(
-            int((screen.get_width() / 2) + 100),
-            int((screen.get_height() / 2) - 150),
-            50,
-            20,
-            text=",".join(SETTINGS["controls"]["jump"]),
-        ),
+                int((screen.get_width() / 2) + 100),
+                int((screen.get_height() / 2) - 150),
+                50,
+                20,
+                text=",".join(SETTINGS["controls"]["jump"]),
+            ),
             InputBox(
-            int((screen.get_width() / 2) + 100),
-            int((screen.get_height() / 2) - 100),
-            50,
-            20,
-            text=",".join(SETTINGS["controls"]["move_left"]),
-        ),
+                int((screen.get_width() / 2) + 100),
+                int((screen.get_height() / 2) - 100),
+                50,
+                20,
+                text=",".join(SETTINGS["controls"]["move_left"]),
+            ),
             InputBox(
-            int((screen.get_width() / 2) + 100),
-            int((screen.get_height() / 2) - 50),
-            50,
-            20,
-            text=",".join(SETTINGS["controls"]["move_right"]),
-        )   
+                int((screen.get_width() / 2) + 100),
+                int((screen.get_height() / 2) - 50),
+                50,
+                20,
+                text=",".join(SETTINGS["controls"]["move_right"]),
+            ),
         ]
 
         # Set Title Text
@@ -159,13 +171,13 @@ class SettingsScreen(Screen):
     def onBtnBack(self):
         # Save settings before going back
         SETTINGS["debug_mode"] = self.debug_toggle.getValue()
-        
+
         # Save input box values to controls
         SETTINGS["controls"]["attack"] = self.input_boxes[0].text.split(",")
         SETTINGS["controls"]["jump"] = self.input_boxes[1].text.split(",")
         SETTINGS["controls"]["move_left"] = self.input_boxes[2].text.split(",")
         SETTINGS["controls"]["move_right"] = self.input_boxes[3].text.split(",")
-        
+
         save_settings(SETTINGS)
         self.running = False
         from screens.TitleScreen import TitleScreen
@@ -178,7 +190,7 @@ class SettingsScreen(Screen):
             if event.type == pygame.QUIT:
                 self.running = False
                 return  # Exit immediately without drawing
-            
+
             # Handle events for all input boxes
             for box in self.input_boxes:
                 box.handle_event(event)
@@ -259,7 +271,7 @@ class SettingsScreen(Screen):
         # Draw the buttons and toggle
         self.debug_toggle.draw()
         self.back_btn.draw()
-        
+
         # Draw all input boxes
         for box in self.input_boxes:
             box.draw(self.screen)

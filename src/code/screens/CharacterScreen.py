@@ -27,6 +27,10 @@ class CharacterScreen(Screen):
 
         # Define buttons
         self.character_ids = list(CHARACTER_REGISTRY.keys())
+        if self.selected_character not in CHARACTER_REGISTRY and self.character_ids:
+            self.selected_character = self.character_ids[0]
+            SETTINGS["character"] = self.selected_character
+            save_settings(SETTINGS)
         grid_x = (screen.get_width() / 2) - 320
         list_top = (screen.get_height() / 2) - 200
         list_bottom = (screen.get_height() / 2) + 260
@@ -131,7 +135,8 @@ class CharacterScreen(Screen):
             is_hovered = row_rect.collidepoint(mouse_pos)
             character_id = self.character_ids[idx]
             character_name = CHARACTER_REGISTRY[character_id].name
-            is_selected = SETTINGS.get("character", "character1") == character_id
+            current_character = SETTINGS.get("character", self.character_ids[0])
+            is_selected = current_character == character_id
             base_color = (30, 30, 30) if is_hovered else (20, 20, 20)
             border_color = (140, 140, 140) if is_hovered else (90, 90, 90)
             pygame.draw.rect(self.screen, base_color, row_rect, border_radius=8)
@@ -148,7 +153,10 @@ class CharacterScreen(Screen):
             )
 
         # Draw current selection text and previews
-        selected_name = CHARACTER_REGISTRY[SETTINGS.get("character", "character1")].name
+        selected_id = SETTINGS.get("character", self.character_ids[0])
+        if selected_id not in CHARACTER_REGISTRY:
+            selected_id = self.character_ids[0]
+        selected_name = CHARACTER_REGISTRY[selected_id].name
         self.draw_text(
             f"Selected: {selected_name}",
             getFont(24),

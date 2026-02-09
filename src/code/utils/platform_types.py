@@ -50,7 +50,7 @@ class PlatformTypes:
 
     # Friction values for platform types
     FRICTION_VALUES: Dict[str, float] = {
-        SLIPPERY: 0.95,  # Very low friction
+        SLIPPERY: 0.03,  # Very low friction
         NORMAL: 0.8,  # Normal friction
     }
 

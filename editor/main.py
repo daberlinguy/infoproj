@@ -694,6 +694,11 @@ class LevelEditor(QMainWindow):
         self._ensure_pages()
         return self.level_data["pages"][self.current_page]["cells"]
 
+    def _cells_for_page(self, page_key):
+        self._ensure_pages()
+        page = self.level_data.get("pages", {}).get(str(page_key), {})
+        return page.get("cells", [])
+
     def _on_page_change(self, value):
         self.current_page = str(value)
         self._ensure_pages()
@@ -886,6 +891,9 @@ class LevelCanvas(QGraphicsView):
         self._outline_items = {}
         self.setTransformationAnchor(QGraphicsView.ViewportAnchor.AnchorUnderMouse)
         self.setResizeAnchor(QGraphicsView.ViewportAnchor.AnchorViewCenter)
+        self._page_order = [1]
+        self._page_slot_by_key = {"1": 0}
+        self._current_page_slot = 0
 
     def set_mode(self, mode):
         self.mode = mode
@@ -912,24 +920,49 @@ class LevelCanvas(QGraphicsView):
         self.scene.clear()
         self.columns = int(self.editor.level_data.get("page_width_cells", self.columns))
         self.rows = int(self.editor.level_data.get("page_height_cells", self.rows))
-        width = self.columns * self.grid_size
+        pages = self.editor.level_data.get("pages", {})
+        page_order = []
+        for page_key in pages.keys():
+            try:
+                page_order.append(int(page_key))
+            except (TypeError, ValueError):
+                continue
+        if not page_order:
+            page_order = [1]
+        page_order.sort()
+        self._page_order = page_order
+        self._page_slot_by_key = {
+            str(page_num): slot for slot, page_num in enumerate(self._page_order)
+        }
+        self._current_page_slot = self._page_slot_by_key.get(
+            self.editor.current_page, 0
+        )
+
+        page_count = len(self._page_order)
+        page_width_px = self.columns * self.grid_size
+        width = page_count * page_width_px
         height = self.rows * self.grid_size
         self.scene.setSceneRect(0, 0, width, height)
         self._preview_item = None
 
         bg = self.editor.level_data.get("background_color", {})
         bg_color = QColor(bg.get("r", 135), bg.get("g", 206), bg.get("b", 235))
-        bg_rect = QGraphicsRectItem(QRectF(0, 0, width, height))
-        bg_rect.setBrush(QBrush(bg_color))
-        bg_rect.setPen(QPen(Qt.PenStyle.NoPen))
-        bg_rect.setZValue(-3)
-        self.scene.addItem(bg_rect)
+        for page_slot in range(page_count):
+            page_x = page_slot * page_width_px
+            bg_rect = QGraphicsRectItem(QRectF(page_x, 0, page_width_px, height))
+            bg_rect.setBrush(QBrush(bg_color))
+            bg_rect.setPen(QPen(Qt.PenStyle.NoPen))
+            bg_rect.setZValue(-3)
+            self.scene.addItem(bg_rect)
 
         image_path = bg.get("image")
         if image_path and os.path.exists(image_path):
-            pixmap = QPixmap(image_path).scaled(width, height)
-            img_item = self.scene.addPixmap(pixmap)
-            img_item.setZValue(-2)
+            for page_slot in range(page_count):
+                page_x = page_slot * page_width_px
+                pixmap = QPixmap(image_path).scaled(page_width_px, height)
+                img_item = self.scene.addPixmap(pixmap)
+                img_item.setPos(page_x, 0)
+                img_item.setZValue(-2)
 
         spawn = self.editor.level_data.get("player_spawn", {})
         spawn_x = int(spawn.get("x", 0))
@@ -937,7 +970,13 @@ class LevelCanvas(QGraphicsView):
         if spawn.get("grid", True):
             spawn_x *= self.grid_size
             spawn_y *= self.grid_size
-        spawn_rect = QRectF(spawn_x, spawn_y, self.grid_size, self.grid_size)
+        spawn_page_slot = self._page_slot_by_key.get("1", self._current_page_slot)
+        spawn_rect = QRectF(
+            spawn_page_slot * page_width_px + spawn_x,
+            spawn_y,
+            self.grid_size,
+            self.grid_size,
+        )
         spawn_item = QGraphicsRectItem(spawn_rect)
         spawn_item.setBrush(QBrush(QColor(0, 255, 0, 90)))
         spawn_item.setPen(QPen(QColor(0, 120, 0), 2))
@@ -945,59 +984,83 @@ class LevelCanvas(QGraphicsView):
         self.scene.addItem(spawn_item)
 
         grid_pen = QPen(QColor(80, 80, 80), 1)
-        for x in range(0, width + 1, self.grid_size):
-            self.scene.addLine(x, 0, x, height, grid_pen)
+        separator_pen = QPen(QColor(25, 25, 25), 3)
+        for page_slot in range(page_count):
+            page_x = page_slot * page_width_px
+            for x in range(0, page_width_px + 1, self.grid_size):
+                self.scene.addLine(page_x + x, 0, page_x + x, height, grid_pen)
         for y in range(0, height + 1, self.grid_size):
             self.scene.addLine(0, y, width, y, grid_pen)
+        for divider in range(1, page_count):
+            x = divider * page_width_px
+            self.scene.addLine(x, 0, x, height, separator_pen)
 
         self._outline_items = {}
-        for idx, cell in enumerate(self.editor._current_cells()):
-            rect = self._cell_rect(cell)
-            item = QGraphicsRectItem(rect)
-            item.setFlag(QGraphicsRectItem.GraphicsItemFlag.ItemIsSelectable, True)
-            item.setData(0, idx)
-            color = cell.get("color", [120, 120, 120])
-            item.setBrush(QBrush(QColor(*color)))
-            item.setPen(QPen(QColor(200, 0, 0), 2))
-            item.setZValue(1)
-            self.scene.addItem(item)
-            texture = cell.get("texture", "")
-            if texture and self._atlas and texture in TEXTURE_ATLAS:
-                x, y, w, h = TEXTURE_ATLAS[texture]
-                tile = self._atlas.copy(x, y, w, h).scaled(
-                    self.grid_size, self.grid_size
+        for page_slot, page_num in enumerate(self._page_order):
+            page_key = str(page_num)
+            page_cells = self.editor._cells_for_page(page_key)
+            is_current_page = page_key == self.editor.current_page
+            page_offset_px = page_slot * page_width_px
+            for idx, cell in enumerate(page_cells):
+                rect = self._cell_rect(cell, page_offset_px)
+                item = QGraphicsRectItem(rect)
+                item.setFlag(
+                    QGraphicsRectItem.GraphicsItemFlag.ItemIsSelectable,
+                    is_current_page,
                 )
-                start_x = int(rect.x())
-                start_y = int(rect.y())
-                end_x = int(rect.x() + rect.width())
-                end_y = int(rect.y() + rect.height())
-                for ty in range(start_y, end_y, self.grid_size):
-                    for tx in range(start_x, end_x, self.grid_size):
-                        tile_item = self.scene.addPixmap(tile)
-                        tile_item.setPos(tx, ty)
-                        tile_item.setZValue(2)
-                        tile_item.setFlag(
-                            tile_item.GraphicsItemFlag.ItemIsSelectable, False
-                        )
-                        tile_item.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
-            elif texture:
-                text = self.scene.addText(texture)
-                text.setDefaultTextColor(QColor(20, 20, 20))
-                text.setPos(rect.x() + 4, rect.y() + 4)
-                text.setZValue(3)
-                text.setFlag(text.GraphicsItemFlag.ItemIsSelectable, False)
-                text.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
-            outline = QGraphicsRectItem(rect)
-            outline.setBrush(QBrush(Qt.BrushStyle.NoBrush))
-            outline.setPen(QPen(QColor(0, 0, 0, 0), 0))
-            outline.setZValue(4)
-            self.scene.addItem(outline)
-            self._outline_items[idx] = outline
+                if is_current_page:
+                    item.setData(0, idx)
+                color = cell.get("color", [120, 120, 120])
+                item.setBrush(QBrush(QColor(*color)))
+                item.setPen(QPen(QColor(200, 0, 0), 2))
+                item.setZValue(1)
+                self.scene.addItem(item)
+                texture = cell.get("texture", "")
+                if texture and self._atlas and texture in TEXTURE_ATLAS:
+                    x, y, w, h = TEXTURE_ATLAS[texture]
+                    tile = self._atlas.copy(x, y, w, h).scaled(
+                        self.grid_size, self.grid_size
+                    )
+                    start_x = int(rect.x())
+                    start_y = int(rect.y())
+                    end_x = int(rect.x() + rect.width())
+                    end_y = int(rect.y() + rect.height())
+                    for ty in range(start_y, end_y, self.grid_size):
+                        for tx in range(start_x, end_x, self.grid_size):
+                            tile_item = self.scene.addPixmap(tile)
+                            tile_item.setPos(tx, ty)
+                            tile_item.setZValue(2)
+                            tile_item.setFlag(
+                                tile_item.GraphicsItemFlag.ItemIsSelectable, False
+                            )
+                            tile_item.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
+                elif texture:
+                    text = self.scene.addText(texture)
+                    text.setDefaultTextColor(QColor(20, 20, 20))
+                    text.setPos(rect.x() + 4, rect.y() + 4)
+                    text.setZValue(3)
+                    text.setFlag(text.GraphicsItemFlag.ItemIsSelectable, False)
+                    text.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
 
-    def _cell_rect(self, cell):
+                if is_current_page:
+                    outline = QGraphicsRectItem(rect)
+                    outline.setBrush(QBrush(Qt.BrushStyle.NoBrush))
+                    outline.setPen(QPen(QColor(0, 0, 0, 0), 0))
+                    outline.setZValue(4)
+                    self.scene.addItem(outline)
+                    self._outline_items[idx] = outline
+
+    def _cell_rect(self, cell, x_offset=0):
         x = cell.get("x", 0) * self.grid_size
         y = cell.get("y", 0) * self.grid_size
-        return QRectF(x, y, self.grid_size, self.grid_size)
+        return QRectF(x + x_offset, y, self.grid_size, self.grid_size)
+
+    def _to_current_page_cell(self, scene_x, scene_y):
+        page_offset_cells = self._current_page_slot * self.columns
+        cell_x_global = int(scene_x) // self.grid_size
+        cell_y = int(scene_y) // self.grid_size
+        cell_x = cell_x_global - page_offset_cells
+        return cell_x, cell_y
 
     def get_selected_indices(self):
         indices = []
@@ -1016,8 +1079,7 @@ class LevelCanvas(QGraphicsView):
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             pos = self.mapToScene(event.position().toPoint())
-            cell_x = int(pos.x()) // self.grid_size
-            cell_y = int(pos.y()) // self.grid_size
+            cell_x, cell_y = self._to_current_page_cell(pos.x(), pos.y())
             if 0 <= cell_x < self.columns and 0 <= cell_y < self.rows:
                 if (
                     self.mode == "add"
@@ -1037,8 +1099,7 @@ class LevelCanvas(QGraphicsView):
     def mouseMoveEvent(self, event):
         if self.mode == "add" and self._dragging and self._start_cell:
             pos = self.mapToScene(event.position().toPoint())
-            cell_x = int(pos.x()) // self.grid_size
-            cell_y = int(pos.y()) // self.grid_size
+            cell_x, cell_y = self._to_current_page_cell(pos.x(), pos.y())
             cell_x = max(0, min(self.columns - 1, cell_x))
             cell_y = max(0, min(self.rows - 1, cell_y))
             x1, y1 = self._start_cell
@@ -1051,8 +1112,7 @@ class LevelCanvas(QGraphicsView):
     def mouseReleaseEvent(self, event):
         if self.mode == "add" and self._dragging and self._start_cell:
             pos = self.mapToScene(event.position().toPoint())
-            cell_x = int(pos.x()) // self.grid_size
-            cell_y = int(pos.y()) // self.grid_size
+            cell_x, cell_y = self._to_current_page_cell(pos.x(), pos.y())
             cell_x = max(0, min(self.columns - 1, cell_x))
             cell_y = max(0, min(self.rows - 1, cell_y))
             x1, y1 = self._start_cell
