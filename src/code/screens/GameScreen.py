@@ -315,6 +315,30 @@ class GameScreen(Screen):
                 distance = enemy.distance_to(player_pos)
 
                 if attack_pressed and distance <= self.player_attack_range:
+                    # Enemy killed by player - respawn it
+                    new_enemy = self._spawn_enemy_on_page(enemy.page_index)
+                    survivors.append(new_enemy)
+                    continue
+
+                # Check if enemy fell off screen
+                if enemy.body.player_pos.y > self.virtual_height:
+                    # Respawn enemy
+                    new_enemy = self._spawn_enemy_on_page(enemy.page_index)
+                    survivors.append(new_enemy)
+                    continue
+
+                # Check if enemy touched death platform
+                enemy_died = False
+                enemy_rect = enemy.body.get_rect()
+                for platform in self.platforms:
+                    if platform.is_deadly() and enemy_rect.colliderect(platform.rect):
+                        enemy_died = True
+                        break
+
+                if enemy_died:
+                    # Respawn enemy
+                    new_enemy = self._spawn_enemy_on_page(enemy.page_index)
+                    survivors.append(new_enemy)
                     continue
 
                 if distance <= enemy.attack_range:
@@ -496,10 +520,9 @@ class GameScreen(Screen):
         self.player.prev_x = self.player.player_pos.x
         self.player.prev_y = self.player.player_pos.y
 
-        keyss = SETTINGS.get("controls", {})
-        if keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]:
+        if self._is_control_pressed(keys, "move_left"):
             self.player.move_left()
-        if keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]:
+        if self._is_control_pressed(keys, "move_right"):
             self.player.move_right()
         if keys[pygame.K_ESCAPE]:
             self.running = False
@@ -512,7 +535,7 @@ class GameScreen(Screen):
             )
             return  # Exit immediately to prevent further updates
 
-        if keys[pygame.key.key_code(keyss.get("jump", ["w"])[0])]:
+        if self._is_control_pressed(keys, "jump"):
             self.player.jump()
 
         attack_pressed = self._is_control_pressed(keys, "attack")
@@ -580,13 +603,13 @@ class GameScreen(Screen):
 
         is_moving = (
             abs(self.player.velocity_x) > 0
-            or keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]
-            or keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]
+            or self._is_control_pressed(keys, "move_left")
+            or self._is_control_pressed(keys, "move_right")
         )
         is_landing = (not self.was_on_ground) and self.player.is_on_ground
-        if keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]:
+        if self._is_control_pressed(keys, "move_left"):
             self.character.facing = -1
-        elif keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]:
+        elif self._is_control_pressed(keys, "move_right"):
             self.character.facing = 1
         self.character.set_center(self.player.player_pos)
         self.character.update_state(

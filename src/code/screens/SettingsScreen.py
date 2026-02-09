@@ -121,11 +121,11 @@ class SettingsScreen(Screen):
         self.back_btn = Button(
             screen,
             int((screen.get_width() / 2) - (button_width / 2)),
-            start_y + 120,
+            start_y + 140,
             button_width,
             button_height,
             False,
-            text="Back",
+            text="Save & Back",
             onClick=self.onBtnBack,
             font=getFont(30),
             radius=10,
