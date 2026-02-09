@@ -9,3 +9,4 @@
 - [ ] Gegner
 - [ ] 2ter Spieler
 - [ ] Endlos Modus
+- [ ] "Checkpoint erreicht!"-Benachrichtigung

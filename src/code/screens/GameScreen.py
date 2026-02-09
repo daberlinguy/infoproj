@@ -346,9 +346,10 @@ class GameScreen(Screen):
         self.player.prev_x = self.player.player_pos.x
         self.player.prev_y = self.player.player_pos.y
 
-        if keys[pygame.K_a]:
+        keyss = SETTINGS.get("controls", {})
+        if keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]:
             self.player.move_left()
-        if keys[pygame.K_d]:
+        if keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]:
             self.player.move_right()
         if keys[pygame.K_ESCAPE]:
             self.running = False
@@ -360,7 +361,8 @@ class GameScreen(Screen):
                 block_escape_until_release=True,
             )
             return  # Exit immediately to prevent further updates
-        if keys[pygame.K_SPACE] or keys[pygame.K_w]:
+        
+        if keys[pygame.key.key_code(keyss.get("jump", ["w"])[0])]:
             self.player.jump()
 
         # Update moving platforms
@@ -420,12 +422,12 @@ class GameScreen(Screen):
                 self._switch_page(self.current_checkpoint_page)
 
         is_moving = (
-            abs(self.player.velocity_x) > 0 or keys[pygame.K_a] or keys[pygame.K_d]
+            abs(self.player.velocity_x) > 0 or keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])] or keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]
         )
         is_landing = (not self.was_on_ground) and self.player.is_on_ground
-        if keys[pygame.K_a]:
+        if keys[pygame.key.key_code(keyss.get("move_left", ["a"])[0])]:
             self.character.facing = -1
-        elif keys[pygame.K_d]:
+        elif keys[pygame.key.key_code(keyss.get("move_right", ["d"])[0])]:
             self.character.facing = 1
         self.character.set_center(self.player.player_pos)
         self.character.update_state(

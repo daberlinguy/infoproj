@@ -10,7 +10,8 @@
           "level1.json": true,
           "level3 - Kopie.json": true,
           "level3.json": true,
-          "Nether.json": true
+          "Nether.json": true,
+          "test22.json": true
         },
         "complete": false
       },
@@ -27,7 +28,7 @@
       "s"
     ],
     "move_left": [
-      "a"
+      "g"
     ],
     "move_right": [
       "d"
