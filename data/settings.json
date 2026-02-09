@@ -1,8 +1,8 @@
 {
   "debug_mode": false,
   "character": "queen",
-  "selected_world": "2 - Tiefenforschung",
-  "selected_level": "Erkundungstour.json",
+  "selected_world": "1 - Sonnenaufgang",
+  "selected_level": "Plains.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {
@@ -21,5 +21,23 @@
         "complete": false
       }
     }
+  },
+  "controls": {
+    "move_down": [
+      "s"
+    ],
+    "move_left": [
+      "a"
+    ],
+    "move_right": [
+      "d"
+    ],
+    "jump": [
+      "space",
+      "w"
+    ],
+    "attack": [
+      "k"
+    ]
   }
 }

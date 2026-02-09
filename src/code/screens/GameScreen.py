@@ -493,7 +493,7 @@ class GameScreen(Screen):
         if (
             self.player.current_platform
             and self.player.current_platform.is_finish()
-            and not self.checkpoints_activated < self.checkpoints_required
+#            and not self.checkpoints_activated < self.checkpoints_required
         ):
             self.level_completed = True
             self._mark_level_complete()

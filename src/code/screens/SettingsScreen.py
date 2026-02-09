@@ -25,7 +25,7 @@ class SettingsScreen(Screen):
         self.debug_toggle = Toggle(
             screen,
             int((screen.get_width() / 2) + 100),
-            start_y,
+            int((screen.get_height() / 2) - 200),
             100,
             40,
             startOn=SETTINGS["debug_mode"],
@@ -82,7 +82,7 @@ class SettingsScreen(Screen):
             255,
             255,
             (self.screen.get_width() / 2) - (self.title_width / 2),
-            (self.screen.get_height() / 2) - 200,
+            (self.screen.get_height() / 2) - 300,
         )
 
         # Draw debug mode label
@@ -93,7 +93,47 @@ class SettingsScreen(Screen):
             255,
             255,
             (self.screen.get_width() / 2) - 180,
+            (self.screen.get_height() / 2) - 200,
+        )
+
+        self.draw_text(
+            "Jump:",
+            getFont(30),
+            255,
+            255,
+            255,
+            (self.screen.get_width() / 2) - 180,
+            (self.screen.get_height() / 2) - 150,
+        )
+
+        self.draw_text(
+            "Left:",
+            getFont(30),
+            255,
+            255,
+            255,
+            (self.screen.get_width() / 2) - 180,
             (self.screen.get_height() / 2) - 100,
+        )
+
+        self.draw_text(
+            "Right:",
+            getFont(30),
+            255,
+            255,
+            255,
+            (self.screen.get_width() / 2) - 180,
+            (self.screen.get_height() / 2) - 50,
+        )
+
+        self.draw_text(
+            "Attack:",
+            getFont(30),
+            255,
+            255,
+            255,
+            (self.screen.get_width() / 2) - 180,
+            (self.screen.get_height() / 2),
         )
 
         # Draw the buttons and toggle
