@@ -1,8 +1,8 @@
 {
-  "debug_mode": false,
-  "character": "queen",
-  "selected_world": "3 - Eiswelt",
-  "selected_level": "Sprung.json",
+  "debug_mode": true,
+  "character": "dave",
+  "selected_world": "1 - Sonnenaufgang",
+  "selected_level": "Plains.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {
