@@ -14,7 +14,8 @@ class Spieler:
         self.velocity_x = 0
         self.velocity_y = 0
         self.gravity = 980
-        self.jump_strength = -450
+        self.jump_strength = -450 # normaler Sprung (~3 Blöcke)
+        self.boost_jump_strength = -900 # Boost-Up (~6 Blöcke)
         self.acceleration = 1200  # Horizontal acceleration
         self.max_speed = 300  # Maximum horizontal speed
         self.max_fall_speed = 1000  # Maximum falling speed to prevent tunneling
@@ -47,9 +48,18 @@ class Spieler:
             self.velocity_x = 300
 
     def jump(self):
-        if self.is_on_ground:
-            self.velocity_y = self.jump_strength
-            self.is_on_ground = False
+        if not self.is_on_ground:
+            return
+
+        jump_velocity = self.jump_strength
+
+        if self.current_platform and self.current_platform.is_boost_up():
+            jump_velocity = self.boost_jump_strength
+
+        self.velocity_y = jump_velocity
+        self.is_on_ground = False
+        self.current_platform = None
+
 
     def on_ground(self):
         return self.is_on_ground
@@ -222,15 +232,6 @@ class Spieler:
                     new_checkpoint = pygame.Vector2(
                         platform.rect.centerx, platform.rect.top - 30
                     )
-
-                # Boost platforms - apply velocity changes
-                if platform.is_boost_up():
-                    # Strong upward boost (like a wind current or jump pad)
-                    self.velocity_y = min(self.velocity_y, -450)
-
-                if platform.is_boost_down():
-                    # Strong downward boost (like a downdraft)
-                    self.velocity_y = max(self.velocity_y, 450)
 
         return (new_checkpoint, should_respawn)
 

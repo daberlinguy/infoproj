@@ -1,8 +1,8 @@
 {
   "debug_mode": false,
   "character": "queen",
-  "selected_world": "1 - Sonnenaufgang",
-  "selected_level": "Plains.json",
+  "selected_world": "3 - Eiswelt",
+  "selected_level": "Sprung.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {
@@ -28,7 +28,7 @@
       "s"
     ],
     "move_left": [
-      "g"
+      "a"
     ],
     "move_right": [
       "d"
