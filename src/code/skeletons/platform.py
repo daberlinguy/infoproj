@@ -252,7 +252,9 @@ class Platform:
     SLIPPERY: str = PlatformTypes.SLIPPERY
     NOCLIP: str = PlatformTypes.NOCLIP
     BOOST_UP: str = PlatformTypes.BOOST_UP
-    BOOST_DOWN: str = PlatformTypes.BOOST_DOWN
+    SPEED_UP: str = PlatformTypes.SPEED_UP
+    SLOW_DOWN: str = PlatformTypes.SLOW_DOWN
+
     x1: float
     y1: int
     x2: float
@@ -478,29 +480,45 @@ class Platform:
                 ],
             )
 
-        if Platform.BOOST_DOWN in self.platform_types:
-            # Draw downward arrow
+        if Platform.SPEED_UP in self.platform_types:
+            # Draw double arrow to the right (speed up)
             center_cell = self.cells[len(self.cells) // 2]
             center_x = center_cell.rect.centerx - offset_x
             center_y = center_cell.rect.centery - offset_y
-            # Arrow shaft
-            pygame.draw.line(
-                screen,
-                (200, 0, 0),
-                (center_x, center_y - 8),
-                (center_x, center_y + 8),
-                3,
-            )
-            # Arrow head
+
             pygame.draw.polygon(
                 screen,
-                (200, 0, 0),
+                (0, 200, 255),
                 [
-                    (center_x, center_y + 10),
-                    (center_x - 5, center_y + 5),
-                    (center_x + 5, center_y + 5),
+                    (center_x - 6, center_y - 6),
+                    (center_x + 4, center_y),
+                    (center_x - 6, center_y + 6),
                 ],
             )
+            pygame.draw.polygon(
+                screen,
+                (0, 200, 255),
+                [
+                    (center_x + 2, center_y - 6),
+                    (center_x + 12, center_y),
+                    (center_x + 2, center_y + 6),
+                ],
+            )
+
+        if Platform.SLOW_DOWN in self.platform_types:
+            # Draw minus symbol (slow down)
+            center_cell = self.cells[len(self.cells) // 2]
+            center_x = center_cell.rect.centerx - offset_x
+            center_y = center_cell.rect.centery - offset_y
+
+            pygame.draw.line(
+                screen,
+                (255, 150, 0),
+                (center_x - 8, center_y),
+                (center_x + 8, center_y),
+                4,
+            )
+
 
     def get_friction(self) -> float:
         """Get the friction coefficient for this platform.
@@ -514,6 +532,15 @@ class Platform:
             if friction != PlatformTypes.DEFAULT_FRICTION:
                 return friction
         return PlatformTypes.DEFAULT_FRICTION
+    
+    def get_speed_multiplier(self) -> float:
+    """Get speed multiplier for this platform."""
+    for ptype in self.platform_types:
+        multiplier = PlatformTypes.get_speed_multiplier(ptype)
+        if multiplier != PlatformTypes.DEFAULT_SPEED_MULTIPLIER:
+            return multiplier
+    return PlatformTypes.DEFAULT_SPEED_MULTIPLIER
+
 
     def is_deadly(self) -> bool:
         """Check if this platform kills the player on contact.
@@ -563,13 +590,19 @@ class Platform:
         """
         return Platform.BOOST_UP in self.platform_types
 
-    def is_boost_down(self) -> bool:
-        """Check if this platform boosts player downward.
-
+    def is_speed_up(self) -> bool:
+        """Check if this platform speeds the player up.
+        
         Returns:
-            True if this is a BOOST_DOWN platform.
-        """
-        return Platform.BOOST_DOWN in self.platform_types
+            True if this is a SPEED_UP platform."""
+        return Platform.SPEED_UP in self.platform_types
+
+    def is_slow_down(self) -> bool:
+        """Check if this platform slows the player down.
+        
+        Returns:
+            True if this is a SLOW_DOWN platform."""
+        return Platform.SLOW_DOWN in self.platform_types
 
     def activate_checkpoint(self) -> None:
         """Activate this checkpoint.

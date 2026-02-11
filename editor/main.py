@@ -114,6 +114,7 @@ class LevelEditor(QMainWindow):
             "page_width_cells": DEFAULT_GRID_COLUMNS,
             "page_height_cells": DEFAULT_GRID_ROWS,
             "pages": {"1": {"cells": []}},
+            "page_positions": {"1": {"x": 0, "y": 0}},
         }
         self.current_path = None
         self.current_page = "1"
@@ -232,12 +233,6 @@ class LevelEditor(QMainWindow):
         coord_layout.addWidget(self.y2, 1, 3)
         form.addRow("Grid Coords", coord_layout)
 
-        self.grid_size = QSpinBox()
-        self.grid_size.setRange(1, 512)
-        self.grid_size.setValue(32)
-        self.grid_size.setReadOnly(True)
-        form.addRow("Grid Size", self.grid_size)
-
         # Platform types with checkboxes
         types_group = QGroupBox("Platform Types")
         types_layout = QVBoxLayout()
@@ -257,20 +252,6 @@ class LevelEditor(QMainWindow):
         self.texture_type = QComboBox()
         self.texture_type.addItems(TEXTURE_TYPES)
         form.addRow("Texture", self.texture_type)
-
-        color_layout = QGridLayout()
-        self.color_r = QSpinBox()
-        self.color_g = QSpinBox()
-        self.color_b = QSpinBox()
-        for spin in (self.color_r, self.color_g, self.color_b):
-            spin.setRange(0, 255)
-        color_layout.addWidget(QLabel("R"), 0, 0)
-        color_layout.addWidget(self.color_r, 0, 1)
-        color_layout.addWidget(QLabel("G"), 0, 2)
-        color_layout.addWidget(self.color_g, 0, 3)
-        color_layout.addWidget(QLabel("B"), 0, 4)
-        color_layout.addWidget(self.color_b, 0, 5)
-        form.addRow("Color", color_layout)
 
         # Layer depth control
         self.layer = QSpinBox()
@@ -297,14 +278,32 @@ class LevelEditor(QMainWindow):
         return form
 
     def _build_page_controls(self):
-        layout = QHBoxLayout()
+        layout = QVBoxLayout()
+        top_row = QHBoxLayout()
         self.page_label = QLabel("Page")
         self.page_select = QSpinBox()
         self.page_select.setRange(1, 999)
         self.page_select.setValue(int(self.current_page))
         self.page_select.valueChanged.connect(self._on_page_change)
-        layout.addWidget(self.page_label)
-        layout.addWidget(self.page_select)
+        top_row.addWidget(self.page_label)
+        top_row.addWidget(self.page_select)
+
+        buttons = QGridLayout()
+        self.add_page_up_btn = QPushButton("Add Up")
+        self.add_page_down_btn = QPushButton("Add Down")
+        self.add_page_left_btn = QPushButton("Add Left")
+        self.add_page_right_btn = QPushButton("Add Right")
+        self.add_page_up_btn.clicked.connect(lambda: self._add_page_relative(0, -1))
+        self.add_page_down_btn.clicked.connect(lambda: self._add_page_relative(0, 1))
+        self.add_page_left_btn.clicked.connect(lambda: self._add_page_relative(-1, 0))
+        self.add_page_right_btn.clicked.connect(lambda: self._add_page_relative(1, 0))
+        buttons.addWidget(self.add_page_up_btn, 0, 1)
+        buttons.addWidget(self.add_page_left_btn, 1, 0)
+        buttons.addWidget(self.add_page_right_btn, 1, 2)
+        buttons.addWidget(self.add_page_down_btn, 2, 1)
+
+        layout.addLayout(top_row)
+        layout.addLayout(buttons)
         return layout
 
     def _build_mode_controls(self):
@@ -384,18 +383,14 @@ class LevelEditor(QMainWindow):
             "y1": self.y1.value(),
             "x2": self.x2.value(),
             "y2": self.y2.value(),
-            "grid_size": self.grid_size.value(),
+            "grid_size": 32,
             "types": selected_types,  # Changed from "type" to "types"
             "layer": self.layer.value(),  # Add layer support
+            "color": [120, 120, 120],
         }
         texture = self.texture_type.currentText()
         if texture:
             platform["texture"] = texture
-        platform["color"] = [
-            self.color_r.value(),
-            self.color_g.value(),
-            self.color_b.value(),
-        ]
         return platform
 
     def _load_platform_into_form(self, index):
@@ -425,18 +420,12 @@ class LevelEditor(QMainWindow):
         self.y1.setValue(platform.get("y1", 0))
         self.x2.setValue(platform.get("x2", 0))
         self.y2.setValue(platform.get("y2", 0))
-        self.grid_size.setValue(platform.get("grid_size", 32))
 
         # Update type checkboxes
         for ptype, checkbox in self.type_checkboxes.items():
             checkbox.setChecked(ptype in platform.get("types", []))
 
         self.texture_type.setCurrentText(platform.get("texture", ""))
-        color = platform.get("color", [0, 0, 0])
-        if len(color) >= 3:
-            self.color_r.setValue(color[0])
-            self.color_g.setValue(color[1])
-            self.color_b.setValue(color[2])
 
         # Load layer value
         self.layer.setValue(cell.get("layer", 0))
@@ -564,6 +553,7 @@ class LevelEditor(QMainWindow):
             self.level_data.setdefault("page_width_cells", DEFAULT_GRID_COLUMNS)
             self.level_data.setdefault("page_height_cells", DEFAULT_GRID_ROWS)
             self._ensure_pages()
+            self._ensure_page_positions()
             self._expand_platforms_to_cells()
             self._apply_level_to_form()
             self._refresh_platform_list()
@@ -652,6 +642,12 @@ class LevelEditor(QMainWindow):
             ),
             "pages": {},
         }
+        page_positions = self._get_page_positions()
+        if page_positions:
+            payload["page_positions"] = {
+                str(page_key): {"x": pos[0], "y": pos[1]}
+                for page_key, pos in page_positions.items()
+            }
         for page_key, page in self.level_data.get("pages", {}).items():
             cells = page.get("cells", [])
             platforms = self._cells_to_platforms(cells)
@@ -690,6 +686,100 @@ class LevelEditor(QMainWindow):
         if str(self.current_page) not in pages:
             pages[str(self.current_page)] = {"cells": []}
 
+    def _ensure_page_positions(self):
+        pages = self.level_data.get("pages", {})
+        positions = self.level_data.get("page_positions")
+        if not isinstance(positions, dict):
+            positions = {}
+
+        normalized = {}
+        for key, pos in positions.items():
+            if not isinstance(pos, dict):
+                continue
+            try:
+                x = int(pos.get("x", 0))
+                y = int(pos.get("y", 0))
+            except (TypeError, ValueError):
+                continue
+            normalized[str(key)] = {"x": x, "y": y}
+
+        if not normalized:
+            page_numbers = []
+            for page_key in pages.keys():
+                try:
+                    page_numbers.append(int(page_key))
+                except (TypeError, ValueError):
+                    continue
+            page_numbers = sorted(page_numbers) or [1]
+            for index, page_key in enumerate(page_numbers):
+                normalized[str(page_key)] = {"x": index, "y": 0}
+
+        if normalized:
+            max_x = max(pos["x"] for pos in normalized.values())
+        else:
+            max_x = 0
+
+        for page_key in pages.keys():
+            if str(page_key) not in normalized:
+                max_x += 1
+                normalized[str(page_key)] = {"x": max_x, "y": 0}
+
+        self.level_data["page_positions"] = normalized
+
+    def _get_page_positions(self):
+        self._ensure_pages()
+        self._ensure_page_positions()
+        positions = self.level_data.get("page_positions", {})
+        return {
+            str(page_key): (int(pos.get("x", 0)), int(pos.get("y", 0)))
+            for page_key, pos in positions.items()
+            if isinstance(pos, dict)
+        }
+
+    def _next_page_id(self):
+        pages = self.level_data.get("pages", {})
+        max_page = 0
+        for page_key in pages.keys():
+            try:
+                max_page = max(max_page, int(page_key))
+            except (TypeError, ValueError):
+                continue
+        return max_page + 1
+
+    def _add_page_relative(self, dx, dy):
+        self._record_undo()
+        self._ensure_page_positions()
+        positions = self.level_data.get("page_positions", {})
+        current_pos = positions.get(str(self.current_page), {"x": 0, "y": 0})
+        target_x = int(current_pos.get("x", 0)) + dx
+        target_y = int(current_pos.get("y", 0)) + dy
+
+        existing_page = None
+        for page_key, pos in positions.items():
+            if int(pos.get("x", 0)) == target_x and int(pos.get("y", 0)) == target_y:
+                existing_page = str(page_key)
+                break
+
+        if existing_page:
+            self.current_page = existing_page
+            self.page_select.blockSignals(True)
+            self.page_select.setValue(int(existing_page))
+            self.page_select.blockSignals(False)
+            self._refresh_platform_list()
+            self.canvas.render_scene()
+            return
+
+        new_page = str(self._next_page_id())
+        self.level_data.setdefault("pages", {})[new_page] = {"cells": []}
+        positions[new_page] = {"x": target_x, "y": target_y}
+        self.level_data["page_positions"] = positions
+        self.current_page = new_page
+        self.page_select.blockSignals(True)
+        self.page_select.setValue(int(new_page))
+        self.page_select.blockSignals(False)
+        self._refresh_platform_list()
+        self.canvas.render_scene()
+
     def _current_cells(self):
         self._ensure_pages()
         return self.level_data["pages"][self.current_page]["cells"]
@@ -702,7 +792,9 @@ class LevelEditor(QMainWindow):
     def _on_page_change(self, value):
         self.current_page = str(value)
         self._ensure_pages()
+        self._ensure_page_positions()
         self._refresh_platform_list()
+        self.canvas.render_scene()
 
     def _on_level_field_change(self):
         self._sync_level_fields()
@@ -729,22 +821,40 @@ class LevelEditor(QMainWindow):
         self._set_status(f"Updated {len(selected_indices)} platform(s).")
 
     def _filter_textures(self, search_text):
-        """Filter texture dropdown based on search text."""
-        current_texture = self.texture_type.currentText()
+        """Filter texture dropdown based on search text and auto-select best match."""
         self.texture_type.clear()
 
-        search_lower = search_text.lower()
+        search_lower = search_text.lower().strip()
         filtered_textures = [""]  # Always include empty option
 
+        if not search_lower:
+            # No search text – show all textures, select nothing
+            self.texture_type.addItems(TEXTURE_TYPES)
+            return
+
+        best_match = None
+        best_score = -1
         for texture in TEXTURE_TYPES[1:]:  # Skip the first empty string
-            if search_lower in texture.lower():
+            t_lower = texture.lower()
+            if search_lower in t_lower:
                 filtered_textures.append(texture)
+                # Score: exact match > starts-with > contains
+                if t_lower == search_lower:
+                    score = 3
+                elif t_lower.startswith(search_lower):
+                    score = 2
+                else:
+                    score = 1
+                # Among equal scores prefer shorter names (closer match)
+                if score > best_score or (score == best_score and (best_match is None or len(texture) < len(best_match))):
+                    best_score = score
+                    best_match = texture
 
         self.texture_type.addItems(filtered_textures)
 
-        # Try to restore the previous selection if it's still in the filtered list
-        if current_texture in filtered_textures:
-            self.texture_type.setCurrentText(current_texture)
+        # Auto-select the best match
+        if best_match:
+            self.texture_type.setCurrentText(best_match)
 
     def _apply_type_to_selected(self):
         """Update only the type for selected platforms."""
@@ -891,9 +1001,11 @@ class LevelCanvas(QGraphicsView):
         self._outline_items = {}
         self.setTransformationAnchor(QGraphicsView.ViewportAnchor.AnchorUnderMouse)
         self.setResizeAnchor(QGraphicsView.ViewportAnchor.AnchorViewCenter)
-        self._page_order = [1]
-        self._page_slot_by_key = {"1": 0}
-        self._current_page_slot = 0
+        self._page_positions = {"1": (0, 0)}
+        self._page_key_by_position = {(0, 0): "1"}
+        self._page_offset_px_by_key = {"1": (0, 0)}
+        self._min_page_pos = (0, 0)
+        self._current_page_offset = (0, 0)
 
     def set_mode(self, mode):
         self.mode = mode
@@ -921,35 +1033,42 @@ class LevelCanvas(QGraphicsView):
         self.columns = int(self.editor.level_data.get("page_width_cells", self.columns))
         self.rows = int(self.editor.level_data.get("page_height_cells", self.rows))
         pages = self.editor.level_data.get("pages", {})
-        page_order = []
-        for page_key in pages.keys():
-            try:
-                page_order.append(int(page_key))
-            except (TypeError, ValueError):
-                continue
-        if not page_order:
-            page_order = [1]
-        page_order.sort()
-        self._page_order = page_order
-        self._page_slot_by_key = {
-            str(page_num): slot for slot, page_num in enumerate(self._page_order)
-        }
-        self._current_page_slot = self._page_slot_by_key.get(
-            self.editor.current_page, 0
-        )
+        page_positions = self.editor._get_page_positions()
+        if not page_positions:
+            page_positions = {"1": (0, 0)}
 
-        page_count = len(self._page_order)
+        self._page_positions = page_positions
+        self._page_key_by_position = {
+            (pos[0], pos[1]): str(page_key)
+            for page_key, pos in page_positions.items()
+        }
+
         page_width_px = self.columns * self.grid_size
-        width = page_count * page_width_px
-        height = self.rows * self.grid_size
+        page_height_px = self.rows * self.grid_size
+
+        min_x = min(pos[0] for pos in page_positions.values())
+        max_x = max(pos[0] for pos in page_positions.values())
+        min_y = min(pos[1] for pos in page_positions.values())
+        max_y = max(pos[1] for pos in page_positions.values())
+        self._min_page_pos = (min_x, min_y)
+
+        self._page_offset_px_by_key = {}
+        for page_key, pos in page_positions.items():
+            offset_x = (pos[0] - min_x) * page_width_px
+            offset_y = (pos[1] - min_y) * page_height_px
+            self._page_offset_px_by_key[str(page_key)] = (offset_x, offset_y)
+
+        width = (max_x - min_x + 1) * page_width_px
+        height = (max_y - min_y + 1) * page_height_px
         self.scene.setSceneRect(0, 0, width, height)
         self._preview_item = None
 
         bg = self.editor.level_data.get("background_color", {})
         bg_color = QColor(bg.get("r", 135), bg.get("g", 206), bg.get("b", 235))
-        for page_slot in range(page_count):
-            page_x = page_slot * page_width_px
-            bg_rect = QGraphicsRectItem(QRectF(page_x, 0, page_width_px, height))
+        for page_key, (offset_x, offset_y) in self._page_offset_px_by_key.items():
+            bg_rect = QGraphicsRectItem(
+                QRectF(offset_x, offset_y, page_width_px, page_height_px)
+            )
             bg_rect.setBrush(QBrush(bg_color))
             bg_rect.setPen(QPen(Qt.PenStyle.NoPen))
             bg_rect.setZValue(-3)
@@ -957,11 +1076,10 @@ class LevelCanvas(QGraphicsView):
 
         image_path = bg.get("image")
         if image_path and os.path.exists(image_path):
-            for page_slot in range(page_count):
-                page_x = page_slot * page_width_px
-                pixmap = QPixmap(image_path).scaled(page_width_px, height)
+            for page_key, (offset_x, offset_y) in self._page_offset_px_by_key.items():
+                pixmap = QPixmap(image_path).scaled(page_width_px, page_height_px)
                 img_item = self.scene.addPixmap(pixmap)
-                img_item.setPos(page_x, 0)
+                img_item.setPos(offset_x, offset_y)
                 img_item.setZValue(-2)
 
         spawn = self.editor.level_data.get("player_spawn", {})
@@ -970,10 +1088,12 @@ class LevelCanvas(QGraphicsView):
         if spawn.get("grid", True):
             spawn_x *= self.grid_size
             spawn_y *= self.grid_size
-        spawn_page_slot = self._page_slot_by_key.get("1", self._current_page_slot)
+        spawn_offset = self._page_offset_px_by_key.get(
+            "1", self._page_offset_px_by_key.get(self.editor.current_page, (0, 0))
+        )
         spawn_rect = QRectF(
-            spawn_page_slot * page_width_px + spawn_x,
-            spawn_y,
+            spawn_offset[0] + spawn_x,
+            spawn_offset[1] + spawn_y,
             self.grid_size,
             self.grid_size,
         )
@@ -985,31 +1105,39 @@ class LevelCanvas(QGraphicsView):
 
         grid_pen = QPen(QColor(80, 80, 80), 1)
         separator_pen = QPen(QColor(25, 25, 25), 3)
-        for page_slot in range(page_count):
-            page_x = page_slot * page_width_px
+        for page_key, (offset_x, offset_y) in self._page_offset_px_by_key.items():
             for x in range(0, page_width_px + 1, self.grid_size):
-                self.scene.addLine(page_x + x, 0, page_x + x, height, grid_pen)
-        for y in range(0, height + 1, self.grid_size):
-            self.scene.addLine(0, y, width, y, grid_pen)
-        for divider in range(1, page_count):
-            x = divider * page_width_px
-            self.scene.addLine(x, 0, x, height, separator_pen)
+                self.scene.addLine(
+                    offset_x + x,
+                    offset_y,
+                    offset_x + x,
+                    offset_y + page_height_px,
+                    grid_pen,
+                )
+            for y in range(0, page_height_px + 1, self.grid_size):
+                self.scene.addLine(
+                    offset_x,
+                    offset_y + y,
+                    offset_x + page_width_px,
+                    offset_y + y,
+                    grid_pen,
+                )
+            self.scene.addRect(
+                offset_x, offset_y, page_width_px, page_height_px, separator_pen
+            )
 
         self._outline_items = {}
-        for page_slot, page_num in enumerate(self._page_order):
-            page_key = str(page_num)
+        for page_key, (offset_x, offset_y) in self._page_offset_px_by_key.items():
             page_cells = self.editor._cells_for_page(page_key)
-            is_current_page = page_key == self.editor.current_page
-            page_offset_px = page_slot * page_width_px
             for idx, cell in enumerate(page_cells):
-                rect = self._cell_rect(cell, page_offset_px)
+                rect = self._cell_rect(cell, offset_x, offset_y)
                 item = QGraphicsRectItem(rect)
                 item.setFlag(
                     QGraphicsRectItem.GraphicsItemFlag.ItemIsSelectable,
-                    is_current_page,
+                    True,
                 )
-                if is_current_page:
-                    item.setData(0, idx)
+                item.setData(0, idx)
+                item.setData(1, page_key)  # Store page key
                 color = cell.get("color", [120, 120, 120])
                 item.setBrush(QBrush(QColor(*color)))
                 item.setPen(QPen(QColor(200, 0, 0), 2))
@@ -1042,44 +1170,84 @@ class LevelCanvas(QGraphicsView):
                     text.setFlag(text.GraphicsItemFlag.ItemIsSelectable, False)
                     text.setAcceptedMouseButtons(Qt.MouseButton.NoButton)
 
-                if is_current_page:
-                    outline = QGraphicsRectItem(rect)
-                    outline.setBrush(QBrush(Qt.BrushStyle.NoBrush))
-                    outline.setPen(QPen(QColor(0, 0, 0, 0), 0))
-                    outline.setZValue(4)
-                    self.scene.addItem(outline)
-                    self._outline_items[idx] = outline
+                outline = QGraphicsRectItem(rect)
+                outline.setBrush(QBrush(Qt.BrushStyle.NoBrush))
+                outline.setPen(QPen(QColor(0, 0, 0, 0), 0))
+                outline.setZValue(4)
+                self.scene.addItem(outline)
+                self._outline_items[(page_key, idx)] = outline
 
-    def _cell_rect(self, cell, x_offset=0):
+        self._current_page_offset = self._page_offset_px_by_key.get(
+            self.editor.current_page, (0, 0)
+        )
+
+    def _cell_rect(self, cell, x_offset=0, y_offset=0):
         x = cell.get("x", 0) * self.grid_size
         y = cell.get("y", 0) * self.grid_size
-        return QRectF(x + x_offset, y, self.grid_size, self.grid_size)
+        return QRectF(x + x_offset, y + y_offset, self.grid_size, self.grid_size)
+
+    def _to_page_cell(self, scene_x, scene_y):
+        """Return (page_key, cell_x, cell_y) for the given scene coordinates."""
+        page_width_px = self.columns * self.grid_size
+        page_height_px = self.rows * self.grid_size
+        min_x, min_y = self._min_page_pos
+        grid_x = int(scene_x) // page_width_px
+        grid_y = int(scene_y) // page_height_px
+        page_pos = (grid_x + min_x, grid_y + min_y)
+        page_key = self._page_key_by_position.get(page_pos)
+        if page_key is None:
+            page_key = self.editor.current_page
+        offset_x, offset_y = self._page_offset_px_by_key.get(page_key, (0, 0))
+        cell_x = (int(scene_x) - offset_x) // self.grid_size
+        cell_y = (int(scene_y) - offset_y) // self.grid_size
+        return page_key, cell_x, cell_y
 
     def _to_current_page_cell(self, scene_x, scene_y):
-        page_offset_cells = self._current_page_slot * self.columns
-        cell_x_global = int(scene_x) // self.grid_size
-        cell_y = int(scene_y) // self.grid_size
-        cell_x = cell_x_global - page_offset_cells
+        """Legacy helper – returns (cell_x, cell_y) on the current page."""
+        _, cell_x, cell_y = self._to_page_cell(scene_x, scene_y)
         return cell_x, cell_y
 
     def get_selected_indices(self):
         indices = []
+        page_keys = set()
         for item in self.scene.selectedItems():
             index = item.data(0)
+            page_key = item.data(1)
             if index is not None:
                 indices.append(int(index))
+                if page_key is not None:
+                    page_keys.add(page_key)
+        # Auto-switch to the page of the selected cells
+        if page_keys and len(page_keys) == 1:
+            target_page = page_keys.pop()
+            if target_page != self.editor.current_page:
+                self.editor.current_page = target_page
+                self.editor.page_select.blockSignals(True)
+                self.editor.page_select.setValue(int(target_page))
+                self.editor.page_select.blockSignals(False)
+                self.editor._refresh_platform_list()
         return indices
 
     def select_platform_index(self, index):
         for item in self.scene.items():
-            if item.data(0) == index:
+            if item.data(0) == index and item.data(1) == self.editor.current_page:
                 item.setSelected(True)
                 break
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             pos = self.mapToScene(event.position().toPoint())
-            cell_x, cell_y = self._to_current_page_cell(pos.x(), pos.y())
+            page_key, cell_x, cell_y = self._to_page_cell(pos.x(), pos.y())
+            # Auto-switch to the clicked page
+            if page_key != self.editor.current_page:
+                self.editor.current_page = page_key
+                self.editor.page_select.blockSignals(True)
+                self.editor.page_select.setValue(int(page_key))
+                self.editor.page_select.blockSignals(False)
+                self._current_page_offset = self._page_offset_px_by_key.get(
+                    page_key, (0, 0)
+                )
+                self.editor._refresh_platform_list()
             if 0 <= cell_x < self.columns and 0 <= cell_y < self.rows:
                 if (
                     self.mode == "add"
@@ -1099,20 +1267,27 @@ class LevelCanvas(QGraphicsView):
     def mouseMoveEvent(self, event):
         if self.mode == "add" and self._dragging and self._start_cell:
             pos = self.mapToScene(event.position().toPoint())
-            cell_x, cell_y = self._to_current_page_cell(pos.x(), pos.y())
+            _, cell_x, cell_y = self._to_page_cell(pos.x(), pos.y())
             cell_x = max(0, min(self.columns - 1, cell_x))
             cell_y = max(0, min(self.rows - 1, cell_y))
             x1, y1 = self._start_cell
             x2, y2 = cell_x, cell_y
             if self._preview_item:
-                rect = self._rect_for_cells(x1, y1, x2, y2)
+                rect = self._rect_for_cells(
+                    x1,
+                    y1,
+                    x2,
+                    y2,
+                    self._current_page_offset[0],
+                    self._current_page_offset[1],
+                )
                 self._preview_item.setRect(rect)
         super().mouseMoveEvent(event)
 
     def mouseReleaseEvent(self, event):
         if self.mode == "add" and self._dragging and self._start_cell:
             pos = self.mapToScene(event.position().toPoint())
-            cell_x, cell_y = self._to_current_page_cell(pos.x(), pos.y())
+            _, cell_x, cell_y = self._to_page_cell(pos.x(), pos.y())
             cell_x = max(0, min(self.columns - 1, cell_x))
             cell_y = max(0, min(self.rows - 1, cell_y))
             x1, y1 = self._start_cell
@@ -1142,25 +1317,30 @@ class LevelCanvas(QGraphicsView):
         super().keyPressEvent(event)
 
     def selectionChanged(self):
-        selected = set(self.get_selected_indices())
-        for index, outline in list(self._outline_items.items()):
+        selected_items = {}
+        for item in self.scene.selectedItems():
+            index = item.data(0)
+            page_key = item.data(1)
+            if index is not None and page_key is not None:
+                selected_items[(page_key, int(index))] = True
+        for key, outline in list(self._outline_items.items()):
             if outline is None:
-                self._outline_items.pop(index, None)
+                self._outline_items.pop(key, None)
                 continue
             try:
-                if index in selected:
+                if key in selected_items:
                     outline.setPen(self.selected_outline_pen)
                 else:
                     outline.setPen(QPen(QColor(0, 0, 0, 0), 0))
             except RuntimeError:
                 # Item got deleted by a scene refresh; drop stale references.
-                self._outline_items.pop(index, None)
+                self._outline_items.pop(key, None)
 
-    def _rect_for_cells(self, x1, y1, x2, y2):
-        left = min(x1, x2) * self.grid_size
-        top = min(y1, y2) * self.grid_size
-        right = (max(x1, x2) + 1) * self.grid_size
-        bottom = (max(y1, y2) + 1) * self.grid_size
+    def _rect_for_cells(self, x1, y1, x2, y2, x_offset=0, y_offset=0):
+        left = min(x1, x2) * self.grid_size + x_offset
+        top = min(y1, y2) * self.grid_size + y_offset
+        right = (max(x1, x2) + 1) * self.grid_size + x_offset
+        bottom = (max(y1, y2) + 1) * self.grid_size + y_offset
         return QRectF(left, top, right - left, bottom - top)
 
     def _zoom_by(self, factor):

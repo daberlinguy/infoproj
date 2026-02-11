@@ -18,7 +18,9 @@ class PlatformTypes:
     SLIPPERY: str = "slippery"
     NOCLIP: str = "noclip"
     BOOST_UP: str = "boost_up"
-    BOOST_DOWN: str = "boost_down"
+    SPEED_UP: str = "speed_up"
+    SLOW_DOWN: str = "slow_down"
+
 
     # All valid platform types
     ALL_TYPES: List[str] = [
@@ -30,7 +32,8 @@ class PlatformTypes:
         SLIPPERY,
         NOCLIP,
         BOOST_UP,
-        BOOST_DOWN,
+        SPEED_UP,
+        SLOW_DOWN,
     ]
 
     # Default colors for each platform type
@@ -42,7 +45,8 @@ class PlatformTypes:
         SLIPPERY: (100, 200, 255),  # Light blue
         NOCLIP: (200, 200, 200),  # Light gray
         BOOST_UP: (150, 255, 150),  # Light green
-        BOOST_DOWN: (255, 150, 150),  # Light red
+        SPEED_UP: (0, 200, 255),  # Cyan
+        SLOW_DOWN: (255, 150, 0),  # Orange
         NORMAL: (100, 100, 100),  # Gray
     }
 
@@ -52,6 +56,8 @@ class PlatformTypes:
     FRICTION_VALUES: Dict[str, float] = {
         SLIPPERY: 0.03,  # Very low friction
         NORMAL: 0.8,  # Normal friction
+        SPEED_UP: 0.2,   # Less friction
+        SLOW_DOWN: 1.2,  # High friction
     }
 
     DEFAULT_FRICTION: float = 0.8

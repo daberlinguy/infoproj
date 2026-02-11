@@ -191,7 +191,19 @@ class Screen:
             self._sprite_cache[cache_key] = image
         self.screen.blit(image, (x, y))
 
-    def run(self) -> None:
+    def drawBar(self, pos, size, borderC, barC, progress):
+
+        pygame.draw.rect(self.screen, borderC, (*pos, *size), 1)
+        innerPos  = (pos[0]+3, pos[1]+3)
+        innerSize = ((size[0]-6) * progress, size[1]-6)
+        pygame.draw.rect(self.screen, barC, (*innerPos, *innerSize))
+
+        barPos      = (120, 360)
+        barSize     = (200, 20)
+        borderColor = (0, 0, 0)
+        barColor    = (0, 128, 0)
+        max_a = 350
+        self.screen.drawBar(barPos, barSize, borderColor, barColor, a/max_a)
         """Main update method called every frame.
 
         Override this method in subclasses to implement screen-specific logic.

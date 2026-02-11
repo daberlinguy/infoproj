@@ -1,6 +1,6 @@
 {
-  "debug_mode": true,
-  "character": "dave",
+  "debug_mode": false,
+  "character": "emmanuel",
   "selected_world": "1 - Sonnenaufgang",
   "selected_level": "Plains.json",
   "progress": {
@@ -11,9 +11,11 @@
           "level3 - Kopie.json": true,
           "level3.json": true,
           "Nether.json": true,
-          "test22.json": true
+          "test22.json": true,
+          "Example.json": true,
+          "Plains.json": true
         },
-        "complete": false
+        "complete": true
       },
       "2 - Tiefenforschung": {
         "levels": {
@@ -34,11 +36,47 @@
       "d"
     ],
     "jump": [
+      "w",
+      "space"
+    ],
+    "attack": [
+      "k"
+    ]
+  },
+  "character2": "character2",
+  "player1_controls": {
+    "move_down": [
+      "s"
+    ],
+    "move_left": [
+      "a"
+    ],
+    "move_right": [
+      "d"
+    ],
+    "jump": [
       "space",
       "w"
     ],
     "attack": [
       "k"
+    ]
+  },
+  "player2_controls": {
+    "move_down": [
+      "down"
+    ],
+    "move_left": [
+      "left"
+    ],
+    "move_right": [
+      "right"
+    ],
+    "jump": [
+      "up"
+    ],
+    "attack": [
+      "rctrl"
     ]
   }
 }

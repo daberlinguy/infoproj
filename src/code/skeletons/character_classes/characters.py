@@ -115,34 +115,6 @@ class CharacterThree(CharacterClass):
     jump_frames = ["l1.png"]
 
 
-class CharacterVillager(CharacterClass):
-    """Villager - Recolored knight variant."""
-
-    name = "Villager"
-    sprite_scale = (3.1, 3.1)
-    sprite_folder = "characters/villager"
-
-    walk_frames = [
-        "l1.png",
-        "l2.png",
-        "l3.png",
-        "l4.png",
-        "l5.png",
-        "l6.png",
-        "l7.png",
-        "l8.png",
-        "l9.png",
-        "l10.png",
-        "l11.png",
-        "l12.png",
-        "l13.png",
-        "l14.png",
-        "l15.png",
-        "l16.png",
-    ]
-
-    jump_frames = ["l1.png"]
-
 
 class CharacterEmmanuel(CharacterClass):
     """Emmanuel - Recolored knight variant."""
@@ -173,34 +145,6 @@ class CharacterDave(CharacterClass):
 
     jump_frames = ["w1.png"]
 
-class CharacterSteve(CharacterClass):
-    """Steve - Recolored knight variant."""
-
-    name = "Steve"
-    sprite_scale = (3.1, 3.1)
-    sprite_folder = "characters/steve"
-
-    walk_frames = [
-        "l1.png",
-        "l2.png",
-        "l3.png",
-        "l4.png",
-        "l5.png",
-        "l6.png",
-        "l7.png",
-        "l8.png",
-        "l9.png",
-        "l10.png",
-        "l11.png",
-        "l12.png",
-        "l13.png",
-        "l14.png",
-        "l15.png",
-        "l16.png",
-    ]
-
-    jump_frames = ["l1.png"]
-
 
 #: Global registry mapping character IDs to their class definitions.
 #: Character IDs are used in settings and save data.
@@ -213,8 +157,6 @@ CHARACTER_REGISTRY: Dict[str, Type[CharacterClass]] = {
     "character1": CharacterOne,
     "character2": CharacterTwo,
     "character3": CharacterThree,
-    "villager": CharacterVillager,
     "emmanuel": CharacterEmmanuel,
     "dave": CharacterDave,
-    "steve": CharacterSteve,
 }

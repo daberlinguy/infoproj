@@ -1102,8 +1102,12 @@
             "description": "Boosts player upward when passing through"
         },
         {
-            "name": "BOOST_DOWN",
-            "description": "Boosts player downward when passing through"
+            "name": "SPEED_UP",
+            "description": "Makes player run faster"
+        },
+        {
+            "name": "SLOW_DOWN",
+            "description": "Makes player run slower"
         }
     ]
 }

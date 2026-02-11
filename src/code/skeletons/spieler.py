@@ -20,6 +20,8 @@ class Spieler:
         self.max_speed = 300  # Maximum horizontal speed
         self.max_fall_speed = 1000  # Maximum falling speed to prevent tunneling
         self.friction = 0.8  # Default friction coefficient
+        self.speed_multiplier = 1.0
+        self.base_speed = 300
         self.current_platform = None  # Track which platform we're on
         self.is_on_ground = False
         self.prev_y = player_pos.y
@@ -35,8 +37,10 @@ class Spieler:
             self.velocity_x -= self.acceleration * self.dt
             self.velocity_x = max(self.velocity_x, -self.max_speed)
         else:
-            self.player_pos.x -= 300 * self.dt
-            self.velocity_x = -300
+            speed = self.base_speed * self.speed_multiplier
+            self.player_pos.x -= speed * self.dt
+            self.velocity_x = -speed
+
 
     def move_right(self):
         # On slippery platforms, use acceleration. Otherwise, direct movement
@@ -44,8 +48,10 @@ class Spieler:
             self.velocity_x += self.acceleration * self.dt
             self.velocity_x = min(self.velocity_x, self.max_speed)
         else:
-            self.player_pos.x += 300 * self.dt
-            self.velocity_x = 300
+            speed = self.base_speed * self.speed_multiplier
+            self.player_pos.x += speed * self.dt
+            self.velocity_x = speed
+
 
     def jump(self):
         if not self.is_on_ground:
@@ -123,6 +129,7 @@ class Spieler:
 
         # First pass: check for ground collision (highest priority)
         self.current_platform = None
+        self.speed_multiplier = 1.0
         for platform in platforms:
             # Skip death platforms - don't allow standing on them
             if platform.is_deadly():
@@ -145,6 +152,11 @@ class Spieler:
                         self.is_on_ground = True
                         self.current_platform = platform
                         self.friction = platform.get_friction()
+                        if hasattr(platform, "get_speed_multiplier"):
+                            self.speed_multiplier = platform.get_speed_multiplier()
+                        else:
+                            self.speed_multiplier = 1.0
+
                         # Inherit platform velocity if it's moving
                         if hasattr(platform, "velocity_x") and platform.velocity_x != 0:
                             self.player_pos.x += platform.velocity_x * self.dt
