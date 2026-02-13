@@ -94,14 +94,17 @@ Get the collision rectangle for the player.
 
 ---
 
-### check_platform_collision(platforms)
+### check_platform_collision(platforms, adjacent_platforms=None)
 
 Resolve collisions with solid platforms and update `is_on_ground`, `current_platform`, and friction.
+
+Includes a broad-phase query step so only nearby platforms are tested in detail.
 
 **Parameters:**
 | Name | Type | Description |
 |------|------|-------------|
 | `platforms` | `List[Platform]` | Platforms to check |
+| `adjacent_platforms` | `List[Platform] \| None` | Optional collision proxies from neighboring pages |
 
 ---
 
@@ -130,7 +133,7 @@ player = Spieler(player_pos, dt=0)
 
 # In game loop
 player.apply_physics(dt)
-player.check_platform_collision(platforms)
+player.check_platform_collision(platforms, adjacent_platforms)
 checkpoint, respawn = player.check_special_platform_interactions(platforms, checkpoint)
 if player.check_fell_off_screen(screen_height, checkpoint):
     pass

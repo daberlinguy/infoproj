@@ -100,7 +100,8 @@ Platform.FINISH     # "finish"
 Platform.SLIPPERY   # "slippery"
 Platform.NOCLIP     # "noclip"
 Platform.BOOST_UP   # "boost_up"
-Platform.BOOST_DOWN # "boost_down"
+Platform.SPEED_UP   # "speed_up"
+Platform.SLOW_DOWN  # "slow_down"
 ```
 
 **Note:** These constants are now provided by the `PlatformTypes` utility class. See [Utility Modules API](utils) for more details.
@@ -206,7 +207,19 @@ platform.is_checkpoint()  # True if has CHECKPOINT type
 platform.is_finish()      # True if has FINISH type
 platform.is_spawn()       # True if has SPAWN type
 platform.is_noclip()      # True if has NOCLIP type
+platform.is_boost_up()    # True if has BOOST_UP type
+platform.is_speed_up()    # True if has SPEED_UP type
+platform.is_slow_down()   # True if has SLOW_DOWN type
 ```
+
+### get_speed_multiplier()
+
+Get movement speed multiplier for the platform.
+
+**Returns:**
+- `1.5` for `SPEED_UP`
+- `0.5` for `SLOW_DOWN`
+- `1.0` otherwise
 
 **Note:** Since platforms can have multiple types, these methods check if the type is present in the `platform_types` list.
 

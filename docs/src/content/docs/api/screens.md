@@ -119,6 +119,9 @@ GameScreen(screen, "Game", level_path=None)
 - Builds platforms from level data
 - Handles checkpoints, pages, and completion
 - Uses `Spieler` for physics and `Character` for rendering
+- Default page size is 60x34 cells at 32px grid unless overridden by level JSON
+- Uses neighboring-page collision proxies near boundaries to prevent wall phasing
+- Caches adjacent collision data per page to reduce per-frame overhead
 
 ---
 

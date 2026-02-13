@@ -26,7 +26,8 @@ Platform.FINISH      # "finish"
 Platform.SLIPPERY    # "slippery"
 Platform.NOCLIP      # "noclip"
 Platform.BOOST_UP    # "boost_up"
-Platform.BOOST_DOWN  # "boost_down"
+Platform.SPEED_UP    # "speed_up"
+Platform.SLOW_DOWN   # "slow_down"
 ```
 
 ## Multiple Types
@@ -317,7 +318,7 @@ Platform(
 - Player can pass through from any direction
 - No collision detection
 - Visual indicator only
-- Often combined with other types (BOOST_UP, BOOST_DOWN)
+- Often combined with other types (BOOST_UP, SPEED_UP, SLOW_DOWN)
 
 **Visual:**
 - Default: Light Gray (200, 200, 200)
@@ -377,35 +378,65 @@ Platform(
 
 ---
 
-### BOOST_DOWN
+### SPEED_UP
 
-**Purpose:** Boost player downward when passing through
+**Purpose:** Increase horizontal movement speed on contact
 
 **Behavior:**
-- Player can pass through (like NOCLIP)
-- Applies downward velocity boost when touched
-- Useful for creating downdrafts
-- Often combined with NOCLIP type
+- Increases movement speed multiplier
+- Usually combined with reduced friction for faster traversal
+- Can be combined with `NOCLIP` for speed zones
 
 **Visual:**
-- Default: Light Red (255, 150, 150)
-- Shows downward arrow indicator
+- Default: Cyan (0, 200, 255)
 
 **Code Example:**
 ```python
 Platform(
     x1=300, y1=400,
-    x2=300, y2=500,
+    x2=500, y2=400,
     grid_size=32,
-    platform_types=[Platform.NOCLIP, Platform.BOOST_DOWN],
+    platform_types=[Platform.SPEED_UP],
 )
 ```
 
 **JSON Example:**
 ```json
 {
-  "x1": 10, "y1": 10, "x2": 10, "y2": 15,
-  "types": ["NOCLIP", "BOOST_DOWN"]
+  "x1": 10, "y1": 10, "x2": 18, "y2": 10,
+  "types": ["SPEED_UP"]
+}
+```
+
+---
+
+### SLOW_DOWN
+
+**Purpose:** Reduce horizontal movement speed on contact
+
+**Behavior:**
+- Reduces movement speed multiplier
+- Uses higher friction than normal platforms
+- Useful for mud/sand/slow zones
+
+**Visual:**
+- Default: Orange (255, 150, 0)
+
+**Code Example:**
+```python
+Platform(
+    x1=300, y1=400,
+    x2=500, y2=400,
+    grid_size=32,
+    platform_types=[Platform.SLOW_DOWN],
+)
+```
+
+**JSON Example:**
+```json
+{
+  "x1": 20, "y1": 10, "x2": 28, "y2": 10,
+  "types": ["SLOW_DOWN"]
 }
 ```
 
@@ -422,8 +453,10 @@ platform.is_finish()      # True if FINISH in types
 platform.is_spawn()       # True if SPAWN in types
 platform.is_noclip()      # True if NOCLIP in types
 platform.is_boost_up()    # True if BOOST_UP in types
-platform.is_boost_down()  # True if BOOST_DOWN in types
-platform.get_friction()   # 0.05 for SLIPPERY, 0.8 for others
+platform.is_speed_up()    # True if SPEED_UP in types
+platform.is_slow_down()   # True if SLOW_DOWN in types
+platform.get_friction()   # Type-based friction
+platform.get_speed_multiplier()  # Type-based movement multiplier
 ```
 
 ## Default Colors
@@ -438,7 +471,8 @@ platform.get_friction()   # 0.05 for SLIPPERY, 0.8 for others
 | SLIPPERY | (100, 200, 255) | #64C8FF |
 | NOCLIP | (200, 200, 200) | #C8C8C8 |
 | BOOST_UP | (150, 255, 150) | #96FF96 |
-| BOOST_DOWN | (255, 150, 150) | #FF9696 |
+| SPEED_UP | (0, 200, 255) | #00C8FF |
+| SLOW_DOWN | (255, 150, 0) | #FF9600 |
 
 ## Custom Colors
 

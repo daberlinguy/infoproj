@@ -16,6 +16,33 @@ from utils.level_data import LevelDataUtils
 from utils.platform_types import PlatformTypes
 
 
+class _AdjacentCollisionPlatform:
+    """Lightweight collision proxy for platforms on neighboring pages."""
+
+    def __init__(self, source_platform, offset_x: int, offset_y: int):
+        self._source = source_platform
+        self.rect = source_platform.rect.move(offset_x, offset_y)
+        self.velocity_x = getattr(source_platform, "velocity_x", 0)
+        self.platform_type = getattr(source_platform, "platform_type", None)
+
+    def __getattr__(self, name):
+        return getattr(self._source, name)
+
+    def is_deadly(self):
+        return self._source.is_deadly()
+
+    def is_noclip(self):
+        return self._source.is_noclip()
+
+    def get_friction(self):
+        return self._source.get_friction()
+
+    def get_speed_multiplier(self):
+        if hasattr(self._source, "get_speed_multiplier"):
+            return self._source.get_speed_multiplier()
+        return 1.0
+
+
 class GameScreen(Screen):
     def __init__(self, screen, caption, level_path=None):
         # Clear all previous widgets
@@ -46,6 +73,9 @@ class GameScreen(Screen):
         self.background_image = None
         self.background_image_cached = None
         self.level_data = None
+        self._adjacent_platforms_cache = {}
+        self.finish_world_positions = []
+        self.initial_spawn_page = self.page_index
 
         # Spawn point and checkpoint tracking
         self.spawn_point = pygame.Vector2(1 * 32 + 16, 14 * 32)  # Above spawn platform
@@ -121,6 +151,7 @@ class GameScreen(Screen):
             return
 
         self.level_data = level_data
+        self._adjacent_platforms_cache = {}
         self.timer = 0.0
         self.run_timer = 0.0
         self.latest_run_time = 0.0
@@ -153,6 +184,7 @@ class GameScreen(Screen):
             self.spawn_point = self.player_pos.copy()
             self.current_checkpoint = self.spawn_point.copy()
             self.current_checkpoint_page = self.page_index
+            self.initial_spawn_page = self.page_index
 
         background_color = level_data.get("background_color")
         if background_color:
@@ -182,6 +214,47 @@ class GameScreen(Screen):
             )
         self.checkpoints_required = total_checkpoints
         print(f"Total checkpoints in level: {self.checkpoints_required}")
+
+        self._calculate_finish_world_positions()
+
+    def _calculate_finish_world_positions(self):
+        """Pre-calculate world positions of all finish platforms for progress bar."""
+        self.finish_world_positions = []
+        if not self.level_data:
+            return
+
+        page_width_px = self.page_width_cells * self.page_grid_size
+        page_height_px = self.page_height_cells * self.page_grid_size
+        pages = self.level_data.get("pages", {})
+
+        for page_id, page_content in pages.items():
+            try:
+                page_idx = int(page_id)
+            except ValueError:
+                continue
+
+            # Need page position to calculate world position
+            page_pos = self.page_positions.get(page_idx)
+            if page_pos is None:
+                continue
+
+            platforms_data = page_content.get("platforms", [])
+            for entry in platforms_data:
+                types = LevelDataUtils.normalize_platform_types(entry)
+                if "FINISH" in types:
+                    coords = LevelDataUtils.get_platform_coordinates(
+                        entry, self.page_grid_size
+                    )
+                    if coords:
+                        x1, y1, x2, y2 = coords
+                        center_x = (x1 + x2) / 2
+                        center_y = (y1 + y2) / 2
+                        self.finish_world_positions.append(
+                            pygame.Vector2(
+                                page_pos[0] * page_width_px + center_x,
+                                page_pos[1] * page_height_px + center_y,
+                            )
+                        )
 
     def _available_pages(self):
         if self.page_positions:
@@ -366,6 +439,47 @@ class GameScreen(Screen):
                 if checkpoint_key in self.activated_checkpoints:
                     platform.activate_checkpoint()
 
+    def _get_adjacent_page_platforms(self):
+        """Get platforms from adjacent pages for boundary collision detection.
+        
+        Returns a list of platforms from neighboring pages, offset to their world positions.
+        This prevents the player from phasing through walls at page boundaries.
+        """
+        if not self.level_data or not self.level_data.get("pages"):
+            return []
+
+        cached = self._adjacent_platforms_cache.get(self.page_index)
+        if cached is not None:
+            return cached
+        
+        adjacent_platforms = []
+        page_width_px = self.page_width_cells * self.page_grid_size
+        page_height_px = self.page_height_cells * self.page_grid_size
+        
+        # Check all four adjacent pages (left, right, up, down)
+        neighbors = [
+            (self._neighbor_page(-1, 0), -page_width_px, 0),  # Left page
+            (self._neighbor_page(1, 0), page_width_px, 0),     # Right page
+            (self._neighbor_page(0, -1), 0, -page_height_px),  # Up page
+            (self._neighbor_page(0, 1), 0, page_height_px),    # Down page
+        ]
+        
+        for neighbor_page, offset_x, offset_y in neighbors:
+            if neighbor_page:
+                # Build platforms for the adjacent page
+                neighbor_platforms = self._build_platforms_from_level(self.level_data, neighbor_page)
+                
+                # Offset the platforms to their world position relative to current page
+                for platform in neighbor_platforms:
+                    # Use lightweight proxy instead of rebuilding full platform/cells.
+                    offset_platform = _AdjacentCollisionPlatform(
+                        platform, offset_x, offset_y
+                    )
+                    adjacent_platforms.append(offset_platform)
+
+        self._adjacent_platforms_cache[self.page_index] = adjacent_platforms
+        return adjacent_platforms
+
     def _mark_level_complete(self):
         if not self.level_path:
             return
@@ -399,6 +513,42 @@ class GameScreen(Screen):
         SETTINGS["selected_world"] = world_id
         SETTINGS["selected_level"] = level_id
         save_settings(SETTINGS)
+
+    def _distance_to_finish(self):
+        if not self.finish_world_positions:
+            return None
+
+        player_world_pos = self._get_player_world_pos()
+        distances = [
+            player_world_pos.distance_to(pos) for pos in self.finish_world_positions
+        ]
+        return min(distances) if distances else None
+
+    def _distance_to_start(self):
+        player_world_pos = self._get_player_world_pos()
+        
+        # Calculate start world position
+        page_width_px = self.page_width_cells * self.page_grid_size
+        page_height_px = self.page_height_cells * self.page_grid_size
+        spawn_page_pos = self.page_positions.get(self.initial_spawn_page, (0, 0))
+        
+        start_world_pos = pygame.Vector2(
+            spawn_page_pos[0] * page_width_px + self.spawn_point.x + self.player.sprite_width / 2,
+            spawn_page_pos[1] * page_height_px + self.spawn_point.y + self.player.sprite_height / 2
+        )
+        
+        return player_world_pos.distance_to(start_world_pos)
+
+    def _get_player_world_pos(self):
+        """Calculate the player's position in world coordinates (across pages)."""
+        page_pos = self.page_positions.get(self.page_index, (0, 0))
+        page_width_px = self.page_width_cells * self.page_grid_size
+        page_height_px = self.page_height_cells * self.page_grid_size
+        
+        return pygame.Vector2(
+            page_pos[0] * page_width_px + self.player.player_pos.x + self.player.sprite_width / 2,
+            page_pos[1] * page_height_px + self.player.player_pos.y + self.player.sprite_height / 2
+        )
 
     def run(self):
         self.player_pos = self.player.player_pos
@@ -456,11 +606,23 @@ class GameScreen(Screen):
 
         # Apply physics - apply gravity first, then check collisions to resolve
         self.player.apply_physics(self.dt)
-        self.player.check_platform_collision(self.platforms)
 
-        # Check page boundaries FIRST before death checks to prevent false deaths when crossing pages
+        # Only include adjacent pages when player is near a page boundary.
+        player_pos = self.player.player_pos
+        boundary_margin = max(self.player.sprite_width, self.player.sprite_height) * 2
         page_width_px = self.page_width_cells * self.page_grid_size
         page_height_px = self.page_height_cells * self.page_grid_size
+        near_boundary = (
+            player_pos.x <= boundary_margin
+            or player_pos.x >= (page_width_px - boundary_margin)
+            or player_pos.y <= boundary_margin
+            or player_pos.y >= (page_height_px - boundary_margin)
+        )
+
+        adjacent_platforms = self._get_adjacent_page_platforms() if near_boundary else []
+        self.player.check_platform_collision(self.platforms, adjacent_platforms)
+
+        # Check page boundaries FIRST before death checks to prevent false deaths when crossing pages
         player_pos = self.player.player_pos
         half_width = self.player.sprite_width / 2
         half_height = self.player.sprite_height / 2
@@ -560,12 +722,8 @@ class GameScreen(Screen):
             self.attempts += 1
             self.latest_run_time = self.run_timer
             self.run_timer = 0.0
-            # Always switch to checkpoint page on respawn
             if self.page_index != self.current_checkpoint_page:
                 self._switch_page(self.current_checkpoint_page)
-            # Update prev position after respawn to prevent falling through platforms
-            self.player.prev_y = self.player.player_pos.y
-            self.player.prev_x = self.player.player_pos.x
 
         is_moving = (
             abs(self.player.velocity_x) > 0
@@ -612,6 +770,12 @@ class GameScreen(Screen):
         # Draw platforms
         for platform in self.platforms:
             platform.draw(self.screen)
+
+        dist_start = self._distance_to_start()
+        dist_finish = self._distance_to_finish()
+        if dist_finish is not None and (dist_start + dist_finish) > 0:
+            progress = dist_start / (dist_start + dist_finish)
+            self.drawBar((10, 10), (200, 20), (255, 255, 255), (0, 255, 0), progress)
 
         # Draw player (animated)
         self.character.draw(self.screen)

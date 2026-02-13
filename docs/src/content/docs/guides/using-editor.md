@@ -133,7 +133,8 @@ Check one type checkbox:
 - `SLIPPERY` - Low friction (ice)
 - `NOCLIP` - Player passes through
 - `BOOST_UP` - Boosts player upward
-- `BOOST_DOWN` - Boosts player downward
+- `SPEED_UP` - Increases player movement speed
+- `SLOW_DOWN` - Reduces player movement speed
 
 ### Multiple Types (New in v2.0)
 

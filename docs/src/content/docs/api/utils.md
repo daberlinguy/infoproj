@@ -116,7 +116,8 @@ PlatformTypes.FINISH       # "finish"
 PlatformTypes.SLIPPERY     # "slippery"
 PlatformTypes.NOCLIP       # "noclip"
 PlatformTypes.BOOST_UP     # "boost_up"
-PlatformTypes.BOOST_DOWN   # "boost_down"
+PlatformTypes.SPEED_UP     # "speed_up"
+PlatformTypes.SLOW_DOWN    # "slow_down"
 ```
 
 ### ALL_TYPES
@@ -126,7 +127,7 @@ List of all valid platform type strings.
 ```python
 all_types = PlatformTypes.ALL_TYPES
 # ['normal', 'death', 'spawn', 'checkpoint', 'finish', 
-#  'slippery', 'noclip', 'boost_up', 'boost_down']
+#  'slippery', 'noclip', 'boost_up', 'speed_up', 'slow_down']
 ```
 
 ### TYPE_COLORS
@@ -147,12 +148,37 @@ friction = PlatformTypes.FRICTION_VALUES[PlatformTypes.SLIPPERY]
 # 0.05
 ```
 
+### SPEED_MULTIPLIERS
+
+Dictionary mapping type names to movement speed multipliers.
+
+```python
+speed = PlatformTypes.SPEED_MULTIPLIERS[PlatformTypes.SPEED_UP]
+# 1.5
+```
+
 ### get_color(platform_type)
 
 Get the default color for a platform type.
 
 **Parameters:**
 | Name | Type | Description |
+
+### get_speed_multiplier(platform_type)
+
+Get the movement speed multiplier for a platform type.
+
+**Parameters:**
+| Name | Type | Description |
+|------|------|-------------|
+| `platform_type` | `str` | Platform type constant |
+
+**Returns:** `float` - Speed multiplier
+
+```python
+fast = PlatformTypes.get_speed_multiplier(PlatformTypes.SPEED_UP)
+# Returns 1.5
+```
 |------|------|-------------|
 | `platform_type` | `str` | Platform type constant |
 

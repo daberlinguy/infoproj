@@ -109,12 +109,23 @@ class Spieler:
             self.sprite_height,
         )
 
-    def check_platform_collision(self, platforms: list[Platform]):
+    def check_platform_collision(self, platforms: list[Platform], adjacent_platforms: list[Platform] = None):
+        """Check for collisions with platforms.
+        
+        Args:
+            platforms: List of platforms on the current page
+            adjacent_platforms: Optional list of platforms from adjacent pages for boundary collision detection
+        """
         self.is_on_ground = False
         self.is_against_wall = False  # Track if player is touching a wall
         player_rect = self.get_rect()
         feet_rect = player_rect.copy()
         feet_rect.y += 1
+
+        # Combine current and adjacent platforms for comprehensive collision detection
+        all_platforms = list(platforms)
+        if adjacent_platforms:
+            all_platforms.extend(adjacent_platforms)
 
         # previous / current edges for more reliable axis resolution
         prev_top = self.prev_y - self.sprite_height / 2
@@ -127,10 +138,27 @@ class Spieler:
         curr_left = self.player_pos.x - self.sprite_width / 2
         curr_right = self.player_pos.x + self.sprite_width / 2
 
+        # Broad-phase collision query to avoid scanning distant platforms.
+        # Covers movement sweep from previous to current position with tolerance.
+        sweep_left = min(prev_left, curr_left) - 4
+        sweep_top = min(prev_top, curr_top) - 4
+        sweep_right = max(prev_right, curr_right) + 4
+        sweep_bottom = max(prev_bottom, curr_bottom) + 4
+        sweep_rect = pygame.Rect(
+            int(sweep_left),
+            int(sweep_top),
+            int(sweep_right - sweep_left),
+            int(sweep_bottom - sweep_top),
+        )
+        query_rect = sweep_rect.inflate(self.sprite_width * 2, self.sprite_height * 2)
+        candidate_platforms = [
+            platform for platform in all_platforms if query_rect.colliderect(platform.rect)
+        ]
+
         # First pass: check for ground collision (highest priority)
         self.current_platform = None
         self.speed_multiplier = 1.0
-        for platform in platforms:
+        for platform in candidate_platforms:
             # Skip death platforms - don't allow standing on them
             if platform.is_deadly():
                 continue
@@ -164,7 +192,7 @@ class Spieler:
 
         # Second pass: check for ceiling and wall collisions (only if not grounded or different platforms)
         player_rect = self.get_rect()  # Update rect after potential ground correction
-        for platform in platforms:
+        for platform in candidate_platforms:
             # Skip death platforms - they don't block movement
             if platform.is_noclip() or platform.is_deadly():
                 continue

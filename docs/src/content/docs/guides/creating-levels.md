@@ -209,16 +209,17 @@ Large levels can span multiple pages. The player transitions between pages when 
 
 ### Page Dimensions
 
-- Default page width: **40 cells** (1280px at 32px grid)
-- Default page height: **23 cells** (736px at 32px grid)
-- X coordinates: 0-39 for each page
-- Y coordinates: 0-22 (top to bottom)
+- Default page width: **60 cells** (1920px at 32px grid)
+- Default page height: **34 cells** (1088px at 32px grid)
+- X coordinates: 0-59 for each page
+- Y coordinates: 0-33 (top to bottom)
 
 ### Page Transitions
 
 - Player moving past **x < 0** goes to previous page
 - Player moving past **x > page_width** goes to next page
 - Y position is preserved during transitions
+- Collision checks include neighboring pages near boundaries so side walls remain solid during transitions
 
 ## Complete Level Example
 

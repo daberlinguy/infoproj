@@ -62,6 +62,29 @@ class PlatformTypes:
 
     DEFAULT_FRICTION: float = 0.8
 
+    # Speed multipliers for platform types
+    SPEED_MULTIPLIERS: Dict[str, float] = {
+        SPEED_UP: 1.5,
+        SLOW_DOWN: 0.5,
+    }
+
+    DEFAULT_SPEED_MULTIPLIER: float = 1.0
+
+    @classmethod
+    def get_speed_multiplier(cls, platform_type: str) -> float:
+        """Get the speed multiplier for a platform type.
+
+        Args:
+            platform_type: The platform type constant.
+
+        Returns:
+            Speed multiplier value.
+        """
+        return cls.SPEED_MULTIPLIERS.get(
+            platform_type,
+            cls.DEFAULT_SPEED_MULTIPLIER
+        )
+
     @classmethod
     def get_color(cls, platform_type: str) -> Tuple[int, int, int]:
         """Get the default color for a platform type.

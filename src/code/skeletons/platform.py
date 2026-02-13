@@ -534,12 +534,12 @@ class Platform:
         return PlatformTypes.DEFAULT_FRICTION
     
     def get_speed_multiplier(self) -> float:
-    """Get speed multiplier for this platform."""
-    for ptype in self.platform_types:
-        multiplier = PlatformTypes.get_speed_multiplier(ptype)
-        if multiplier != PlatformTypes.DEFAULT_SPEED_MULTIPLIER:
-            return multiplier
-    return PlatformTypes.DEFAULT_SPEED_MULTIPLIER
+        """Get speed multiplier for this platform."""
+        for ptype in self.platform_types:
+            multiplier = PlatformTypes.get_speed_multiplier(ptype)
+            if multiplier != PlatformTypes.DEFAULT_SPEED_MULTIPLIER:
+                return multiplier
+        return PlatformTypes.DEFAULT_SPEED_MULTIPLIER
 
 
     def is_deadly(self) -> bool:

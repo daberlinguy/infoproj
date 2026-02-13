@@ -121,6 +121,7 @@ class CharacterEmmanuel(CharacterClass):
 
     name = "Emmanuel"
     sprite_scale = (1.4, 1.4)
+    collider_size = (29.4, 51.8)
     sprite_folder = "characters/emmanuel"
 
     walk_frames = [

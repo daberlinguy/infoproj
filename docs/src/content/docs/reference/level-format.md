@@ -46,7 +46,7 @@ data/worlds/<world_name>/<level_name>.json
           "h": "number (height, alternative to y2)",
           "grid_size": "number (default: 32)",
           "type": "string (legacy, use types instead)",
-          "types": "array of strings (NORMAL|DEATH|SPAWN|CHECKPOINT|FINISH|SLIPPERY|NOCLIP|BOOST_UP|BOOST_DOWN)",
+          "types": "array of strings (NORMAL|DEATH|SPAWN|CHECKPOINT|FINISH|SLIPPERY|NOCLIP|BOOST_UP|SPEED_UP|SLOW_DOWN)",
           "texture": "string (texture name)",
           "color": "[r, g, b] array",
           "layer": "number (-10 to +10, default: 0)"
@@ -188,7 +188,7 @@ Both methods result in a platform from (0, 15) to (10, 15).
 |----------|-------|
 | Type | `array of strings` |
 | Default | `["NORMAL"]` |
-| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY`, `NOCLIP`, `BOOST_UP`, `BOOST_DOWN` |
+| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY`, `NOCLIP`, `BOOST_UP`, `SPEED_UP`, `SLOW_DOWN` |
 
 Platforms can now have multiple types simultaneously:
 
@@ -210,7 +210,7 @@ Platforms can now have multiple types simultaneously:
 |----------|-------|
 | Type | `string` |
 | Default | `"NORMAL"` |
-| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY`, `NOCLIP`, `BOOST_UP`, `BOOST_DOWN` |
+| Values | `NORMAL`, `DEATH`, `SPAWN`, `CHECKPOINT`, `FINISH`, `SLIPPERY`, `NOCLIP`, `BOOST_UP`, `SPEED_UP`, `SLOW_DOWN` |
 | Status | **Deprecated** - Use `types` array instead |
 
 The old single type format is still supported for backward compatibility:
@@ -404,14 +404,25 @@ Applies upward velocity boost when player passes through. Typically combined wit
 }
 ```
 
-### BOOST_DOWN (New in v2.0)
+### SPEED_UP (New in v2.0)
 
-Applies downward velocity boost when player passes through. Typically combined with NOCLIP.
+Increases movement speed on contact.
 
 ```json
 {
   "x1": 20, "y1": 5, "x2": 22, "y2": 5,
-  "types": ["NOCLIP", "BOOST_DOWN"]
+  "types": ["SPEED_UP"]
+}
+```
+
+### SLOW_DOWN (New in v2.0)
+
+Reduces movement speed on contact.
+
+```json
+{
+  "x1": 24, "y1": 5, "x2": 26, "y2": 5,
+  "types": ["SLOW_DOWN"]
 }
 ```
 
@@ -540,3 +551,4 @@ The game validates levels on load:
 - Players transition at x < 0 (previous page) and x > page_width (next page)
 - Y position is preserved across transitions
 - Checkpoint pages are tracked for respawn
+- Neighbor-page collision is evaluated near boundaries to prevent phasing through side walls
