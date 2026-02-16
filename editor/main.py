@@ -11,11 +11,12 @@ import os
 import sys
 
 from PyQt6.QtCore import Qt, QRectF
-from PyQt6.QtGui import QColor, QPen, QBrush, QPainter, QPixmap, QKeySequence
+from PyQt6.QtGui import QColor, QPen, QBrush, QPainter, QPixmap, QKeySequence, QFont
 from PyQt6.QtWidgets import (
     QApplication,
     QCheckBox,
     QComboBox,
+    QDoubleSpinBox,
     QFileDialog,
     QFormLayout,
     QGraphicsRectItem,
@@ -31,8 +32,11 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QMessageBox,
     QPushButton,
+    QScrollArea,
     QSplitter,
     QSpinBox,
+    QTabWidget,
+    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -115,6 +119,7 @@ class LevelEditor(QMainWindow):
             "page_height_cells": DEFAULT_GRID_ROWS,
             "pages": {"1": {"cells": []}},
             "page_positions": {"1": {"x": 0, "y": 0}},
+            "texts": [],
         }
         self.current_path = None
         self.current_page = "1"
@@ -132,17 +137,28 @@ class LevelEditor(QMainWindow):
         self.canvas = LevelCanvas(self)
         splitter.addWidget(self.canvas)
 
+        self.tab_widget = QTabWidget()
+        
         self.platform_list = QListWidget()
         self.platform_list.setSelectionMode(
             QListWidget.SelectionMode.ExtendedSelection
-        )  # Enable multi-select
+        )
         self.platform_list.currentRowChanged.connect(self._load_platform_into_form)
-        splitter.addWidget(self.platform_list)
+        self.tab_widget.addTab(self.platform_list, "Platforms")
+        
+        self.text_list = QListWidget()
+        self.text_list.currentRowChanged.connect(self._load_text_into_form)
+        self.tab_widget.addTab(self.text_list, "Texts")
+        
+        splitter.addWidget(self.tab_widget)
 
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
         right_panel = QWidget()
         right = QVBoxLayout()
         right_panel.setLayout(right)
-        splitter.addWidget(right_panel)
+        scroll.setWidget(right_panel)
+        splitter.addWidget(scroll)
         splitter.setSizes([500, 200, 300])
 
         right.addLayout(self._build_level_form())
@@ -152,12 +168,15 @@ class LevelEditor(QMainWindow):
         right.addLayout(self._build_platform_form())
         right.addSpacing(10)
         right.addLayout(self._build_buttons())
+        right.addSpacing(10)
+        right.addWidget(self._build_text_form())
         right.addStretch()
 
         self.status_label = QLabel("")
         right.addWidget(self.status_label)
         self._set_mode("add")
         self._refresh_platform_list()
+        self._refresh_text_list()
         self.canvas.render_scene()
 
     def _build_level_form(self):
@@ -235,12 +254,12 @@ class LevelEditor(QMainWindow):
 
         # Platform types with checkboxes
         types_group = QGroupBox("Platform Types")
-        types_layout = QVBoxLayout()
+        types_layout = QGridLayout()
         self.type_checkboxes = {}
-        for ptype in PLATFORM_TYPES:
+        for i, ptype in enumerate(PLATFORM_TYPES):
             checkbox = QCheckBox(ptype)
             self.type_checkboxes[ptype] = checkbox
-            types_layout.addWidget(checkbox)
+            types_layout.addWidget(checkbox, i // 3, i % 3)
         types_group.setLayout(types_layout)
         form.addRow(types_group)
 
@@ -253,7 +272,6 @@ class LevelEditor(QMainWindow):
         self.texture_type.addItems(TEXTURE_TYPES)
         form.addRow("Texture", self.texture_type)
 
-        # Layer depth control
         self.layer = QSpinBox()
         self.layer.setRange(-10, 10)
         self.layer.setValue(0)
@@ -261,6 +279,35 @@ class LevelEditor(QMainWindow):
             "Layer depth: negative = background (darker), positive = foreground (brighter)"
         )
         form.addRow("Layer", self.layer)
+
+        values_group = QGroupBox("Platform Values")
+        values_layout = QFormLayout()
+        
+        self.boost_power = QSpinBox()
+        self.boost_power.setRange(-2000, -100)
+        self.boost_power.setValue(-900)
+        self.boost_power.setSingleStep(50)
+        self.boost_power.setToolTip("Jump velocity for BOOST_UP platforms (more negative = higher jump)")
+        values_layout.addRow("Boost Power", self.boost_power)
+        
+        self.speed_mult = QDoubleSpinBox()
+        self.speed_mult.setRange(0.1, 5.0)
+        self.speed_mult.setValue(1.5)
+        self.speed_mult.setSingleStep(0.1)
+        self.speed_mult.setDecimals(1)
+        self.speed_mult.setToolTip("Speed multiplier for SPEED_UP platforms")
+        values_layout.addRow("Speed Mult", self.speed_mult)
+        
+        self.slow_mult = QDoubleSpinBox()
+        self.slow_mult.setRange(0.1, 1.0)
+        self.slow_mult.setValue(0.5)
+        self.slow_mult.setSingleStep(0.1)
+        self.slow_mult.setDecimals(1)
+        self.slow_mult.setToolTip("Speed multiplier for SLOW_DOWN platforms")
+        values_layout.addRow("Slow Mult", self.slow_mult)
+        
+        values_group.setLayout(values_layout)
+        form.addRow(values_group)
 
         self.apply_selected_btn = QPushButton("Apply All to Selected")
         self.apply_selected_btn.clicked.connect(self._apply_to_selected)
@@ -339,6 +386,152 @@ class LevelEditor(QMainWindow):
         layout.addWidget(save_btn)
         return layout
 
+    def _build_text_form(self):
+        group = QGroupBox("Text Objects")
+        layout = QFormLayout()
+        
+        pos_layout = QGridLayout()
+        self.text_x = QSpinBox()
+        self.text_y = QSpinBox()
+        self.text_page = QSpinBox()
+        self.text_x.setRange(-9999, 9999)
+        self.text_y.setRange(-9999, 9999)
+        self.text_page.setRange(1, 999)
+        self.text_page.setValue(1)
+        pos_layout.addWidget(QLabel("X"), 0, 0)
+        pos_layout.addWidget(self.text_x, 0, 1)
+        pos_layout.addWidget(QLabel("Y"), 0, 2)
+        pos_layout.addWidget(self.text_y, 0, 3)
+        pos_layout.addWidget(QLabel("Page"), 1, 0)
+        pos_layout.addWidget(self.text_page, 1, 1)
+        layout.addRow("Position", pos_layout)
+        
+        self.text_content = QTextEdit()
+        self.text_content.setPlaceholderText("Enter text here...")
+        self.text_content.setMaximumHeight(60)
+        layout.addRow("Text", self.text_content)
+        
+        color_layout = QGridLayout()
+        self.text_r = QSpinBox()
+        self.text_g = QSpinBox()
+        self.text_b = QSpinBox()
+        for spin in (self.text_r, self.text_g, self.text_b):
+            spin.setRange(0, 255)
+        self.text_r.setValue(255)
+        self.text_g.setValue(255)
+        self.text_b.setValue(255)
+        color_layout.addWidget(QLabel("R"), 0, 0)
+        color_layout.addWidget(self.text_r, 0, 1)
+        color_layout.addWidget(QLabel("G"), 0, 2)
+        color_layout.addWidget(self.text_g, 0, 3)
+        color_layout.addWidget(QLabel("B"), 0, 4)
+        color_layout.addWidget(self.text_b, 0, 5)
+        layout.addRow("Color", color_layout)
+        
+        size_font_layout = QHBoxLayout()
+        self.text_size = QSpinBox()
+        self.text_size.setRange(8, 99)
+        self.text_size.setValue(24)
+        self.text_font = QLineEdit("Minecraft")
+        self.text_font.setPlaceholderText("Font name (empty = default)")
+        size_font_layout.addWidget(QLabel("Size"))
+        size_font_layout.addWidget(self.text_size)
+        size_font_layout.addWidget(QLabel("Font"))
+        size_font_layout.addWidget(self.text_font)
+        layout.addRow("Style", size_font_layout)
+        
+        btn_layout = QHBoxLayout()
+        add_text_btn = QPushButton("Add Text")
+        add_text_btn.clicked.connect(self._add_text)
+        update_text_btn = QPushButton("Update Text")
+        update_text_btn.clicked.connect(self._update_text)
+        remove_text_btn = QPushButton("Remove Text")
+        remove_text_btn.clicked.connect(self._remove_text)
+        btn_layout.addWidget(add_text_btn)
+        btn_layout.addWidget(update_text_btn)
+        btn_layout.addWidget(remove_text_btn)
+        layout.addRow(btn_layout)
+        
+        group.setLayout(layout)
+        return group
+
+    def _add_text(self):
+        self._record_undo()
+        text_obj = {
+            "x": self.text_x.value(),
+            "y": self.text_y.value(),
+            "page": self.text_page.value(),
+            "text": self.text_content.toPlainText(),
+            "color": [self.text_r.value(), self.text_g.value(), self.text_b.value()],
+            "size": self.text_size.value(),
+            "font": self.text_font.text().strip(),
+        }
+        self.level_data.setdefault("texts", []).append(text_obj)
+        self._refresh_text_list()
+        self.canvas.render_scene()
+        self._set_status("Text added.")
+
+    def _update_text(self):
+        index = self.text_list.currentRow()
+        if index < 0:
+            QMessageBox.warning(self, "No selection", "Select a text to update.")
+            return
+        self._record_undo()
+        text_obj = {
+            "x": self.text_x.value(),
+            "y": self.text_y.value(),
+            "page": self.text_page.value(),
+            "text": self.text_content.toPlainText(),
+            "color": [self.text_r.value(), self.text_g.value(), self.text_b.value()],
+            "size": self.text_size.value(),
+            "font": self.text_font.text().strip(),
+        }
+        self.level_data["texts"][index] = text_obj
+        self._refresh_text_list()
+        self.text_list.setCurrentRow(index)
+        self.canvas.render_scene()
+        self._set_status("Text updated.")
+
+    def _remove_text(self):
+        index = self.text_list.currentRow()
+        if index < 0:
+            QMessageBox.warning(self, "No selection", "Select a text to remove.")
+            return
+        self._record_undo()
+        self.level_data["texts"].pop(index)
+        self._refresh_text_list()
+        self.canvas.render_scene()
+        self._set_status("Text removed.")
+
+    def _load_text_into_form(self, index):
+        texts = self.level_data.get("texts", [])
+        if index < 0 or index >= len(texts):
+            return
+        text_obj = texts[index]
+        self.text_x.setValue(text_obj.get("x", 0))
+        self.text_y.setValue(text_obj.get("y", 0))
+        self.text_page.setValue(text_obj.get("page", 1))
+        self.text_content.setPlainText(text_obj.get("text", ""))
+        color = text_obj.get("color", [255, 255, 255])
+        self.text_r.setValue(color[0] if len(color) > 0 else 255)
+        self.text_g.setValue(color[1] if len(color) > 1 else 255)
+        self.text_b.setValue(color[2] if len(color) > 2 else 255)
+        self.text_size.setValue(text_obj.get("size", 24))
+        self.text_font.setText(text_obj.get("font", ""))
+
+    def _refresh_text_list(self):
+        self.text_list.blockSignals(True)
+        self.text_list.clear()
+        texts = self.level_data.get("texts", [])
+        for idx, text_obj in enumerate(texts):
+            preview = text_obj.get("text", "")[:20]
+            if len(text_obj.get("text", "")) > 20:
+                preview += "..."
+            page = text_obj.get("page", 1)
+            label = f"{idx + 1}: [P{page}] ({text_obj.get('x')},{text_obj.get('y')}) {preview}"
+            self.text_list.addItem(label)
+        self.text_list.blockSignals(False)
+
     def _set_status(self, text):
         self.status_label.setText(text)
 
@@ -368,13 +561,11 @@ class LevelEditor(QMainWindow):
             self.level_data["background_color"]["image"] = image_path
 
     def _collect_platform_fields(self):
-        # Collect selected types
         selected_types = [
             ptype
             for ptype, checkbox in self.type_checkboxes.items()
             if checkbox.isChecked()
         ]
-        # If no types selected, default to NORMAL
         if not selected_types:
             selected_types = ["NORMAL"]
 
@@ -384,9 +575,12 @@ class LevelEditor(QMainWindow):
             "x2": self.x2.value(),
             "y2": self.y2.value(),
             "grid_size": 32,
-            "types": selected_types,  # Changed from "type" to "types"
-            "layer": self.layer.value(),  # Add layer support
+            "types": selected_types,
+            "layer": self.layer.value(),
             "color": [120, 120, 120],
+            "boost_power": self.boost_power.value(),
+            "speed_multiplier": self.speed_mult.value(),
+            "slow_multiplier": self.slow_mult.value(),
         }
         texture = self.texture_type.currentText()
         if texture:
@@ -399,10 +593,8 @@ class LevelEditor(QMainWindow):
             return
         cell = cells[index]
 
-        # Handle both old "type" and new "types" format
         cell_types = cell.get("types", [])
         if not cell_types:
-            # Fallback to old single type format
             old_type = cell.get("type", "NORMAL")
             cell_types = [old_type] if old_type else ["NORMAL"]
 
@@ -427,8 +619,11 @@ class LevelEditor(QMainWindow):
 
         self.texture_type.setCurrentText(platform.get("texture", ""))
 
-        # Load layer value
         self.layer.setValue(cell.get("layer", 0))
+        
+        self.boost_power.setValue(cell.get("boost_power", -900))
+        self.speed_mult.setValue(cell.get("speed_multiplier", 1.5))
+        self.slow_mult.setValue(cell.get("slow_multiplier", 0.5))
 
         self.canvas.select_platform_index(index)
 
@@ -557,6 +752,7 @@ class LevelEditor(QMainWindow):
             self._expand_platforms_to_cells()
             self._apply_level_to_form()
             self._refresh_platform_list()
+            self._refresh_text_list()
             self.undo_stack.clear()
             self.redo_stack.clear()
             self._set_status(f"Loaded {os.path.basename(path)}")
@@ -607,7 +803,6 @@ class LevelEditor(QMainWindow):
                 x2 = int(platform.get("x2", 0))
                 y2 = int(platform.get("y2", 0))
 
-                # Handle both old "type" and new "types" format
                 platform_types = platform.get("types", [])
                 if not platform_types:
                     old_type = platform.get("type", "NORMAL")
@@ -621,7 +816,14 @@ class LevelEditor(QMainWindow):
                             "grid_size": platform.get("grid_size", 32),
                             "types": platform_types,
                             "color": platform.get("color", [120, 120, 120]),
+                            "layer": platform.get("layer", 0),
                         }
+                        if platform.get("boost_power"):
+                            cell["boost_power"] = platform["boost_power"]
+                        if platform.get("speed_multiplier"):
+                            cell["speed_multiplier"] = platform["speed_multiplier"]
+                        if platform.get("slow_multiplier"):
+                            cell["slow_multiplier"] = platform["slow_multiplier"]
                         if platform.get("texture"):
                             cell["texture"] = platform["texture"]
                         cells.append(cell)
@@ -652,12 +854,15 @@ class LevelEditor(QMainWindow):
             cells = page.get("cells", [])
             platforms = self._cells_to_platforms(cells)
             payload["pages"][str(page_key)] = {"platforms": platforms}
+        
+        texts = self.level_data.get("texts", [])
+        if texts:
+            payload["texts"] = texts
         return payload
 
     def _cells_to_platforms(self, cells):
         platforms = []
         for cell in cells:
-            # Handle both old "type" and new "types" format
             platform_types = cell.get("types", [])
             if not platform_types:
                 old_type = cell.get("type", "NORMAL")
@@ -671,7 +876,20 @@ class LevelEditor(QMainWindow):
                 "grid_size": cell.get("grid_size", 32),
                 "types": platform_types,
                 "color": cell.get("color", [120, 120, 120]),
+                "layer": cell.get("layer", 0),
             }
+            
+            boost_power = cell.get("boost_power")
+            speed_mult = cell.get("speed_multiplier")
+            slow_mult = cell.get("slow_multiplier")
+            
+            if boost_power is not None and boost_power != -900:
+                platform["boost_power"] = boost_power
+            if speed_mult is not None and speed_mult != 1.5:
+                platform["speed_multiplier"] = speed_mult
+            if slow_mult is not None and slow_mult != 0.5:
+                platform["slow_multiplier"] = slow_mult
+            
             if cell.get("texture"):
                 platform["texture"] = cell["texture"]
             platforms.append(platform)
@@ -961,6 +1179,8 @@ class LevelEditor(QMainWindow):
         self.level_data = self.undo_stack.pop()
         self._apply_level_to_form()
         self._refresh_platform_list()
+        self._refresh_text_list()
+        self.canvas.render_scene()
         self._set_status("Undo.")
 
     def redo(self):
@@ -971,6 +1191,8 @@ class LevelEditor(QMainWindow):
         self.level_data = self.redo_stack.pop()
         self._apply_level_to_form()
         self._refresh_platform_list()
+        self._refresh_text_list()
+        self.canvas.render_scene()
         self._set_status("Redo.")
 
 
@@ -1176,6 +1398,25 @@ class LevelCanvas(QGraphicsView):
                 outline.setZValue(4)
                 self.scene.addItem(outline)
                 self._outline_items[(page_key, idx)] = outline
+
+        texts = self.editor.level_data.get("texts", [])
+        for text_obj in texts:
+            text_page = str(text_obj.get("page", 1))
+            if text_page not in self._page_offset_px_by_key:
+                continue
+            offset_x, offset_y = self._page_offset_px_by_key[text_page]
+            x = text_obj.get("x", 0) + offset_x
+            y = text_obj.get("y", 0) + offset_y
+            color = text_obj.get("color", [255, 255, 255])
+            size = text_obj.get("size", 24)
+            font_name = text_obj.get("font", "")
+            text_content = text_obj.get("text", "")
+            
+            font = QFont(font_name if font_name else "Arial", size)
+            text_item = self.scene.addText(text_content, font)
+            text_item.setDefaultTextColor(QColor(*color))
+            text_item.setPos(x, y)
+            text_item.setZValue(5)
 
         self._current_page_offset = self._page_offset_px_by_key.get(
             self.editor.current_page, (0, 0)

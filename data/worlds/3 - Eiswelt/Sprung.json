@@ -31,6 +31,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -47,6 +48,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -63,6 +65,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -79,6 +82,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -95,6 +99,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -111,6 +116,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -127,6 +133,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -143,6 +150,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -159,6 +167,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -175,6 +184,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -191,6 +201,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -207,6 +218,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -223,6 +235,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -239,6 +252,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -255,6 +269,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -271,6 +286,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -287,6 +303,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -303,6 +320,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -319,6 +337,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -335,6 +354,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -351,6 +371,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -367,6 +388,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -383,6 +405,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -399,6 +422,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -415,6 +439,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -431,6 +456,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -447,6 +473,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -463,6 +490,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -479,6 +507,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -495,6 +524,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -511,6 +541,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -527,6 +558,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -543,6 +575,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
         },
         {
@@ -559,39 +592,8 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "STONE"
-        },
-        {
-          "x1": 12,
-          "y1": 20,
-          "x2": 12,
-          "y2": 20,
-          "grid_size": 32,
-          "types": [
-            "BOOST_UP"
-          ],
-          "color": [
-            0,
-            0,
-            0
-          ],
-          "texture": "SLIME_BLOCK"
-        },
-        {
-          "x1": 13,
-          "y1": 20,
-          "x2": 13,
-          "y2": 20,
-          "grid_size": 32,
-          "types": [
-            "BOOST_UP"
-          ],
-          "color": [
-            0,
-            0,
-            0
-          ],
-          "texture": "SLIME_BLOCK"
         },
         {
           "x1": 33,
@@ -607,6 +609,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "SLIME_BLOCK"
         },
         {
@@ -623,6 +626,7 @@
             0,
             0
           ],
+          "layer": 0,
           "texture": "SLIME_BLOCK"
         },
         {
@@ -639,6 +643,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -655,6 +660,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -671,6 +677,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -687,6 +694,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -703,6 +711,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -719,6 +728,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -735,6 +745,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -751,6 +762,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -767,6 +779,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -783,6 +796,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -799,6 +813,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -815,6 +830,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -831,6 +847,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -847,6 +864,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -863,6 +881,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -879,6 +898,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -895,6 +915,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -911,6 +932,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -927,6 +949,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -943,6 +966,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -959,6 +983,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -975,6 +1000,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -991,6 +1017,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "HAY"
         },
         {
@@ -1007,6 +1034,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1023,6 +1051,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1039,6 +1068,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1055,6 +1085,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1071,6 +1102,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1087,6 +1119,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1103,6 +1136,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1119,6 +1153,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1135,6 +1170,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1151,6 +1187,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1167,6 +1204,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1183,6 +1221,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1199,6 +1238,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1215,6 +1255,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1231,6 +1272,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1247,6 +1289,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1263,6 +1306,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1279,6 +1323,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1295,6 +1340,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1311,6 +1357,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1327,6 +1374,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1343,6 +1391,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1359,6 +1408,7 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1375,7 +1425,62 @@
             120,
             120
           ],
+          "layer": 0,
           "texture": "GLOWSTONE"
+        },
+        {
+          "x1": 12,
+          "y1": 20,
+          "x2": 12,
+          "y2": 20,
+          "grid_size": 32,
+          "types": [
+            "BOOST_UP"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "boost_power": -200,
+          "texture": "SLIME_BLOCK"
+        },
+        {
+          "x1": 13,
+          "y1": 20,
+          "x2": 13,
+          "y2": 20,
+          "grid_size": 32,
+          "types": [
+            "BOOST_UP"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "boost_power": -200,
+          "texture": "SLIME_BLOCK"
+        },
+        {
+          "x1": 14,
+          "y1": 20,
+          "x2": 14,
+          "y2": 20,
+          "grid_size": 32,
+          "types": [
+            "BOOST_UP"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "boost_power": -200,
+          "texture": "SLIME_BLOCK"
         },
         {
           "x1": 27,
@@ -1391,6 +1496,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1407,6 +1515,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1423,6 +1534,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1439,6 +1553,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1455,6 +1572,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1471,6 +1591,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1487,6 +1610,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1503,6 +1629,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1519,6 +1648,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1535,6 +1667,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1551,6 +1686,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1567,6 +1705,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1583,6 +1724,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1599,6 +1743,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1615,6 +1762,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1631,6 +1781,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1647,6 +1800,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1663,6 +1819,9 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         },
         {
@@ -1679,12 +1838,25 @@
             120,
             120
           ],
+          "layer": 0,
+          "boost_power": -200,
+          "speed_multiplier": 5.0,
           "texture": "GLOWSTONE"
         }
       ]
     },
     "2": {
       "platforms": []
+    }
+  },
+  "page_positions": {
+    "1": {
+      "x": 0,
+      "y": 0
+    },
+    "2": {
+      "x": 1,
+      "y": 0
     }
   }
 }

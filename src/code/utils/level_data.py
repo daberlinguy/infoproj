@@ -171,6 +171,9 @@ class LevelDataUtils:
             texture = entry.get("texture")
             color = entry.get("color")
             comment = entry.get("comment")
+            boost_power = entry.get("boost_power")
+            speed_multiplier = entry.get("speed_multiplier")
+            slow_multiplier = entry.get("slow_multiplier")
 
             key = (
                 grid_size,
@@ -179,6 +182,9 @@ class LevelDataUtils:
                 texture,
                 tuple(color) if isinstance(color, (list, tuple)) else color,
                 comment,
+                boost_power,
+                speed_multiplier,
+                slow_multiplier,
             )
 
             group = cell_groups.get(key)
@@ -192,6 +198,9 @@ class LevelDataUtils:
                     "texture": texture,
                     "color": color,
                     "comment": comment,
+                    "boost_power": boost_power,
+                    "speed_multiplier": speed_multiplier,
+                    "slow_multiplier": slow_multiplier,
                 }
                 cell_groups[key] = group
             group["cells"].add((int(x1), int(y1)))
@@ -232,6 +241,12 @@ class LevelDataUtils:
                     merged_entry["color"] = group["color"]
                 if group["comment"]:
                     merged_entry["comment"] = group["comment"]
+                if group["boost_power"] is not None:
+                    merged_entry["boost_power"] = group["boost_power"]
+                if group["speed_multiplier"] is not None:
+                    merged_entry["speed_multiplier"] = group["speed_multiplier"]
+                if group["slow_multiplier"] is not None:
+                    merged_entry["slow_multiplier"] = group["slow_multiplier"]
                 merged.append(merged_entry)
 
         return merged

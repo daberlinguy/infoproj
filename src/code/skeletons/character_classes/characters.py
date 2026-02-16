@@ -70,7 +70,7 @@ class CharacterTwo(CharacterClass):
 
     name = "Dino"
     sprite_scale = (0.45, 0.50)  # Width, Height scale
-    collider_size = (42, 47)  # Custom hitbox: Width, Height in pixels
+    collider_size = (29.4, 51.8)
     sprite_folder = "characters/dino"
 
     walk_frames = [
@@ -91,6 +91,7 @@ class CharacterThree(CharacterClass):
 
     name = "CKghnit"
     sprite_scale = (3.1, 3.1)
+    collider_size = (29.4, 51.8)
     sprite_folder = "characters/kngiht"
 
     walk_frames = [

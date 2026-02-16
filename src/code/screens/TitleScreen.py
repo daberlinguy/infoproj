@@ -167,7 +167,7 @@ class TitleScreen(Screen):
 
         # Fill screen with Background Image
         self.set_backgroundImage(
-            "title.jpg",
+            "plains.png",
             scale_height=self.screen.get_height(),
             scale_width=self.screen.get_width(),
         )

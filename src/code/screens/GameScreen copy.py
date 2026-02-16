@@ -378,11 +378,8 @@ class GameScreen(Screen):
             texture = getattr(Texture, texture_name, None) if texture_name else None
             color = LevelDataUtils.parse_color(entry.get("color"))
 
+            # Get layer (defaults to 0 if not specified)
             layer = entry.get("layer", 0)
-            
-            boost_power = entry.get("boost_power", -900)
-            speed_multiplier = entry.get("speed_multiplier", 1.5)
-            slow_multiplier = entry.get("slow_multiplier", 0.5)
 
             platforms.append(
                 Platform(
@@ -395,9 +392,6 @@ class GameScreen(Screen):
                     color=color,
                     texture=texture,
                     layer=layer,
-                    boost_power=boost_power,
-                    speed_multiplier=speed_multiplier,
-                    slow_multiplier=slow_multiplier,
                 )
             )
 
@@ -557,36 +551,6 @@ class GameScreen(Screen):
             page_pos[1] * page_height_px + self.player.player_pos.y + self.player.sprite_height / 2
         )
 
-    def _render_texts(self):
-        if not self.level_data:
-            return
-        texts = self.level_data.get("texts", [])
-        if not texts:
-            return
-        page_width_px = self.page_width_cells * self.page_grid_size
-        page_height_px = self.page_height_cells * self.page_grid_size
-        current_page_pos = self.page_positions.get(self.page_index, (0, 0))
-        
-        for text_obj in texts:
-            text_page = text_obj.get("page", 1)
-            text_page_pos = self.page_positions.get(text_page, (0, 0))
-            
-            offset_x = (text_page_pos[0] - current_page_pos[0]) * page_width_px
-            offset_y = (text_page_pos[1] - current_page_pos[1]) * page_height_px
-            
-            x = text_obj.get("x", 0) + offset_x
-            y = text_obj.get("y", 0) + offset_y
-            color = text_obj.get("color", [255, 255, 255])
-            size = min(99, max(1, text_obj.get("size", 24)))
-            text_content = text_obj.get("text", "")
-            
-            if not text_content:
-                continue
-            
-            font = getFont(size)
-            text_surface = font.render(text_content, True, tuple(color))
-            self.screen.blit(text_surface, (int(x), int(y)))
-
     def run(self):
         self.player_pos = self.player.player_pos
         pygame.display.set_caption(
@@ -603,10 +567,8 @@ class GameScreen(Screen):
                 if event.key == pygame.K_r:  # Reset to spawn point with 'R' key
                     self._switch_page(self.initial_spawn_page)
                     self.player.player_pos = self.spawn_point.copy()
-                    self.checkpoints_activated = 0
                     self.player.velocity_x = 0
                     self.player.velocity_y = 0
-                    self.player.speed_multiplier = 1.0
 
         # Handle input
         keys = pygame.key.get_pressed()
@@ -614,9 +576,18 @@ class GameScreen(Screen):
         # Update player dt
         self.player.dt = self.dt
 
+        # Timer
         self.timer += self.dt
         self.run_timer += self.dt
 
+        # Store previous position before any movement
+        self.player.prev_x = self.player.player_pos.x
+        self.player.prev_y = self.player.player_pos.y
+
+        if self._is_control_pressed(keys, "move_left"):
+            self.player.move_left()
+        if self._is_control_pressed(keys, "move_right"):
+            self.player.move_right()
         if keys[pygame.K_ESCAPE]:
             self.running = False
             from screens.TitleScreen import TitleScreen
@@ -626,36 +597,31 @@ class GameScreen(Screen):
                 "Title Screen",
                 block_escape_until_release=True,
             )
-            return
+            return  # Exit immediately to prevent further updates
 
         if self._is_control_pressed(keys, "jump"):
             self.player.jump()
 
+        # Update moving platforms
         for platform in self.platforms:
             platform.update(self.dt)
 
+        # Apply physics - apply gravity first, then check collisions to resolve
+        self.player.apply_physics(self.dt)
+
+        # Only include adjacent pages when player is near a page boundary.
+        player_pos = self.player.player_pos
         boundary_margin = max(self.player.sprite_width, self.player.sprite_height) * 2
         page_width_px = self.page_width_cells * self.page_grid_size
         page_height_px = self.page_height_cells * self.page_grid_size
-        player_pos = self.player.player_pos
         near_boundary = (
             player_pos.x <= boundary_margin
             or player_pos.x >= (page_width_px - boundary_margin)
             or player_pos.y <= boundary_margin
             or player_pos.y >= (page_height_px - boundary_margin)
         )
-        adjacent_platforms = self._get_adjacent_page_platforms() if near_boundary else []
 
-        self.player.prev_x = self.player.player_pos.x
-        self.player.prev_y = self.player.player_pos.y
-        
-        if self._is_control_pressed(keys, "move_left"):
-            self.player.move_left(self.dt)
-        if self._is_control_pressed(keys, "move_right"):
-            self.player.move_right(self.dt)
-        
-        self.player.apply_physics(self.dt)
-        self.player.apply_velocity(self.dt)
+        adjacent_platforms = self._get_adjacent_page_platforms() if near_boundary else []
         self.player.check_platform_collision(self.platforms, adjacent_platforms)
 
         # Check page boundaries FIRST before death checks to prevent false deaths when crossing pages
@@ -806,8 +772,6 @@ class GameScreen(Screen):
         # Draw platforms
         for platform in self.platforms:
             platform.draw(self.screen)
-
-        self._render_texts()
 
         dist_start = self._distance_to_start()
         dist_finish = self._distance_to_finish()

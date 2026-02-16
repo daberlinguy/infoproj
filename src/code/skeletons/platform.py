@@ -273,8 +273,10 @@ class Platform:
         texture: Optional[pygame.Surface] = None,
         velocity_x: float = 0,
         layer: int = 0,
+        boost_power: float = -900,
+        speed_multiplier: float = 1.5,
+        slow_multiplier: float = 0.5,
     ) -> None:
-        # Handle both single type (legacy) and multiple types (new)
         if platform_types is not None:
             self.platform_types: List[str] = (
                 platform_types if platform_types else [Platform.NORMAL]
@@ -284,7 +286,6 @@ class Platform:
         else:
             self.platform_types: List[str] = [Platform.NORMAL]
 
-        # Keep platform_type for backward compatibility (returns first type)
         self.platform_type: str = self.platform_types[0]
 
         self.checkpoint_activated: bool = False
@@ -292,15 +293,17 @@ class Platform:
         self.velocity_x: float = velocity_x
         self.original_x1: int = x1
         self.original_x2: int = x2
-        self.layer: int = layer  # Layer for depth rendering (-10 to +10, 0 is normal)
+        self.layer: int = layer
+        
+        self.boost_power: float = boost_power
+        self.speed_multiplier: float = speed_multiplier
+        self.slow_multiplier: float = slow_multiplier
 
-        # Ensure coordinates are properly ordered
         self.x1: float = float(min(x1, x2))
         self.y1: int = min(y1, y2)
         self.x2: float = float(max(x1, x2))
         self.y2: int = max(y1, y2)
 
-        # Determine color based on type if not provided
         if color is None:
             self.color: Tuple[int, int, int] = PlatformTypes.get_color(
                 self.platform_type
@@ -310,10 +313,8 @@ class Platform:
 
         self.texture: Optional[pygame.Surface] = texture
 
-        # Create cells for the platform area with layer tinting applied
         self.cells: List[Cell] = []
 
-        # Apply layer tint using ColorUtils
         tinted_color = ColorUtils.apply_layer_tint(self.color, layer)
         tinted_texture = (
             ColorUtils.apply_layer_tint_to_texture(texture, layer) if texture else None
@@ -324,7 +325,6 @@ class Platform:
                 cell = Cell(x, y, grid_size, tinted_color, tinted_texture)
                 self.cells.append(cell)
 
-        # Create bounding rect for collision detection
         self.rect: pygame.Rect = pygame.Rect(
             int(self.x1),
             self.y1,
@@ -534,13 +534,20 @@ class Platform:
         return PlatformTypes.DEFAULT_FRICTION
     
     def get_speed_multiplier(self) -> float:
-        """Get speed multiplier for this platform."""
         for ptype in self.platform_types:
+            if ptype == Platform.SPEED_UP:
+                return self.speed_multiplier
+            if ptype == Platform.SLOW_DOWN:
+                return self.slow_multiplier
             multiplier = PlatformTypes.get_speed_multiplier(ptype)
             if multiplier != PlatformTypes.DEFAULT_SPEED_MULTIPLIER:
                 return multiplier
         return PlatformTypes.DEFAULT_SPEED_MULTIPLIER
 
+    def get_boost_power(self) -> float:
+        if Platform.BOOST_UP in self.platform_types:
+            return self.boost_power
+        return -450
 
     def is_deadly(self) -> bool:
         """Check if this platform kills the player on contact.
@@ -578,9 +585,9 @@ class Platform:
         """Check if this platform is a noclip platform.
 
         Returns:
-            True if this is a NOCLIP platform.
+            True if this is a NOCLIP platform or on a non-zero layer.
         """
-        return Platform.NOCLIP in self.platform_types
+        return Platform.NOCLIP in self.platform_types or self.layer != 0
 
     def is_boost_up(self) -> bool:
         """Check if this platform boosts player upward.

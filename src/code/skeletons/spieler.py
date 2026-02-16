@@ -1,4 +1,5 @@
 import pygame
+from typing import Optional
 
 from skeletons.platform import Platform
 
@@ -7,51 +8,78 @@ class Spieler:
     def __init__(self, player_pos, dt, radius=24):
         self.player_pos = player_pos
         self.dt = dt
-        self.radius = radius  # Keep for backward compatibility
-        # Sprite-based collision box (matching the sprite dimensions)
-        self.sprite_width = int(182 * 0.2)  # 36 pixels
-        self.sprite_height = int(243 * 0.2)  # 48 pixels
+        self.radius = radius
+        self.sprite_width = int(182 * 0.2)
+        self.sprite_height = int(243 * 0.2)
         self.velocity_x = 0
         self.velocity_y = 0
         self.gravity = 980
-        self.jump_strength = -450 # normaler Sprung (~3 Blöcke)
-        self.boost_jump_strength = -900 # Boost-Up (~6 Blöcke)
-        self.acceleration = 1200  # Horizontal acceleration
-        self.max_speed = 300  # Maximum horizontal speed
-        self.max_fall_speed = 1000  # Maximum falling speed to prevent tunneling
-        self.friction = 0.8  # Default friction coefficient
+        self.jump_strength = -450
+        self.acceleration = 1200
+        self.max_speed = 300
+        self.max_fall_speed = 1000
+        self.friction = 0.8
         self.speed_multiplier = 1.0
         self.base_speed = 300
-        self.current_platform = None  # Track which platform we're on
+        self.current_platform = None
         self.is_on_ground = False
+        self.is_against_wall = False
+        self._move_input = False
         self.prev_y = player_pos.y
         self.prev_x = player_pos.x
+        
+        self._player_rect = pygame.Rect(0, 0, self.sprite_width, self.sprite_height)
+        self._feet_rect = pygame.Rect(0, 0, self.sprite_width, self.sprite_height)
+        self._sweep_rect = pygame.Rect(0, 0, 0, 0)
 
     def set_sprite_size(self, width, height):
         self.sprite_width = int(width)
         self.sprite_height = int(height)
+        self._player_rect = pygame.Rect(0, 0, self.sprite_width, self.sprite_height)
+        self._feet_rect = pygame.Rect(0, 0, self.sprite_width, self.sprite_height)
 
-    def move_left(self):
-        # On slippery platforms, use acceleration. Otherwise, direct movement
-        if self.is_on_ground and self.friction < 0.1:  # Slippery
-            self.velocity_x -= self.acceleration * self.dt
-            self.velocity_x = max(self.velocity_x, -self.max_speed)
+    def _update_rects(self):
+        half_w = self.sprite_width / 2
+        half_h = self.sprite_height / 2
+        self._player_rect.centerx = int(self.player_pos.x)
+        self._player_rect.centery = int(self.player_pos.y)
+        self._feet_rect.centerx = int(self.player_pos.x)
+        self._feet_rect.centery = int(self.player_pos.y) + 1
+
+    def get_rect(self):
+        self._update_rects()
+        return self._player_rect
+
+    def move_left(self, dt: float = None):
+        if dt is None:
+            dt = self.dt
+        self._move_input = True
+        if self.is_on_ground and self.friction < 0.1:
+            self.velocity_x -= self.acceleration * dt
+            self.velocity_x = max(self.velocity_x, -self.max_speed * self.speed_multiplier)
         else:
             speed = self.base_speed * self.speed_multiplier
-            self.player_pos.x -= speed * self.dt
+            if self.is_on_ground:
+                self.player_pos.x -= speed * dt
             self.velocity_x = -speed
 
-
-    def move_right(self):
-        # On slippery platforms, use acceleration. Otherwise, direct movement
-        if self.is_on_ground and self.friction < 0.1:  # Slippery
-            self.velocity_x += self.acceleration * self.dt
-            self.velocity_x = min(self.velocity_x, self.max_speed)
+    def move_right(self, dt: float = None):
+        if dt is None:
+            dt = self.dt
+        self._move_input = True
+        if self.is_on_ground and self.friction < 0.1:
+            self.velocity_x += self.acceleration * dt
+            self.velocity_x = min(self.velocity_x, self.max_speed * self.speed_multiplier)
         else:
             speed = self.base_speed * self.speed_multiplier
-            self.player_pos.x += speed * self.dt
+            if self.is_on_ground:
+                self.player_pos.x += speed * dt
             self.velocity_x = speed
 
+    def apply_velocity(self, dt: float):
+        self.player_pos.y += self.velocity_y * dt
+        if self.friction < 0.1 or not self.is_on_ground:
+            self.player_pos.x += self.velocity_x * dt
 
     def jump(self):
         if not self.is_on_ground:
@@ -60,74 +88,60 @@ class Spieler:
         jump_velocity = self.jump_strength
 
         if self.current_platform and self.current_platform.is_boost_up():
-            jump_velocity = self.boost_jump_strength
+            jump_velocity = self.current_platform.get_boost_power()
 
         self.velocity_y = jump_velocity
         self.is_on_ground = False
         self.current_platform = None
 
-
     def on_ground(self):
         return self.is_on_ground
 
     def apply_physics(self, dt):
-        # prev_x and prev_y are now set in GameScreen before movement
-
-        # Apply gravity
         if not self.is_on_ground:
             self.velocity_y += self.gravity * dt
-            # Clamp falling speed to prevent tunneling
             self.velocity_y = min(self.velocity_y, self.max_fall_speed)
-            self.velocity_x = (
-                0  # Stop horizontal movement in air if not on slippery surface
-            )
-        else:
-            self.velocity_y = 0
-            # Only apply friction on slippery platforms
-            if self.friction < 0.1 and abs(self.velocity_x) > 0:
-                # Calculate deceleration based on friction for slippery surfaces
-                deceleration = self.friction * 1000 * dt
-                if abs(self.velocity_x) <= deceleration:
+            if not self._move_input:
+                if self.friction >= 0.1:
                     self.velocity_x = 0
                 else:
-                    self.velocity_x -= deceleration * (1 if self.velocity_x > 0 else -1)
-            elif self.friction >= 0.1:
-                # On normal platforms, stop immediately when not pressing keys
-                self.velocity_x = 0
+                    deceleration = self.friction * 1000 * dt
+                    if abs(self.velocity_x) <= deceleration:
+                        self.velocity_x = 0
+                    else:
+                        self.velocity_x -= deceleration * (1 if self.velocity_x > 0 else -1)
+        else:
+            self.velocity_y = 0
+            if not self._move_input:
+                if self.friction < 0.1 and abs(self.velocity_x) > 0:
+                    deceleration = self.friction * 1000 * dt
+                    if abs(self.velocity_x) <= deceleration:
+                        self.velocity_x = 0
+                    else:
+                        self.velocity_x -= deceleration * (1 if self.velocity_x > 0 else -1)
+                elif self.friction >= 0.1:
+                    self.velocity_x = 0
+        self._move_input = False
 
-        # Apply velocities to position (only for slippery or air movement)
-        if self.friction < 0.1 or not self.is_on_ground:
-            self.player_pos.x += self.velocity_x * dt
-        self.player_pos.y += self.velocity_y * dt
+    def get_substeps(self, dt: float) -> int:
+        max_speed = max(abs(self.velocity_x), abs(self.velocity_y))
+        if max_speed <= 0:
+            return 1
+        min_dimension = min(self.sprite_width, self.sprite_height)
+        steps = max(1, int(max_speed * dt / (min_dimension * 0.5)) + 1)
+        return min(steps, 8)
 
-    def get_rect(self):
-        """Get collision rectangle based on sprite dimensions"""
-        return pygame.Rect(
-            self.player_pos.x - self.sprite_width / 2,
-            self.player_pos.y - self.sprite_height / 2,
-            self.sprite_width,
-            self.sprite_height,
-        )
-
-    def check_platform_collision(self, platforms: list[Platform], adjacent_platforms: list[Platform] = None):
-        """Check for collisions with platforms.
-        
-        Args:
-            platforms: List of platforms on the current page
-            adjacent_platforms: Optional list of platforms from adjacent pages for boundary collision detection
-        """
+    def check_platform_collision(self, platforms: list[Platform], adjacent_platforms: Optional[list[Platform]] = None):
         self.is_on_ground = False
-        self.is_against_wall = False  # Track if player is touching a wall
-        player_rect = self.get_rect()
-        feet_rect = player_rect.copy()
-        feet_rect.y += 1
+        self.is_against_wall = False
+        self._update_rects()
+        player_rect = self._player_rect
+        feet_rect = self._feet_rect
 
-        # Combine current and adjacent platforms for comprehensive collision detection
         all_platforms = list(platforms)
         if adjacent_platforms:
             all_platforms.extend(adjacent_platforms)
 
-        # previous / current edges for more reliable axis resolution
         prev_top = self.prev_y - self.sprite_height / 2
         prev_bottom = self.prev_y + self.sprite_height / 2
         prev_left = self.prev_x - self.sprite_width / 2
@@ -138,39 +152,28 @@ class Spieler:
         curr_left = self.player_pos.x - self.sprite_width / 2
         curr_right = self.player_pos.x + self.sprite_width / 2
 
-        # Broad-phase collision query to avoid scanning distant platforms.
-        # Covers movement sweep from previous to current position with tolerance.
         sweep_left = min(prev_left, curr_left) - 4
         sweep_top = min(prev_top, curr_top) - 4
         sweep_right = max(prev_right, curr_right) + 4
         sweep_bottom = max(prev_bottom, curr_bottom) + 4
-        sweep_rect = pygame.Rect(
-            int(sweep_left),
-            int(sweep_top),
-            int(sweep_right - sweep_left),
-            int(sweep_bottom - sweep_top),
-        )
-        query_rect = sweep_rect.inflate(self.sprite_width * 2, self.sprite_height * 2)
+        self._sweep_rect.x = int(sweep_left)
+        self._sweep_rect.y = int(sweep_top)
+        self._sweep_rect.width = int(sweep_right - sweep_left)
+        self._sweep_rect.height = int(sweep_bottom - sweep_top)
+        query_rect = self._sweep_rect.inflate(self.sprite_width * 2, self.sprite_height * 2)
         candidate_platforms = [
             platform for platform in all_platforms if query_rect.colliderect(platform.rect)
         ]
 
-        # First pass: check for ground collision (highest priority)
         self.current_platform = None
-        self.speed_multiplier = 1.0
         for platform in candidate_platforms:
-            # Skip death platforms - don't allow standing on them
             if platform.is_deadly():
                 continue
             if platform.is_noclip():
                 continue
 
-            # More robust ground collision: check if we're moving downward and crossing the platform top
-            # Allow small tolerance for edge cases
             if feet_rect.colliderect(platform.rect) and self.velocity_y >= 0:
-                # Check if we crossed from above the platform
-                if prev_bottom <= platform.rect.top + 2:  # Small tolerance
-                    # Ensure we're actually overlapping horizontally
+                if prev_bottom <= platform.rect.top + 2:
                     if (
                         curr_right > platform.rect.left
                         and curr_left < platform.rect.right
@@ -185,31 +188,25 @@ class Spieler:
                         else:
                             self.speed_multiplier = 1.0
 
-                        # Inherit platform velocity if it's moving
                         if hasattr(platform, "velocity_x") and platform.velocity_x != 0:
                             self.player_pos.x += platform.velocity_x * self.dt
                         break
 
-        # Second pass: check for ceiling and wall collisions (only if not grounded or different platforms)
-        player_rect = self.get_rect()  # Update rect after potential ground correction
+        self._update_rects()
+        player_rect = self._player_rect
         for platform in candidate_platforms:
-            # Skip death platforms - they don't block movement
             if platform.is_noclip() or platform.is_deadly():
                 continue
 
-            # Skip all collision checks for the platform we're currently standing on
-            # This prevents wall collision logic from triggering when at platform edges
             if self.is_on_ground and platform == self.current_platform:
                 continue
 
-            # Allow seamless movement across platform seams on the same top level
             if self.is_on_ground and self.current_platform:
                 same_top = platform.rect.top == self.current_platform.rect.top
                 if same_top and curr_bottom <= platform.rect.top + 2:
                     continue
 
             if player_rect.colliderect(platform.rect):
-                # Head (bottom of platform) collision when moving up
                 if (
                     self.velocity_y < 0
                     and prev_top >= platform.rect.bottom
@@ -219,25 +216,21 @@ class Spieler:
                     self.velocity_y = 0
                     continue
 
-                # Side collisions: detect approach side using previous X edges
-                # Only apply if there's clear horizontal movement into the platform
                 if (
                     prev_right <= platform.rect.left + 1
                     and curr_right > platform.rect.left
-                ):  # Tighter tolerance
-                    # collided from left -> push player to left side of platform
+                ):
                     self.player_pos.x = platform.rect.left - self.sprite_width / 2
-                    self.velocity_x = 0  # Stop horizontal velocity on wall hit
+                    self.velocity_x = 0
                     self.is_against_wall = True
                     continue
 
                 if (
                     prev_left >= platform.rect.right - 1
                     and curr_left < platform.rect.right
-                ):  # Tighter tolerance
-                    # collided from right -> push player to right side of platform
+                ):
                     self.player_pos.x = platform.rect.right + self.sprite_width / 2
-                    self.velocity_x = 0  # Stop horizontal velocity on wall hit
+                    self.velocity_x = 0
                     self.is_against_wall = True
                     continue
 
@@ -245,7 +238,6 @@ class Spieler:
                 if platform_type == Platform.SLIPPERY:
                     self.prev_x = self.player_pos.x
                     self.player_pos.x += (self.player_pos.x - self.prev_x) * 0.2
-                    pass  # This would be integrated with player movement logic
 
     def check_special_platform_interactions(self, platforms, current_checkpoint):
         """
@@ -257,12 +249,15 @@ class Spieler:
         should_respawn = False
 
         for platform in platforms:
+            if platform.is_noclip():
+                continue
             if player_rect.colliderect(platform.rect):
                 # Death platform - trigger respawn
                 if platform.is_deadly():
                     self.player_pos = current_checkpoint.copy()
                     self.velocity_x = 0
                     self.velocity_y = 0
+                    self.speed_multiplier = 1.0
                     return (current_checkpoint, True)
 
                 # Checkpoint platform - save position
@@ -284,5 +279,6 @@ class Spieler:
             self.player_pos = current_checkpoint.copy()
             self.velocity_x = 0
             self.velocity_y = 0
+            self.speed_multiplier = 1.0
             return True
         return False
