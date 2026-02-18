@@ -3,6 +3,7 @@ import os
 import shutil
 
 from utils.paths import data_root, levels_root, bundled_data_root, bundled_levels_root
+from utils.level_codec import load_level as _load_level_file
 
 data_dir = data_root()
 settings_path = os.path.join(data_dir, "settings.json")
@@ -98,17 +99,21 @@ def load_worlds(force_reload=False):
         if not os.path.isdir(world_path):
             continue
         levels = []
+        # Collect level files; prefer .plvl over .json when both exist for the
+        # same base name (e.g. Plains.plvl wins over Plains.json).
+        _seen_bases: dict = {}
         for entry in sorted(os.listdir(world_path)):
-            if not entry.endswith(".json"):
-                continue
+            if entry.endswith(".plvl") or entry.endswith(".json"):
+                base = os.path.splitext(entry)[0]
+                ext = os.path.splitext(entry)[1]
+                # .plvl overrides .json for the same base name
+                if base not in _seen_bases or ext == ".plvl":
+                    _seen_bases[base] = entry
+
+        for entry in sorted(_seen_bases.values()):
             level_path = os.path.join(world_path, entry)
-            level_name = entry
-            try:
-                with open(level_path, "r", encoding="utf-8") as f:
-                    level_data = json.load(f)
-                level_name = level_data.get("name", entry)
-            except (OSError, json.JSONDecodeError):
-                level_data = {}
+            level_data = _load_level_file(level_path) or {}
+            level_name = level_data.get("name", entry)
             levels.append(
                 {
                     "id": entry,

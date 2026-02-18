@@ -360,10 +360,11 @@ class Platform:
         offset_y = self.rect.y
         for cell in self.cells:
             draw_rect = cell.rect.move(-offset_x, -offset_y)
+            # Always draw the solid colour first so transparent texture pixels
+            # fall back to the cell colour rather than exposing the raw display.
+            pygame.draw.rect(surface, cell.color, draw_rect)
             if cell.texture_scaled:
                 surface.blit(cell.texture_scaled, draw_rect.topleft)
-            else:
-                pygame.draw.rect(surface, cell.color, draw_rect)
 
         if not self.texture:
             self._draw_special_indicators(

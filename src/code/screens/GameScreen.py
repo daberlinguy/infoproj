@@ -10,6 +10,7 @@ from assets.assets import getFont, Texture, assets_path
 from screens.SettingsScreen import SETTINGS
 from data.storage import load_worlds, save_settings
 from utils.level_data import LevelDataUtils
+from utils.level_codec import load_level as _load_level_file
 from utils.platform_types import PlatformTypes
 
 
@@ -148,11 +149,9 @@ class GameScreen(Screen):
         if not level_path or not os.path.exists(level_path):
             return
 
-        try:
-            with open(level_path, "r", encoding="utf-8") as f:
-                level_data = json.load(f)
-        except (OSError, json.JSONDecodeError) as e:
-            print(f"Error loading level file: {e}")
+        level_data = _load_level_file(level_path)
+        if level_data is None:
+            print(f"Error loading level file: {level_path}")
             return
 
         self.level_data = level_data

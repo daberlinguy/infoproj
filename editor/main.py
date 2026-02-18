@@ -10,6 +10,13 @@ import json
 import os
 import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src", "code"))
+try:
+    from utils.level_codec import encode as _plvl_encode, decode as _plvl_decode
+    _CODEC_AVAILABLE = True
+except ImportError:
+    _CODEC_AVAILABLE = False
+
 from PyQt6.QtCore import Qt, QRectF
 from PyQt6.QtGui import QColor, QPen, QBrush, QPainter, QPixmap, QKeySequence, QFont
 from PyQt6.QtWidgets import (
@@ -374,16 +381,20 @@ class LevelEditor(QMainWindow):
         update_btn.clicked.connect(self._update_platform)
         remove_btn = QPushButton("Remove Platform")
         remove_btn.clicked.connect(self._remove_platform)
-        load_btn = QPushButton("Load JSON")
-        load_btn.clicked.connect(self._load_json)
+        load_btn = QPushButton("Load")
+        load_btn.clicked.connect(self._load_level)
         save_btn = QPushButton("Save JSON")
         save_btn.clicked.connect(self._save_json)
+        save_plvl_btn = QPushButton("Save .plvl")
+        save_plvl_btn.clicked.connect(self._save_plvl)
+        save_plvl_btn.setToolTip("Save in compact binary format (~90% smaller)")
 
         layout.addWidget(add_btn)
         layout.addWidget(update_btn)
         layout.addWidget(remove_btn)
         layout.addWidget(load_btn)
         layout.addWidget(save_btn)
+        layout.addWidget(save_plvl_btn)
         return layout
 
     def _build_text_form(self):
@@ -735,15 +746,22 @@ class LevelEditor(QMainWindow):
             self._refresh_platform_list()
             self._set_status("Platform removed.")
 
-    def _load_json(self):
+    def _load_level(self):
         path, _ = QFileDialog.getOpenFileName(
-            self, "Open Level JSON", "", "JSON Files (*.json)"
+            self, "Open Level", "", "Level Files (*.json *.plvl);;JSON (*.json);;Binary Level (*.plvl)"
         )
         if not path:
             return
         try:
-            with open(path, "r", encoding="utf-8") as f:
-                self.level_data = json.load(f)
+            if path.endswith(".plvl"):
+                if not _CODEC_AVAILABLE:
+                    QMessageBox.critical(self, "Codec unavailable", "level_codec module not found.")
+                    return
+                with open(path, "rb") as f:
+                    self.level_data = _plvl_decode(f.read())
+            else:
+                with open(path, "r", encoding="utf-8") as f:
+                    self.level_data = json.load(f)
             self.current_path = path
             self.level_data.setdefault("page_width_cells", DEFAULT_GRID_COLUMNS)
             self.level_data.setdefault("page_height_cells", DEFAULT_GRID_ROWS)
@@ -756,12 +774,15 @@ class LevelEditor(QMainWindow):
             self.undo_stack.clear()
             self.redo_stack.clear()
             self._set_status(f"Loaded {os.path.basename(path)}")
-        except (OSError, json.JSONDecodeError) as exc:
+        except Exception as exc:
             QMessageBox.critical(self, "Load failed", str(exc))
+
+    # keep old name as alias so any external calls still work
+    _load_json = _load_level
 
     def _save_json(self):
         self._sync_level_fields()
-        if not self.current_path:
+        if not self.current_path or self.current_path.endswith(".plvl"):
             path, _ = QFileDialog.getSaveFileName(
                 self, "Save Level JSON", "", "JSON Files (*.json)"
             )
@@ -774,6 +795,34 @@ class LevelEditor(QMainWindow):
                 json.dump(payload, f, indent=2)
             self._set_status(f"Saved {os.path.basename(self.current_path)}")
         except OSError as exc:
+            QMessageBox.critical(self, "Save failed", str(exc))
+
+    def _save_plvl(self):
+        if not _CODEC_AVAILABLE:
+            QMessageBox.critical(self, "Codec unavailable", "level_codec module not found.")
+            return
+        self._sync_level_fields()
+        # Suggest the same base name but with .plvl extension
+        default_path = ""
+        if self.current_path:
+            default_path = os.path.splitext(self.current_path)[0] + ".plvl"
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save Binary Level (.plvl)", default_path, "Binary Level (*.plvl)"
+        )
+        if not path:
+            return
+        try:
+            payload = self._build_save_payload()
+            with open(path, "wb") as f:
+                f.write(_plvl_encode(payload))
+            json_size = len(json.dumps(payload).encode())
+            plvl_size = os.path.getsize(path)
+            ratio = (1 - plvl_size / json_size) * 100 if json_size else 0
+            self._set_status(
+                f"Saved {os.path.basename(path)}  "
+                f"({plvl_size // 1024} KB vs {json_size // 1024} KB JSON, {ratio:.0f}% smaller)"
+            )
+        except Exception as exc:
             QMessageBox.critical(self, "Save failed", str(exc))
 
     def _apply_level_to_form(self):
