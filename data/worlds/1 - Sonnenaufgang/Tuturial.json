@@ -1165,7 +1165,7 @@
           "y2": 31,
           "grid_size": 32,
           "types": [
-            "NORMAL"
+            "SLOW_DOWN"
           ],
           "color": [
             120,
@@ -1182,7 +1182,7 @@
           "y2": 31,
           "grid_size": 32,
           "types": [
-            "NORMAL"
+            "SLOW_DOWN"
           ],
           "color": [
             120,
@@ -1199,7 +1199,7 @@
           "y2": 31,
           "grid_size": 32,
           "types": [
-            "NORMAL"
+            "SLOW_DOWN"
           ],
           "color": [
             120,
@@ -1216,7 +1216,7 @@
           "y2": 31,
           "grid_size": 32,
           "types": [
-            "NORMAL"
+            "SLOW_DOWN"
           ],
           "color": [
             120,
@@ -3146,6 +3146,40 @@
           ],
           "layer": 0,
           "texture": "DIRT"
+        },
+        {
+          "x1": 39,
+          "y1": 30,
+          "x2": 39,
+          "y2": 30,
+          "grid_size": 32,
+          "types": [
+            "NOCLIP"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBWEB"
+        },
+        {
+          "x1": 42,
+          "y1": 30,
+          "x2": 42,
+          "y2": 30,
+          "grid_size": 32,
+          "types": [
+            "NOCLIP"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBWEB"
         }
       ]
     },

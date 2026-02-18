@@ -16708,474 +16708,6 @@
         },
         {
           "x1": 18,
-          "y1": 20,
-          "x2": 18,
-          "y2": 20,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 20,
-          "x2": 19,
-          "y2": 20,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 21,
-          "x2": 18,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 21,
-          "x2": 19,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 22,
-          "x2": 18,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 22,
-          "x2": 19,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 23,
-          "x2": 18,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 23,
-          "x2": 19,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 24,
-          "x2": 18,
-          "y2": 24,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 24,
-          "x2": 19,
-          "y2": 24,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 25,
-          "x2": 18,
-          "y2": 25,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 25,
-          "x2": 19,
-          "y2": 25,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 26,
-          "x2": 18,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 26,
-          "x2": 19,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 27,
-          "x2": 18,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 27,
-          "x2": 19,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 28,
-          "x2": 18,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 28,
-          "x2": 19,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 29,
-          "x2": 18,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 29,
-          "x2": 19,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 30,
-          "x2": 18,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 30,
-          "x2": 19,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 31,
-          "x2": 18,
-          "y2": 31,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 31,
-          "x2": 19,
-          "y2": 31,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
-          "y1": 32,
-          "x2": 18,
-          "y2": 32,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 19,
-          "y1": 32,
-          "x2": 19,
-          "y2": 32,
-          "grid_size": 32,
-          "types": [
-            "NOCLIP"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 18,
           "y1": 33,
           "x2": 18,
           "y2": 33,
@@ -20487,24 +20019,6 @@
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 20,
-          "x2": 17,
-          "y2": 20,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
           "x1": 20,
           "y1": 19,
           "x2": 20,
@@ -20527,24 +20041,6 @@
           "y1": 19,
           "x2": 21,
           "y2": 19,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 4.000000000000002,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
-          "y1": 20,
-          "x2": 20,
-          "y2": 20,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23151,24 +22647,6 @@
           "texture": "SPRUCE_PLANKS"
         },
         {
-          "x1": 16,
-          "y1": 20,
-          "x2": 16,
-          "y2": 20,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": 0,
-          "speed_multiplier": 0.9999999999999997,
-          "texture": "OAK_PLANKS"
-        },
-        {
           "x1": 15,
           "y1": 19,
           "x2": 15,
@@ -23187,44 +22665,10 @@
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 15,
-          "y1": 21,
-          "x2": 15,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 16,
-          "y1": 21,
-          "x2": 16,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
           "x1": 17,
-          "y1": 21,
+          "y1": 20,
           "x2": 17,
-          "y2": 21,
+          "y2": 20,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23234,14 +22678,51 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
+          "texture": "OAK_PLANKS"
+        },
+        {
+          "x1": 18,
+          "y1": 20,
+          "x2": 18,
+          "y2": 20,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": -4,
+          "boost_power": -950,
+          "texture": "OAK_PLANKS"
+        },
+        {
+          "x1": 19,
+          "y1": 20,
+          "x2": 19,
+          "y2": 20,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
           "x1": 20,
-          "y1": 21,
+          "y1": 20,
           "x2": 20,
-          "y2": 21,
+          "y2": 20,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23251,13 +22732,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 21,
+          "x1": 18,
           "y1": 21,
-          "x2": 21,
+          "x2": 18,
           "y2": 21,
           "grid_size": 32,
           "types": [
@@ -23268,13 +22750,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 22,
+          "x1": 19,
           "y1": 21,
-          "x2": 22,
+          "x2": 19,
           "y2": 21,
           "grid_size": 32,
           "types": [
@@ -23285,64 +22768,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 23,
-          "y1": 21,
-          "x2": 23,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 21,
-          "x2": 24,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 21,
-          "x2": 25,
-          "y2": 21,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
+          "x1": 18,
           "y1": 22,
-          "x2": 15,
+          "x2": 18,
           "y2": 22,
           "grid_size": 32,
           "types": [
@@ -23353,13 +22786,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 16,
+          "x1": 19,
           "y1": 22,
-          "x2": 16,
+          "x2": 19,
           "y2": 22,
           "grid_size": 32,
           "types": [
@@ -23370,132 +22804,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 22,
-          "x2": 17,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
-          "y1": 22,
-          "x2": 20,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 21,
-          "y1": 22,
-          "x2": 21,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 22,
-          "y1": 22,
-          "x2": 22,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 22,
-          "x2": 23,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 22,
-          "x2": 24,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 22,
-          "x2": 25,
-          "y2": 22,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
+          "x1": 18,
           "y1": 23,
-          "x2": 15,
+          "x2": 18,
           "y2": 23,
           "grid_size": 32,
           "types": [
@@ -23506,13 +22822,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 16,
+          "x1": 19,
           "y1": 23,
-          "x2": 16,
+          "x2": 19,
           "y2": 23,
           "grid_size": 32,
           "types": [
@@ -23523,132 +22840,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 23,
-          "x2": 17,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
-          "y1": 23,
-          "x2": 20,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 21,
-          "y1": 23,
-          "x2": 21,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 22,
-          "y1": 23,
-          "x2": 22,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 23,
-          "x2": 23,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 23,
-          "x2": 24,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 23,
-          "x2": 25,
-          "y2": 23,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
+          "x1": 18,
           "y1": 24,
-          "x2": 20,
+          "x2": 18,
           "y2": 24,
           "grid_size": 32,
           "types": [
@@ -23659,13 +22858,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 21,
+          "x1": 19,
           "y1": 24,
-          "x2": 21,
+          "x2": 19,
           "y2": 24,
           "grid_size": 32,
           "types": [
@@ -23676,81 +22876,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 22,
-          "y1": 24,
-          "x2": 22,
-          "y2": 24,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 24,
-          "x2": 23,
-          "y2": 24,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 24,
-          "x2": 24,
-          "y2": 24,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 24,
-          "x2": 25,
-          "y2": 24,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
+          "x1": 18,
           "y1": 25,
-          "x2": 15,
+          "x2": 18,
           "y2": 25,
           "grid_size": 32,
           "types": [
@@ -23761,13 +22894,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 16,
+          "x1": 19,
           "y1": 25,
-          "x2": 16,
+          "x2": 19,
           "y2": 25,
           "grid_size": 32,
           "types": [
@@ -23778,81 +22912,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 25,
-          "x2": 17,
-          "y2": 25,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 25,
-          "x2": 23,
-          "y2": 25,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 25,
-          "x2": 24,
-          "y2": 25,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 25,
-          "x2": 25,
-          "y2": 25,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
+          "x1": 18,
           "y1": 26,
-          "x2": 15,
+          "x2": 18,
           "y2": 26,
           "grid_size": 32,
           "types": [
@@ -23863,13 +22930,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 16,
+          "x1": 19,
           "y1": 26,
-          "x2": 16,
+          "x2": 19,
           "y2": 26,
           "grid_size": 32,
           "types": [
@@ -23880,132 +22948,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 26,
-          "x2": 17,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
-          "y1": 26,
-          "x2": 20,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 21,
-          "y1": 26,
-          "x2": 21,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 22,
-          "y1": 26,
-          "x2": 22,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 26,
-          "x2": 23,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 26,
-          "x2": 24,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 26,
-          "x2": 25,
-          "y2": 26,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
+          "x1": 18,
           "y1": 27,
-          "x2": 15,
+          "x2": 18,
           "y2": 27,
           "grid_size": 32,
           "types": [
@@ -24016,13 +22966,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 16,
+          "x1": 19,
           "y1": 27,
-          "x2": 16,
+          "x2": 19,
           "y2": 27,
           "grid_size": 32,
           "types": [
@@ -24033,132 +22984,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 27,
-          "x2": 17,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
-          "y1": 27,
-          "x2": 20,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 21,
-          "y1": 27,
-          "x2": 21,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 22,
-          "y1": 27,
-          "x2": 22,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 27,
-          "x2": 23,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 27,
-          "x2": 24,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 27,
-          "x2": 25,
-          "y2": 27,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
+          "x1": 18,
           "y1": 28,
-          "x2": 15,
+          "x2": 18,
           "y2": 28,
           "grid_size": 32,
           "types": [
@@ -24169,13 +23002,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 16,
+          "x1": 19,
           "y1": 28,
-          "x2": 16,
+          "x2": 19,
           "y2": 28,
           "grid_size": 32,
           "types": [
@@ -24186,132 +23020,14 @@
             120,
             120
           ],
-          "layer": -1,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 28,
-          "x2": 17,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
-          "y1": 28,
-          "x2": 20,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 21,
-          "y1": 28,
-          "x2": 21,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 22,
-          "y1": 28,
-          "x2": 22,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 28,
-          "x2": 23,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 28,
-          "x2": 24,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 25,
-          "y1": 28,
-          "x2": 25,
-          "y2": 28,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -1,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
+          "x1": 18,
           "y1": 29,
-          "x2": 20,
+          "x2": 18,
           "y2": 29,
           "grid_size": 32,
           "types": [
@@ -24322,13 +23038,14 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 21,
+          "x1": 19,
           "y1": 29,
-          "x2": 21,
+          "x2": 19,
           "y2": 29,
           "grid_size": 32,
           "types": [
@@ -24339,64 +23056,14 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 22,
-          "y1": 29,
-          "x2": 22,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 29,
-          "x2": 23,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 29,
-          "x2": 24,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
+          "x1": 18,
           "y1": 30,
-          "x2": 20,
+          "x2": 18,
           "y2": 30,
           "grid_size": 32,
           "types": [
@@ -24407,13 +23074,14 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 21,
+          "x1": 19,
           "y1": 30,
-          "x2": 21,
+          "x2": 19,
           "y2": 30,
           "grid_size": 32,
           "types": [
@@ -24424,64 +23092,14 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 22,
-          "y1": 30,
-          "x2": 22,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 23,
-          "y1": 30,
-          "x2": 23,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 30,
-          "x2": 24,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 20,
+          "x1": 18,
           "y1": 31,
-          "x2": 20,
+          "x2": 18,
           "y2": 31,
           "grid_size": 32,
           "types": [
@@ -24492,13 +23110,14 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 21,
+          "x1": 19,
           "y1": 31,
-          "x2": 21,
+          "x2": 19,
           "y2": 31,
           "grid_size": 32,
           "types": [
@@ -24509,14 +23128,15 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 22,
-          "y1": 31,
-          "x2": 22,
-          "y2": 31,
+          "x1": 18,
+          "y1": 32,
+          "x2": 18,
+          "y2": 32,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -24526,14 +23146,15 @@
             120,
             120
           ],
-          "layer": -2,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 23,
-          "y1": 31,
-          "x2": 23,
-          "y2": 31,
+          "x1": 19,
+          "y1": 32,
+          "x2": 19,
+          "y2": 32,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -24543,126 +23164,8 @@
             120,
             120
           ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 24,
-          "y1": 31,
-          "x2": 24,
-          "y2": 31,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -2,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
-          "y1": 29,
-          "x2": 15,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -3,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 16,
-          "y1": 29,
-          "x2": 16,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -3,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 17,
-          "y1": 29,
-          "x2": 17,
-          "y2": 29,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -3,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 15,
-          "y1": 30,
-          "x2": 15,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -3,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 16,
-          "y1": 30,
-          "x2": 16,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -3,
-          "texture": "OAK_PLANKS"
-        },
-        {
-          "x1": 17,
-          "y1": 30,
-          "x2": 17,
-          "y2": 30,
-          "grid_size": 32,
-          "types": [
-            "NORMAL"
-          ],
-          "color": [
-            120,
-            120,
-            120
-          ],
-          "layer": -3,
+          "layer": -4,
+          "boost_power": -950,
           "texture": "OAK_PLANKS"
         }
       ]

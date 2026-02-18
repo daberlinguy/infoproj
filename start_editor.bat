@@ -1,1 +1,2 @@
-.\parkour\Scripts\python.exe .\editor\main.py
+@echo off
+call .\start.bat -e

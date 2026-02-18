@@ -111,7 +111,7 @@ class TitleScreen(Screen):
             btn.onHoverRelease = lambda b=btn: b.setImage(self.button_texture)
 
         # Set Title Text
-        self.title_text = "Platformer"
+        self.title_text = "Parkuhr"
         self.title_width = getFont(60).size(self.title_text)[0]
 
         super().__init__(screen, caption)

@@ -7,7 +7,7 @@ cd "$ROOT_DIR"
 ./parkour/bin/python -m PyInstaller \
   --noconfirm \
   --clean \
-  --name ParkourGame \
+  --name ParkuhrGame \
   --onefile \
   --windowed \
   --paths src/code \

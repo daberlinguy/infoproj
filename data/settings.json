@@ -13,9 +13,10 @@
           "Nether.json": true,
           "test22.json": true,
           "Example.json": true,
-          "Plains.json": true
+          "Plains.json": true,
+          "Tuturial.json": true
         },
-        "complete": false
+        "complete": true
       },
       "2 - Tiefenforschung": {
         "levels": {

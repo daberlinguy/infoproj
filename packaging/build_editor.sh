@@ -7,7 +7,7 @@ cd "$ROOT_DIR"
 ./parkour/bin/python -m PyInstaller \
   --noconfirm \
   --clean \
-  --name ParkourEditor \
+  --name ParkuhrEditor \
   --onefile \
   --windowed \
   --add-data "src/resources:resources" \
