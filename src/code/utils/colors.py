@@ -48,11 +48,13 @@ class ColorUtils:
                 int(color[2] * multiplier),
             )
         else:
-            # Foreground: brighten towards white
+            # Foreground: brighten towards white, capped at 30 % to avoid
+            # colours washing out to pure white at higher layer values.
+            effective_tint = min(tint_factor, 0.3)
             return (
-                int(color[0] + (255 - color[0]) * tint_factor),
-                int(color[1] + (255 - color[1]) * tint_factor),
-                int(color[2] + (255 - color[2]) * tint_factor),
+                int(color[0] + (255 - color[0]) * effective_tint),
+                int(color[1] + (255 - color[1]) * effective_tint),
+                int(color[2] + (255 - color[2]) * effective_tint),
             )
 
     @staticmethod
@@ -84,9 +86,9 @@ class ColorUtils:
             dark_overlay.fill((0, 0, 0, int(255 * (1 - multiplier))))
             tinted.blit(dark_overlay, (0, 0))
         else:
-            # Foreground: brighten
+            # Foreground: brighten, capped at 30 % to prevent white wash-out.
             bright_overlay = pygame.Surface(tinted.get_size(), pygame.SRCALPHA)
-            bright_overlay.fill((255, 255, 255, int(255 * min(tint_factor, 1.0))))
+            bright_overlay.fill((255, 255, 255, int(255 * min(tint_factor, 0.3))))
             tinted.blit(bright_overlay, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
 
         return tinted

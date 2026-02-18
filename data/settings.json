@@ -1,8 +1,8 @@
 {
   "debug_mode": false,
   "character": "dave",
-  "selected_world": "1 - Sonnenaufgang",
-  "selected_level": "Tuturial.json",
+  "selected_world": "2 - Tiefenforschung",
+  "selected_level": "Stone.json",
   "progress": {
     "worlds": {
       "1 - Sonnenaufgang": {

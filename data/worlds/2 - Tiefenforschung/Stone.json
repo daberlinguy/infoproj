@@ -15146,7 +15146,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15154,7 +15154,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 5,
@@ -15282,7 +15282,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15290,7 +15290,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 13,
@@ -15401,7 +15401,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15409,7 +15409,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 20,
@@ -15554,7 +15554,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15562,7 +15562,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 29,
@@ -15690,7 +15690,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15698,7 +15698,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 37,
@@ -15809,7 +15809,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15817,7 +15817,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 44,
@@ -15877,7 +15877,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15885,7 +15885,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 48,
@@ -15928,7 +15928,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15936,7 +15936,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 51,
@@ -15962,7 +15962,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -15970,7 +15970,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 53,
@@ -16030,7 +16030,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -16038,7 +16038,7 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
         },
         {
           "x1": 57,
@@ -16081,7 +16081,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "DEATH"
+            "NORMAL"
           ],
           "color": [
             120,
@@ -16089,7 +16089,1571 @@
             120
           ],
           "layer": 0,
-          "texture": "LAVA"
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 4,
+          "y1": 31,
+          "x2": 4,
+          "y2": 31,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 12,
+          "y1": 31,
+          "x2": 12,
+          "y2": 31,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 19,
+          "y1": 31,
+          "x2": 19,
+          "y2": 31,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 28,
+          "y1": 32,
+          "x2": 28,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 36,
+          "y1": 32,
+          "x2": 36,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 43,
+          "y1": 31,
+          "x2": 43,
+          "y2": 31,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 47,
+          "y1": 32,
+          "x2": 47,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 52,
+          "y1": 31,
+          "x2": 52,
+          "y2": 31,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 50,
+          "y1": 32,
+          "x2": 50,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 56,
+          "y1": 32,
+          "x2": 56,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 59,
+          "y1": 30,
+          "x2": 59,
+          "y2": 30,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ICE_BROKEN2"
+        },
+        {
+          "x1": 0,
+          "y1": 4,
+          "x2": 0,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 4,
+          "x2": 1,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 4,
+          "x2": 2,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 4,
+          "x2": 3,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 4,
+          "x2": 4,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 4,
+          "x2": 5,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 4,
+          "x2": 6,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 7,
+          "y1": 4,
+          "x2": 7,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 8,
+          "y1": 4,
+          "x2": 8,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 9,
+          "y1": 4,
+          "x2": 9,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 10,
+          "y1": 4,
+          "x2": 10,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 11,
+          "y1": 4,
+          "x2": 11,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 12,
+          "y1": 4,
+          "x2": 12,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 13,
+          "y1": 4,
+          "x2": 13,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 14,
+          "y1": 4,
+          "x2": 14,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 15,
+          "y1": 4,
+          "x2": 15,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 16,
+          "y1": 4,
+          "x2": 16,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 17,
+          "y1": 4,
+          "x2": 17,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 18,
+          "y1": 4,
+          "x2": 18,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 19,
+          "y1": 4,
+          "x2": 19,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 20,
+          "y1": 4,
+          "x2": 20,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 21,
+          "y1": 4,
+          "x2": 21,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 22,
+          "y1": 4,
+          "x2": 22,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 23,
+          "y1": 4,
+          "x2": 23,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 24,
+          "y1": 4,
+          "x2": 24,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 25,
+          "y1": 4,
+          "x2": 25,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 26,
+          "y1": 4,
+          "x2": 26,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 27,
+          "y1": 4,
+          "x2": 27,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 28,
+          "y1": 4,
+          "x2": 28,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 29,
+          "y1": 4,
+          "x2": 29,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 30,
+          "y1": 4,
+          "x2": 30,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 31,
+          "y1": 4,
+          "x2": 31,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 32,
+          "y1": 4,
+          "x2": 32,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 33,
+          "y1": 4,
+          "x2": 33,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 34,
+          "y1": 4,
+          "x2": 34,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 35,
+          "y1": 4,
+          "x2": 35,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 36,
+          "y1": 4,
+          "x2": 36,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 37,
+          "y1": 4,
+          "x2": 37,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 38,
+          "y1": 4,
+          "x2": 38,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 39,
+          "y1": 4,
+          "x2": 39,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 40,
+          "y1": 4,
+          "x2": 40,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 41,
+          "y1": 4,
+          "x2": 41,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 42,
+          "y1": 4,
+          "x2": 42,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 43,
+          "y1": 4,
+          "x2": 43,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COBBLESTONE"
+        },
+        {
+          "x1": 0,
+          "y1": 5,
+          "x2": 0,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 5,
+          "x2": 1,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 5,
+          "x2": 2,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 5,
+          "x2": 3,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 5,
+          "x2": 4,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 5,
+          "x2": 5,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 0,
+          "x2": 0,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 0,
+          "x2": 1,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 0,
+          "x2": 2,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 0,
+          "x2": 3,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 0,
+          "x2": 4,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 0,
+          "x2": 5,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 0,
+          "x2": 6,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 1,
+          "x2": 0,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 1,
+          "x2": 1,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 1,
+          "x2": 2,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 1,
+          "x2": 3,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 1,
+          "x2": 4,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 1,
+          "x2": 5,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 2,
+          "x2": 0,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 2,
+          "x2": 1,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 2,
+          "x2": 2,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 2,
+          "x2": 3,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 2,
+          "x2": 4,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 2,
+          "x2": 5,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 3,
+          "x2": 0,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 3,
+          "x2": 1,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 3,
+          "x2": 2,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 3,
+          "x2": 3,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 3,
+          "x2": 4,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 32,
+          "x2": 4,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 12,
+          "y1": 32,
+          "x2": 12,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 19,
+          "y1": 32,
+          "x2": 19,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 43,
+          "y1": 32,
+          "x2": 43,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 52,
+          "y1": 32,
+          "x2": 52,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 59,
+          "y1": 31,
+          "x2": 59,
+          "y2": 31,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
+        },
+        {
+          "x1": 59,
+          "y1": 32,
+          "x2": 59,
+          "y2": 32,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE_BRICKS"
         }
       ]
     },
@@ -20529,7 +22093,7 @@
           "y2": 33,
           "grid_size": 32,
           "types": [
-            "NORMAL"
+            "CHECKPOINT"
           ],
           "color": [
             120,
@@ -22665,10 +24229,10 @@
           "texture": "OAK_PLANKS"
         },
         {
-          "x1": 17,
-          "y1": 20,
-          "x2": 17,
-          "y2": 20,
+          "x1": 0,
+          "y1": 0,
+          "x2": 0,
+          "y2": 0,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22678,15 +24242,303 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 1,
+          "y1": 0,
+          "x2": 1,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 0,
+          "x2": 2,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 3,
+          "y1": 0,
+          "x2": 3,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 0,
+          "x2": 4,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 0,
+          "x2": 5,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 0,
+          "x2": 6,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 0,
+          "x2": 7,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 0,
+          "x2": 8,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 9,
+          "y1": 0,
+          "x2": 9,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 10,
+          "y1": 0,
+          "x2": 10,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 11,
+          "y1": 0,
+          "x2": 11,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 0,
+          "x2": 12,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 0,
+          "x2": 13,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 0,
+          "x2": 14,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 0,
+          "x2": 15,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 16,
+          "y1": 0,
+          "x2": 16,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 17,
+          "y1": 0,
+          "x2": 17,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 20,
+          "y1": 0,
           "x2": 18,
-          "y2": 20,
+          "y2": 0,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22696,15 +24548,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 20,
+          "y1": 0,
           "x2": 19,
-          "y2": 20,
+          "y2": 0,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22714,15 +24565,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 20,
-          "y1": 20,
+          "y1": 0,
           "x2": 20,
-          "y2": 20,
+          "y2": 0,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22732,15 +24582,983 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 21,
+          "y1": 0,
+          "x2": 21,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 22,
+          "y1": 0,
+          "x2": 22,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 23,
+          "y1": 0,
+          "x2": 23,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 24,
+          "y1": 0,
+          "x2": 24,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 25,
+          "y1": 0,
+          "x2": 25,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 0,
+          "x2": 26,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 0,
+          "x2": 27,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 0,
+          "x2": 28,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 29,
+          "y1": 0,
+          "x2": 29,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 30,
+          "y1": 0,
+          "x2": 30,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 31,
+          "y1": 0,
+          "x2": 31,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 32,
+          "y1": 0,
+          "x2": 32,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 33,
+          "y1": 0,
+          "x2": 33,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 0,
+          "x2": 34,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 0,
+          "x2": 35,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 36,
+          "y1": 0,
+          "x2": 36,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 37,
+          "y1": 0,
+          "x2": 37,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 0,
+          "x2": 38,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 39,
+          "y1": 0,
+          "x2": 39,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 40,
+          "y1": 0,
+          "x2": 40,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 41,
+          "y1": 0,
+          "x2": 41,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 0,
+          "x2": 42,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 0,
+          "x2": 43,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 44,
+          "y1": 0,
+          "x2": 44,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 45,
+          "y1": 0,
+          "x2": 45,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 0,
+          "x2": 46,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 47,
+          "y1": 0,
+          "x2": 47,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 0,
+          "x2": 48,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 49,
+          "y1": 0,
+          "x2": 49,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 50,
+          "y1": 0,
+          "x2": 50,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 51,
+          "y1": 0,
+          "x2": 51,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 52,
+          "y1": 0,
+          "x2": 52,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 53,
+          "y1": 0,
+          "x2": 53,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 54,
+          "y1": 0,
+          "x2": 54,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 55,
+          "y1": 0,
+          "x2": 55,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 56,
+          "y1": 0,
+          "x2": 56,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 57,
+          "y1": 0,
+          "x2": 57,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 0,
+          "x2": 58,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 0,
+          "x2": 59,
+          "y2": 0,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 1,
+          "x2": 0,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 1,
+          "x2": 1,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 2,
+          "y1": 1,
+          "x2": 2,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 1,
+          "x2": 3,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 1,
+          "x2": 4,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 1,
+          "x2": 5,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 1,
+          "x2": 6,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 1,
+          "x2": 7,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 1,
+          "x2": 8,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 9,
+          "y1": 1,
+          "x2": 9,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 10,
+          "y1": 1,
+          "x2": 10,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 11,
+          "y1": 1,
+          "x2": 11,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 1,
+          "x2": 12,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 1,
+          "x2": 13,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 1,
+          "x2": 14,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 1,
+          "x2": 15,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 16,
+          "y1": 1,
+          "x2": 16,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 17,
+          "y1": 1,
+          "x2": 17,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 21,
+          "y1": 1,
           "x2": 18,
-          "y2": 21,
+          "y2": 1,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22750,15 +25568,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 21,
+          "y1": 1,
           "x2": 19,
-          "y2": 21,
+          "y2": 1,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22768,15 +25585,1000 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 20,
+          "y1": 1,
+          "x2": 20,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 21,
+          "y1": 1,
+          "x2": 21,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 22,
+          "y1": 1,
+          "x2": 22,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 23,
+          "y1": 1,
+          "x2": 23,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 24,
+          "y1": 1,
+          "x2": 24,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 25,
+          "y1": 1,
+          "x2": 25,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 1,
+          "x2": 26,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 1,
+          "x2": 27,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 1,
+          "x2": 28,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 29,
+          "y1": 1,
+          "x2": 29,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 30,
+          "y1": 1,
+          "x2": 30,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 31,
+          "y1": 1,
+          "x2": 31,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 32,
+          "y1": 1,
+          "x2": 32,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 33,
+          "y1": 1,
+          "x2": 33,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 1,
+          "x2": 34,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 1,
+          "x2": 35,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 36,
+          "y1": 1,
+          "x2": 36,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 37,
+          "y1": 1,
+          "x2": 37,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 1,
+          "x2": 38,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 39,
+          "y1": 1,
+          "x2": 39,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 40,
+          "y1": 1,
+          "x2": 40,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 41,
+          "y1": 1,
+          "x2": 41,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 42,
+          "y1": 1,
+          "x2": 42,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 43,
+          "y1": 1,
+          "x2": 43,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 44,
+          "y1": 1,
+          "x2": 44,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 45,
+          "y1": 1,
+          "x2": 45,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 1,
+          "x2": 46,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 47,
+          "y1": 1,
+          "x2": 47,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 1,
+          "x2": 48,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 49,
+          "y1": 1,
+          "x2": 49,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 50,
+          "y1": 1,
+          "x2": 50,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 51,
+          "y1": 1,
+          "x2": 51,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 52,
+          "y1": 1,
+          "x2": 52,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 53,
+          "y1": 1,
+          "x2": 53,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 54,
+          "y1": 1,
+          "x2": 54,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 55,
+          "y1": 1,
+          "x2": 55,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 56,
+          "y1": 1,
+          "x2": 56,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 1,
+          "x2": 57,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 1,
+          "x2": 58,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 1,
+          "x2": 59,
+          "y2": 1,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 2,
+          "x2": 0,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 1,
+          "y1": 2,
+          "x2": 1,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 2,
+          "x2": 2,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 2,
+          "x2": 3,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 2,
+          "x2": 4,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 2,
+          "x2": 5,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 2,
+          "x2": 6,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 2,
+          "x2": 7,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 2,
+          "x2": 8,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 9,
+          "y1": 2,
+          "x2": 9,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 10,
+          "y1": 2,
+          "x2": 10,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 11,
+          "y1": 2,
+          "x2": 11,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 12,
+          "y1": 2,
+          "x2": 12,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 13,
+          "y1": 2,
+          "x2": 13,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 2,
+          "x2": 14,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 2,
+          "x2": 15,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 16,
+          "y1": 2,
+          "x2": 16,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 17,
+          "y1": 2,
+          "x2": 17,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 22,
+          "y1": 2,
           "x2": 18,
-          "y2": 22,
+          "y2": 2,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22786,15 +26588,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 22,
+          "y1": 2,
           "x2": 19,
-          "y2": 22,
+          "y2": 2,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22804,15 +26605,1000 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 20,
+          "y1": 2,
+          "x2": 20,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 21,
+          "y1": 2,
+          "x2": 21,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 22,
+          "y1": 2,
+          "x2": 22,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 23,
+          "y1": 2,
+          "x2": 23,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 24,
+          "y1": 2,
+          "x2": 24,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 25,
+          "y1": 2,
+          "x2": 25,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 2,
+          "x2": 26,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 2,
+          "x2": 27,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 2,
+          "x2": 28,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 29,
+          "y1": 2,
+          "x2": 29,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 30,
+          "y1": 2,
+          "x2": 30,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 31,
+          "y1": 2,
+          "x2": 31,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 32,
+          "y1": 2,
+          "x2": 32,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 33,
+          "y1": 2,
+          "x2": 33,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 2,
+          "x2": 34,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 35,
+          "y1": 2,
+          "x2": 35,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 36,
+          "y1": 2,
+          "x2": 36,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 37,
+          "y1": 2,
+          "x2": 37,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 2,
+          "x2": 38,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 39,
+          "y1": 2,
+          "x2": 39,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 40,
+          "y1": 2,
+          "x2": 40,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 41,
+          "y1": 2,
+          "x2": 41,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 2,
+          "x2": 42,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 2,
+          "x2": 43,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 44,
+          "y1": 2,
+          "x2": 44,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 45,
+          "y1": 2,
+          "x2": 45,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 2,
+          "x2": 46,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 47,
+          "y1": 2,
+          "x2": 47,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 2,
+          "x2": 48,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 49,
+          "y1": 2,
+          "x2": 49,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 50,
+          "y1": 2,
+          "x2": 50,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 51,
+          "y1": 2,
+          "x2": 51,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 52,
+          "y1": 2,
+          "x2": 52,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 53,
+          "y1": 2,
+          "x2": 53,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 54,
+          "y1": 2,
+          "x2": 54,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 55,
+          "y1": 2,
+          "x2": 55,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 56,
+          "y1": 2,
+          "x2": 56,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 2,
+          "x2": 57,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 2,
+          "x2": 58,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 2,
+          "x2": 59,
+          "y2": 2,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 3,
+          "x2": 0,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 1,
+          "y1": 3,
+          "x2": 1,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 3,
+          "x2": 2,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 3,
+          "x2": 3,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 3,
+          "x2": 4,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 3,
+          "x2": 5,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 3,
+          "x2": 6,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 3,
+          "x2": 7,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 3,
+          "x2": 8,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 9,
+          "y1": 3,
+          "x2": 9,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 10,
+          "y1": 3,
+          "x2": 10,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 11,
+          "y1": 3,
+          "x2": 11,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 12,
+          "y1": 3,
+          "x2": 12,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 3,
+          "x2": 13,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 3,
+          "x2": 14,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 3,
+          "x2": 15,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 16,
+          "y1": 3,
+          "x2": 16,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 17,
+          "y1": 3,
+          "x2": 17,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 23,
+          "y1": 3,
           "x2": 18,
-          "y2": 23,
+          "y2": 3,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22822,15 +27608,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 23,
+          "y1": 3,
           "x2": 19,
-          "y2": 23,
+          "y2": 3,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22840,15 +27625,1000 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 20,
+          "y1": 3,
+          "x2": 20,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 21,
+          "y1": 3,
+          "x2": 21,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 22,
+          "y1": 3,
+          "x2": 22,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 23,
+          "y1": 3,
+          "x2": 23,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 24,
+          "y1": 3,
+          "x2": 24,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 25,
+          "y1": 3,
+          "x2": 25,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 3,
+          "x2": 26,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 3,
+          "x2": 27,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 3,
+          "x2": 28,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 29,
+          "y1": 3,
+          "x2": 29,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 30,
+          "y1": 3,
+          "x2": 30,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 31,
+          "y1": 3,
+          "x2": 31,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 32,
+          "y1": 3,
+          "x2": 32,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 33,
+          "y1": 3,
+          "x2": 33,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 3,
+          "x2": 34,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 3,
+          "x2": 35,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 36,
+          "y1": 3,
+          "x2": 36,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 37,
+          "y1": 3,
+          "x2": 37,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 3,
+          "x2": 38,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 39,
+          "y1": 3,
+          "x2": 39,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 40,
+          "y1": 3,
+          "x2": 40,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 41,
+          "y1": 3,
+          "x2": 41,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 3,
+          "x2": 42,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 3,
+          "x2": 43,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 44,
+          "y1": 3,
+          "x2": 44,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 45,
+          "y1": 3,
+          "x2": 45,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 3,
+          "x2": 46,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 47,
+          "y1": 3,
+          "x2": 47,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 3,
+          "x2": 48,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COAL_ORE"
+        },
+        {
+          "x1": 49,
+          "y1": 3,
+          "x2": 49,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 50,
+          "y1": 3,
+          "x2": 50,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 51,
+          "y1": 3,
+          "x2": 51,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 52,
+          "y1": 3,
+          "x2": 52,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 53,
+          "y1": 3,
+          "x2": 53,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 54,
+          "y1": 3,
+          "x2": 54,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 55,
+          "y1": 3,
+          "x2": 55,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 56,
+          "y1": 3,
+          "x2": 56,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 3,
+          "x2": 57,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 3,
+          "x2": 58,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 3,
+          "x2": 59,
+          "y2": 3,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 4,
+          "x2": 0,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 4,
+          "x2": 1,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 4,
+          "x2": 2,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 4,
+          "x2": 3,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 4,
+          "x2": 4,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 4,
+          "x2": 5,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 4,
+          "x2": 6,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 4,
+          "x2": 7,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 4,
+          "x2": 8,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 9,
+          "y1": 4,
+          "x2": 9,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 10,
+          "y1": 4,
+          "x2": 10,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 11,
+          "y1": 4,
+          "x2": 11,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 4,
+          "x2": 12,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 13,
+          "y1": 4,
+          "x2": 13,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 4,
+          "x2": 14,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 4,
+          "x2": 15,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 16,
+          "y1": 4,
+          "x2": 16,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 17,
+          "y1": 4,
+          "x2": 17,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 24,
+          "y1": 4,
           "x2": 18,
-          "y2": 24,
+          "y2": 4,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22858,15 +28628,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 24,
+          "y1": 4,
           "x2": 19,
-          "y2": 24,
+          "y2": 4,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22876,15 +28645,1000 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 20,
+          "y1": 4,
+          "x2": 20,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 21,
+          "y1": 4,
+          "x2": 21,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 22,
+          "y1": 4,
+          "x2": 22,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 23,
+          "y1": 4,
+          "x2": 23,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 24,
+          "y1": 4,
+          "x2": 24,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 25,
+          "y1": 4,
+          "x2": 25,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 4,
+          "x2": 26,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 4,
+          "x2": 27,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 4,
+          "x2": 28,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 29,
+          "y1": 4,
+          "x2": 29,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 30,
+          "y1": 4,
+          "x2": 30,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 31,
+          "y1": 4,
+          "x2": 31,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 32,
+          "y1": 4,
+          "x2": 32,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 33,
+          "y1": 4,
+          "x2": 33,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 4,
+          "x2": 34,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 4,
+          "x2": 35,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 36,
+          "y1": 4,
+          "x2": 36,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 37,
+          "y1": 4,
+          "x2": 37,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 4,
+          "x2": 38,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 39,
+          "y1": 4,
+          "x2": 39,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 40,
+          "y1": 4,
+          "x2": 40,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 41,
+          "y1": 4,
+          "x2": 41,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 4,
+          "x2": 42,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 4,
+          "x2": 43,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 44,
+          "y1": 4,
+          "x2": 44,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 45,
+          "y1": 4,
+          "x2": 45,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 4,
+          "x2": 46,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COAL_ORE"
+        },
+        {
+          "x1": 47,
+          "y1": 4,
+          "x2": 47,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COAL_ORE"
+        },
+        {
+          "x1": 48,
+          "y1": 4,
+          "x2": 48,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 49,
+          "y1": 4,
+          "x2": 49,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 50,
+          "y1": 4,
+          "x2": 50,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 51,
+          "y1": 4,
+          "x2": 51,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 52,
+          "y1": 4,
+          "x2": 52,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 53,
+          "y1": 4,
+          "x2": 53,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 54,
+          "y1": 4,
+          "x2": 54,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 55,
+          "y1": 4,
+          "x2": 55,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 56,
+          "y1": 4,
+          "x2": 56,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 4,
+          "x2": 57,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 4,
+          "x2": 58,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 4,
+          "x2": 59,
+          "y2": 4,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 5,
+          "x2": 0,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 5,
+          "x2": 1,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 5,
+          "x2": 2,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 5,
+          "x2": 3,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 4,
+          "y1": 5,
+          "x2": 4,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 5,
+          "x2": 5,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 6,
+          "y1": 5,
+          "x2": 6,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 5,
+          "x2": 7,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 5,
+          "x2": 8,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 9,
+          "y1": 5,
+          "x2": 9,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 10,
+          "y1": 5,
+          "x2": 10,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 11,
+          "y1": 5,
+          "x2": 11,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 5,
+          "x2": 12,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 5,
+          "x2": 13,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 5,
+          "x2": 14,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 5,
+          "x2": 15,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 16,
+          "y1": 5,
+          "x2": 16,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 17,
+          "y1": 5,
+          "x2": 17,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 25,
+          "y1": 5,
           "x2": 18,
-          "y2": 25,
+          "y2": 5,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22894,15 +29648,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 25,
+          "y1": 5,
           "x2": 19,
-          "y2": 25,
+          "y2": 5,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22912,15 +29665,949 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 20,
+          "y1": 5,
+          "x2": 20,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 21,
+          "y1": 5,
+          "x2": 21,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 22,
+          "y1": 5,
+          "x2": 22,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 23,
+          "y1": 5,
+          "x2": 23,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 24,
+          "y1": 5,
+          "x2": 24,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 25,
+          "y1": 5,
+          "x2": 25,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 5,
+          "x2": 26,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 5,
+          "x2": 27,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 5,
+          "x2": 28,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 29,
+          "y1": 5,
+          "x2": 29,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 31,
+          "y1": 5,
+          "x2": 31,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 33,
+          "y1": 5,
+          "x2": 33,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 5,
+          "x2": 34,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 5,
+          "x2": 35,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 36,
+          "y1": 5,
+          "x2": 36,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 37,
+          "y1": 5,
+          "x2": 37,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 5,
+          "x2": 38,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 39,
+          "y1": 5,
+          "x2": 39,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 40,
+          "y1": 5,
+          "x2": 40,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 41,
+          "y1": 5,
+          "x2": 41,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 5,
+          "x2": 42,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 5,
+          "x2": 43,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 44,
+          "y1": 5,
+          "x2": 44,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 45,
+          "y1": 5,
+          "x2": 45,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 5,
+          "x2": 46,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 47,
+          "y1": 5,
+          "x2": 47,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COAL_ORE"
+        },
+        {
+          "x1": 48,
+          "y1": 5,
+          "x2": 48,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 49,
+          "y1": 5,
+          "x2": 49,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COAL_ORE"
+        },
+        {
+          "x1": 50,
+          "y1": 5,
+          "x2": 50,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 51,
+          "y1": 5,
+          "x2": 51,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 52,
+          "y1": 5,
+          "x2": 52,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 53,
+          "y1": 5,
+          "x2": 53,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 54,
+          "y1": 5,
+          "x2": 54,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 55,
+          "y1": 5,
+          "x2": 55,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 56,
+          "y1": 5,
+          "x2": 56,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 5,
+          "x2": 57,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 5,
+          "x2": 58,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 5,
+          "x2": 59,
+          "y2": 5,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 6,
+          "x2": 0,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 6,
+          "x2": 1,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 6,
+          "x2": 2,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 3,
+          "y1": 6,
+          "x2": 3,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 4,
+          "y1": 6,
+          "x2": 4,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 5,
+          "y1": 6,
+          "x2": 5,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 6,
+          "x2": 6,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 6,
+          "x2": 7,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 6,
+          "x2": 8,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 9,
+          "y1": 6,
+          "x2": 9,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 10,
+          "y1": 6,
+          "x2": 10,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 11,
+          "y1": 6,
+          "x2": 11,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 6,
+          "x2": 12,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 6,
+          "x2": 13,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 6,
+          "x2": 14,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 6,
+          "x2": 15,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 16,
+          "y1": 6,
+          "x2": 16,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 26,
+          "y1": 6,
           "x2": 18,
-          "y2": 26,
+          "y2": 6,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22930,15 +30617,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 26,
+          "y1": 6,
           "x2": 19,
-          "y2": 26,
+          "y2": 6,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22948,15 +30634,779 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 20,
+          "y1": 6,
+          "x2": 20,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 21,
+          "y1": 6,
+          "x2": 21,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 22,
+          "y1": 6,
+          "x2": 22,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 23,
+          "y1": 6,
+          "x2": 23,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 24,
+          "y1": 6,
+          "x2": 24,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 25,
+          "y1": 6,
+          "x2": 25,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 6,
+          "x2": 26,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 27,
+          "y1": 6,
+          "x2": 27,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 6,
+          "x2": 28,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 34,
+          "y1": 6,
+          "x2": 34,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 6,
+          "x2": 35,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 36,
+          "y1": 6,
+          "x2": 36,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 37,
+          "y1": 6,
+          "x2": 37,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 6,
+          "x2": 38,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 39,
+          "y1": 6,
+          "x2": 39,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 40,
+          "y1": 6,
+          "x2": 40,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 41,
+          "y1": 6,
+          "x2": 41,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 6,
+          "x2": 42,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 6,
+          "x2": 43,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 45,
+          "y1": 6,
+          "x2": 45,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 46,
+          "y1": 6,
+          "x2": 46,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "COAL_ORE"
+        },
+        {
+          "x1": 47,
+          "y1": 6,
+          "x2": 47,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 6,
+          "x2": 48,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 49,
+          "y1": 6,
+          "x2": 49,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 50,
+          "y1": 6,
+          "x2": 50,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 54,
+          "y1": 6,
+          "x2": 54,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 55,
+          "y1": 6,
+          "x2": 55,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 56,
+          "y1": 6,
+          "x2": 56,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 6,
+          "x2": 57,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 58,
+          "y1": 6,
+          "x2": 58,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 59,
+          "y1": 6,
+          "x2": 59,
+          "y2": 6,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 7,
+          "x2": 0,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 7,
+          "x2": 1,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 7,
+          "x2": 2,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 3,
+          "y1": 7,
+          "x2": 3,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 4,
+          "y1": 7,
+          "x2": 4,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 7,
+          "x2": 5,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 7,
+          "x2": 6,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 7,
+          "x2": 7,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 8,
+          "y1": 7,
+          "x2": 8,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 10,
+          "y1": 7,
+          "x2": 10,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 7,
+          "x2": 12,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 7,
+          "x2": 13,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 7,
+          "x2": 14,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 15,
+          "y1": 7,
+          "x2": 15,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 18,
-          "y1": 27,
+          "y1": 7,
           "x2": 18,
-          "y2": 27,
+          "y2": 7,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22966,15 +31416,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 27,
+          "y1": 7,
           "x2": 19,
-          "y2": 27,
+          "y2": 7,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -22984,15 +31433,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 18,
-          "y1": 28,
-          "x2": 18,
-          "y2": 28,
+          "x1": 20,
+          "y1": 7,
+          "x2": 20,
+          "y2": 7,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23002,15 +31450,524 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 21,
+          "y1": 7,
+          "x2": 21,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 22,
+          "y1": 7,
+          "x2": 22,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 23,
+          "y1": 7,
+          "x2": 23,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 25,
+          "y1": 7,
+          "x2": 25,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 26,
+          "y1": 7,
+          "x2": 26,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 28,
+          "y1": 7,
+          "x2": 28,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 35,
+          "y1": 7,
+          "x2": 35,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 36,
+          "y1": 7,
+          "x2": 36,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 37,
+          "y1": 7,
+          "x2": 37,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 38,
+          "y1": 7,
+          "x2": 38,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 40,
+          "y1": 7,
+          "x2": 40,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 41,
+          "y1": 7,
+          "x2": 41,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 42,
+          "y1": 7,
+          "x2": 42,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 43,
+          "y1": 7,
+          "x2": 43,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 47,
+          "y1": 7,
+          "x2": 47,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 7,
+          "x2": 48,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 55,
+          "y1": 7,
+          "x2": 55,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "ANDESIT"
+        },
+        {
+          "x1": 56,
+          "y1": 7,
+          "x2": 56,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 7,
+          "x2": 57,
+          "y2": 7,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 0,
+          "y1": 8,
+          "x2": 0,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 1,
+          "y1": 8,
+          "x2": 1,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 2,
+          "y1": 8,
+          "x2": 2,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 3,
+          "y1": 8,
+          "x2": 3,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
+        },
+        {
+          "x1": 4,
+          "y1": 8,
+          "x2": 4,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 5,
+          "y1": 8,
+          "x2": 5,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 6,
+          "y1": 8,
+          "x2": 6,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 7,
+          "y1": 8,
+          "x2": 7,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 12,
+          "y1": 8,
+          "x2": 12,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 13,
+          "y1": 8,
+          "x2": 13,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 14,
+          "y1": 8,
+          "x2": 14,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         },
         {
           "x1": 19,
-          "y1": 28,
+          "y1": 8,
           "x2": 19,
-          "y2": 28,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23020,15 +31977,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 18,
-          "y1": 29,
-          "x2": 18,
-          "y2": 29,
+          "x1": 20,
+          "y1": 8,
+          "x2": 20,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23038,15 +31994,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 19,
-          "y1": 29,
-          "x2": 19,
-          "y2": 29,
+          "x1": 21,
+          "y1": 8,
+          "x2": 21,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23056,15 +32011,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "LAPIS_LAZULI_ORE"
         },
         {
-          "x1": 18,
-          "y1": 30,
-          "x2": 18,
-          "y2": 30,
+          "x1": 22,
+          "y1": 8,
+          "x2": 22,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23074,15 +32028,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 19,
-          "y1": 30,
-          "x2": 19,
-          "y2": 30,
+          "x1": 35,
+          "y1": 8,
+          "x2": 35,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23092,15 +32045,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 18,
-          "y1": 31,
-          "x2": 18,
-          "y2": 31,
+          "x1": 36,
+          "y1": 8,
+          "x2": 36,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23110,15 +32062,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 19,
-          "y1": 31,
-          "x2": 19,
-          "y2": 31,
+          "x1": 38,
+          "y1": 8,
+          "x2": 38,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23128,15 +32079,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 18,
-          "y1": 32,
-          "x2": 18,
-          "y2": 32,
+          "x1": 41,
+          "y1": 8,
+          "x2": 41,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23146,15 +32096,14 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
         },
         {
-          "x1": 19,
-          "y1": 32,
-          "x2": 19,
-          "y2": 32,
+          "x1": 42,
+          "y1": 8,
+          "x2": 42,
+          "y2": 8,
           "grid_size": 32,
           "types": [
             "NORMAL"
@@ -23164,9 +32113,59 @@
             120,
             120
           ],
-          "layer": -4,
-          "boost_power": -950,
-          "texture": "OAK_PLANKS"
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 48,
+          "y1": 8,
+          "x2": 48,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 56,
+          "y1": 8,
+          "x2": 56,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
+        },
+        {
+          "x1": 57,
+          "y1": 8,
+          "x2": 57,
+          "y2": 8,
+          "grid_size": 32,
+          "types": [
+            "NORMAL"
+          ],
+          "color": [
+            120,
+            120,
+            120
+          ],
+          "layer": 0,
+          "texture": "STONE"
         }
       ]
     }
