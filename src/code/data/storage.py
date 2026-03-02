@@ -28,7 +28,7 @@ def _maybe_seed_bundle_data():
 def _default_settings():
     return {
         "debug_mode": False,
-        "character": "character1",
+        "character": "character3",
         "selected_world": None,
         "selected_level": None,
         "progress": {"worlds": {}},
@@ -36,8 +36,7 @@ def _default_settings():
             "move_down": ["s"],
             "move_left": ["a"],
             "move_right": ["d"],
-            "jump": ["space", "w"],
-            "attack": ["k"],
+            "jump": ["space", "w"]
         },
     }
 

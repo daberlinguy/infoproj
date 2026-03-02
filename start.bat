@@ -10,6 +10,7 @@ set START_EDITOR=0
 if "%~1" == "" (
     :: Default behavior: Launch Game
     set START_GAME=1
+    EXIT \B
     goto run_starts
 )
 

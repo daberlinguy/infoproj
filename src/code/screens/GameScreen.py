@@ -377,7 +377,7 @@ class GameScreen(Screen):
             texture = getattr(Texture, texture_name, None) if texture_name else None
             color = LevelDataUtils.parse_color(entry.get("color"))
 
-            layer = entry.get("layer", 0)
+            layer = min(entry.get("layer", 0), 0)
             
             boost_power = entry.get("boost_power", -900)
             speed_multiplier = entry.get("speed_multiplier", 1.5)

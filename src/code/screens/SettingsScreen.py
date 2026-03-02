@@ -134,13 +134,6 @@ class SettingsScreen(Screen):
         self.input_boxes = [
             InputBox(
                 int((screen.get_width() / 2) + 100),
-                int((screen.get_height() / 2)),
-                50,
-                20,
-                text=",".join(SETTINGS["controls"]["attack"]),
-            ),
-            InputBox(
-                int((screen.get_width() / 2) + 100),
                 int((screen.get_height() / 2) - 150),
                 50,
                 20,
@@ -173,10 +166,9 @@ class SettingsScreen(Screen):
         SETTINGS["debug_mode"] = self.debug_toggle.getValue()
 
         # Save input box values to controls
-        SETTINGS["controls"]["attack"] = self.input_boxes[0].text.split(",")
-        SETTINGS["controls"]["jump"] = self.input_boxes[1].text.split(",")
-        SETTINGS["controls"]["move_left"] = self.input_boxes[2].text.split(",")
-        SETTINGS["controls"]["move_right"] = self.input_boxes[3].text.split(",")
+        SETTINGS["controls"]["jump"] = self.input_boxes[0].text.split(",")
+        SETTINGS["controls"]["move_left"] = self.input_boxes[1].text.split(",")
+        SETTINGS["controls"]["move_right"] = self.input_boxes[2].text.split(",")
 
         save_settings(SETTINGS)
         self.running = False
@@ -256,16 +248,6 @@ class SettingsScreen(Screen):
             255,
             (self.screen.get_width() / 2) - 180,
             (self.screen.get_height() / 2) - 50,
-        )
-
-        self.draw_text(
-            "Attack:",
-            getFont(30),
-            255,
-            255,
-            255,
-            (self.screen.get_width() / 2) - 180,
-            (self.screen.get_height() / 2),
         )
 
         # Draw the buttons and toggle

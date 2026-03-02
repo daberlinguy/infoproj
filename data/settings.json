@@ -1,28 +1,15 @@
 {
   "debug_mode": false,
-  "character": "dave",
-  "selected_world": "t",
-  "selected_level": "Stone.plvl",
+  "character": "character3",
+  "selected_world": "5 - Weltuntergang",
+  "selected_level": "slime.plvl",
   "progress": {
     "worlds": {
-      "1 - Sonnenaufgang": {
+      "1 - Tutorial": {
         "levels": {
-          "level1.json": true,
-          "level3 - Kopie.json": true,
-          "level3.json": true,
-          "Nether.json": true,
-          "test22.json": true,
-          "Example.json": true,
-          "Plains.json": true,
-          "Tuturial.json": true
+          "Tuturial.plvl": true
         },
         "complete": true
-      },
-      "2 - Tiefenforschung": {
-        "levels": {
-          "Erkundungstour.json": true
-        },
-        "complete": false
       }
     }
   },
@@ -37,47 +24,8 @@
       "d"
     ],
     "jump": [
-      "w",
-      "space"
-    ],
-    "attack": [
-      "k"
-    ]
-  },
-  "character2": "character2",
-  "player1_controls": {
-    "move_down": [
-      "s"
-    ],
-    "move_left": [
-      "a"
-    ],
-    "move_right": [
-      "d"
-    ],
-    "jump": [
       "space",
       "w"
-    ],
-    "attack": [
-      "k"
-    ]
-  },
-  "player2_controls": {
-    "move_down": [
-      "down"
-    ],
-    "move_left": [
-      "left"
-    ],
-    "move_right": [
-      "right"
-    ],
-    "jump": [
-      "up"
-    ],
-    "attack": [
-      "rctrl"
     ]
   }
 }
